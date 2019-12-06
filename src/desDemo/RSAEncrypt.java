@@ -29,6 +29,7 @@ public class RSAEncrypt {
         String message = "df723820";
         String messageEn = encrypt(message, keyMap.get(0));
         String messageDe = decrypt(messageEn, keyMap.get(1));
+        System.out.println(messageDe);
     }
 
     /**
