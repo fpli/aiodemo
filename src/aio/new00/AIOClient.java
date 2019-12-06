@@ -27,7 +27,7 @@ public class AIOClient implements Runnable {
     private void initGroup() {
         if (group == null) {
             try {
-                group = AsynchronousChannelGroup.withCachedThreadPool(Executors.newFixedThreadPool(5), 5); //使用固定线程池实例化组
+                group = AsynchronousChannelGroup.withCachedThreadPool(Executors.newFixedThreadPool(2), 5); //使用固定线程池实例化组
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -38,9 +38,9 @@ public class AIOClient implements Runnable {
     private void send() {
         try {
             //异步流式socket通道 open方法创建 并绑定到组 group
-            final AsynchronousSocketChannel client = AsynchronousSocketChannel.open(group);
+            final AsynchronousSocketChannel client  = AsynchronousSocketChannel.open(group);
             final AsynchronousSocketChannel client2 = AsynchronousSocketChannel.open(group);
-            //连接
+            //连接1
             client.connect(new InetSocketAddress(host, port), null, new CompletionHandler<Void, Object>() {
 
                 @Override
@@ -48,7 +48,7 @@ public class AIOClient implements Runnable {
                     String msg = "client1 test msg-" + Math.random();
                     client.write(ByteBuffer.wrap(msg.getBytes()));
                     System.out.println(Thread.currentThread().getName() + " client send data:" + msg);
-
+                    // AIO 中应用程序需要传递缓冲区， OS负责数据读取， 应用程序关注完成事件(OS读取数据完成事件)
                     final ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
                     client.read(byteBuffer, this, new CompletionHandler<Integer, Object>() {
 
@@ -81,7 +81,7 @@ public class AIOClient implements Runnable {
 
             });
 
-            //连接
+            //连接2
             client2.connect(new InetSocketAddress(host, port), null, new CompletionHandler<Void, Object>() {
 
                 @Override
@@ -145,7 +145,7 @@ public class AIOClient implements Runnable {
     public static void main(String[] args) {
         try {
             new Thread(new AIOClient("127.0.0.1", 8989)).start();
-            System.in.read();//阻塞，保证守护线程不会退出
+            System.in.read();//阻塞主线程，保证JVM不会退出
         } catch (IOException e) {
             e.printStackTrace();
         }

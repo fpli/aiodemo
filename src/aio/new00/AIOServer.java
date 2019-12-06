@@ -31,7 +31,7 @@ public class AIOServer implements Runnable {
 
     private void init() {
         try {
-            asynchronousChannelGroup = AsynchronousChannelGroup.withCachedThreadPool(Executors.newCachedThreadPool(), threadSize);
+            asynchronousChannelGroup = AsynchronousChannelGroup.withCachedThreadPool(Executors.newFixedThreadPool(5), threadSize);
             serverChannel = AsynchronousServerSocketChannel.open(asynchronousChannelGroup);
             serverChannel.bind(new InetSocketAddress(port));
             System.out.println("listening on port: " + port);
@@ -89,7 +89,7 @@ public class AIOServer implements Runnable {
                     } catch (ExecutionException e) {
                         e.printStackTrace();
                     } finally {
-                        //服务端已经接收客户端成功了，为什么还要调用accept方法？因为一个channel可以接收成千上万个客户端
+                        //服务端已经接收客户端成功了，为什么还要调用accept方法？因为一个AsynchronousServerSocketChannel可以接收成千上万个客户端
                         //当调用asynchronousServerSocketChannel.accept(this, new AcceptCompletionHandler())方法后，又有新的
                         //客户端连接接入，所以需要继续调用他的accept方法，接受其它客户端的接入，最终形成一个循环
                         attachment.serverChannel.accept(attachment, this);

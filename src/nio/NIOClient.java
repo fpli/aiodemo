@@ -14,19 +14,19 @@ import java.util.Set;
  * 步骤：
  * 读取操作：
  * 1. 应用程序注册读就绪事件和相关联的事件处理器
- *
+ * <p>
  * 2. 事件分离器等待事件的发生
- *
+ * <p>
  * 3. 当发生读就绪事件的时候，事件分离器调用第一步注册的事件处理器
- *
+ * <p>
  * 4. 事件处理器首先执行实际的读取操作，然后根据读取到的内容进行进一步的处理
- *
- *    写入操作类似于读取操作，只不过第一步注册的是写就绪事件。
+ * <p>
+ * 写入操作类似于读取操作，只不过第一步注册的是写就绪事件。
  */
 public class NIOClient {
 
     public static void main(String[] args) throws IOException {
-        //打开选择器
+        //打开选择器(多路复用器)
         Selector selector = Selector.open();
         //打开通道
         SocketChannel socketChannel = SocketChannel.open();
@@ -40,9 +40,9 @@ public class NIOClient {
         while (true) {
             selector.select(); // 该方法为阻塞方法
             Set<SelectionKey> keys = selector.selectedKeys();
-            Iterator<SelectionKey> iter = keys.iterator();
-            while (iter.hasNext()) {
-                SelectionKey key = iter.next();
+            Iterator<SelectionKey> keyIterator = keys.iterator();
+            while (keyIterator.hasNext()) {
+                SelectionKey key = keyIterator.next();
                 if (key.isConnectable()) {
                     //连接建立或者连接建立不成功
                     SocketChannel channel = (SocketChannel) key.channel();
@@ -65,12 +65,12 @@ public class NIOClient {
                     if (receiveCount == -1) {
                         // 对端关闭了channel, 本地也需要关闭通道
                         channel.close();
-                        iter.remove();
+                        keyIterator.remove();
                         continue;
                     }
                     //buffer Handler
                 }
-                iter.remove();
+                keyIterator.remove();
             }
         }
 

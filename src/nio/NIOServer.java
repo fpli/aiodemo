@@ -26,9 +26,9 @@ public class NIOServer {
         while (true) {
             selector.select();// 该方法为阻塞方法
             Set<SelectionKey> selectionKeys = selector.selectedKeys();
-            Iterator<SelectionKey> iter = selectionKeys.iterator();
-            while (iter.hasNext()) {
-                SelectionKey key = iter.next();
+            Iterator<SelectionKey> keyIterator = selectionKeys.iterator();
+            while (keyIterator.hasNext()) {
+                SelectionKey key = keyIterator.next();
                 if (key.isValid() && key.isAcceptable()) {
                     SocketChannel channel = ((ServerSocketChannel) key.channel()).accept();
                     channel.configureBlocking(false);// 配置为非阻塞模式
@@ -42,7 +42,7 @@ public class NIOServer {
                     int receiveCount = channel.read(readBuffer);
                     if (receiveCount == -1) {// 对端已经关闭了通道
                         channel.close();
-                        iter.remove();
+                        keyIterator.remove();
                         continue;
                     }
                     readBuffer.flip();
@@ -59,13 +59,14 @@ public class NIOServer {
                     while (buffer.hasRemaining()) {
                         //该方法只会写入小于socket's output buffer空闲区域的任何字节数
                         //并返回写入的字节数，可能是0字节。
-                        channel.write(buffer);
+                       int count = channel.write(buffer);
+                        System.out.println("write count:"+count);
                     }
                     //发送完了就取消写事件，否则下次还会进入该分支
                     key.interestOps(key.interestOps() & ~SelectionKey.OP_WRITE);
                 }
 
-                iter.remove();
+                keyIterator.remove();
             }
         }
 
