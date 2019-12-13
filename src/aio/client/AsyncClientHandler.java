@@ -35,7 +35,7 @@ public class AsyncClientHandler implements CompletionHandler<Void, AsyncClientHa
 		try {
 			clientChannel.setOption(StandardSocketOptions.SO_KEEPALIVE, true);
 			SocketAddress remote = new InetSocketAddress(host, port);
-			clientChannel.<AsyncClientHandler>connect(remote, this, this);
+			clientChannel.connect(remote, this, this);
 		} catch (IOException e2) {
 			e2.printStackTrace();
 		}

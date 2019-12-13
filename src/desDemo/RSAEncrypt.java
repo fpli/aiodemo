@@ -18,15 +18,16 @@ import javax.crypto.Cipher;
  * RSA(RSA加密算法是非对称加密算法) 加密与解密
  * 使用RSA加密算法需要使用公钥和私钥, 公钥公开给他人，私钥自己保管。(公钥与私钥组成秘钥对)
  * 业务场景:
- *      1 使用公钥加密，使用私钥解码。
- *      2 使用私钥签名，使用公钥验签。
+ * 1 使用公钥加密，使用私钥解码。
+ * 2 使用私钥签名，使用公钥验签。
  */
 public class RSAEncrypt {
+
     private static Map<Integer, String> keyMap = new HashMap<>();
 
     public static void main(String[] args) throws Exception {
         genKeyPair();
-        String message = "df723820";
+        String message = "测试RSA非对称加密";
         String messageEn = encrypt(message, keyMap.get(0));
         String messageDe = decrypt(messageEn, keyMap.get(1));
         System.out.println(messageDe);
@@ -34,6 +35,7 @@ public class RSAEncrypt {
 
     /**
      * 功能: 生成秘钥对
+     *
      * @throws NoSuchAlgorithmException
      */
     public static void genKeyPair() throws NoSuchAlgorithmException {
@@ -50,6 +52,7 @@ public class RSAEncrypt {
 
     /**
      * 功能: 公钥加密
+     *
      * @param str
      * @param publicKey
      * @return
@@ -66,6 +69,7 @@ public class RSAEncrypt {
 
     /**
      * 描述: 私钥解密
+     *
      * @param str
      * @param privateKey
      * @return
