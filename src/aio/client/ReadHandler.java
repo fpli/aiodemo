@@ -7,6 +7,9 @@ import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.CompletionHandler;
 import java.util.concurrent.CountDownLatch;
 
+/**
+ * 读取操作完成处理器
+ */
 public class ReadHandler implements CompletionHandler<Integer, ByteBuffer> {
 	
 	private AsynchronousSocketChannel clientChannel;

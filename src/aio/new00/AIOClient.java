@@ -40,7 +40,7 @@ public class AIOClient implements Runnable {
             //异步流式socket通道 open方法创建 并绑定到组 group
             final AsynchronousSocketChannel client  = AsynchronousSocketChannel.open(group);
             final AsynchronousSocketChannel client2 = AsynchronousSocketChannel.open(group);
-            //连接1
+            //注册客户端连接完成事件
             client.connect(new InetSocketAddress(host, port), null, new CompletionHandler<Void, Object>() {
 
                 @Override
@@ -50,14 +50,16 @@ public class AIOClient implements Runnable {
                     System.out.println(Thread.currentThread().getName() + " client send data:" + msg);
                     // AIO 中应用程序需要传递缓冲区， OS负责数据读取， 应用程序关注完成事件(OS读取数据完成事件)
                     final ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
+                    // 注册读取完成事件
                     client.read(byteBuffer, this, new CompletionHandler<Integer, Object>() {
 
                         @Override
                         public void completed(Integer result, Object attachment) {
                             System.out.println(result == byteBuffer.position());
+                            byteBuffer.flip();// 切换到读模式(channel的read操作对应buffer的写操作, 所以需要切换模式)
                             System.out.println(Thread.currentThread().getName() + " client read data: " + new String(byteBuffer.array()));
                             try {
-                                byteBuffer.clear();
+                                byteBuffer.clear();//切换到写模式
                                 if (client != null) client.close();
                             } catch (IOException e) {
                                 e.printStackTrace();

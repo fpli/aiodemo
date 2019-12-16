@@ -45,7 +45,7 @@ public class AIOServer implements Runnable {
             if (serverChannel == null) {
                 return;
             }
-
+            // 注册服务器端接受完成事件
             serverChannel.accept(this, new CompletionHandler<AsynchronousSocketChannel, AIOServer>() {
                 // attachment <==> AIOServer.this
                 @Override
