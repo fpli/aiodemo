@@ -26,12 +26,7 @@ public class ReadHandler implements CompletionHandler<Integer, ByteBuffer> {
         try {
             String expression = new String(message, "UTF-8");
             System.out.println("服务器收到消息: " + expression);
-            String calrResult = null;
-            try {
-                calrResult = Calculator.cal(expression).toString();
-            } catch (Exception e) {
-                calrResult = "计算错误：" + e.getMessage();
-            }
+            String calrResult = expression;
             //向客户端发送消息
             doWrite(calrResult);
         } catch (UnsupportedEncodingException e) {

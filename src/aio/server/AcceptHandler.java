@@ -24,7 +24,9 @@ public class AcceptHandler implements CompletionHandler<AsynchronousSocketChanne
 
     @Override
     public void failed(Throwable exc, AsyncServerHandler attachment) {
-        attachment.latch.countDown();
+        attachment.channel.accept(attachment, this);//继续注册下一个客户端接受(向OS订阅接受事件)
+        exc.printStackTrace();
+        //attachment.latch.countDown();
     }
 
 }

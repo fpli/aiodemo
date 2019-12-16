@@ -15,7 +15,8 @@ public class AsyncServerHandler implements Runnable {
             //创建服务端通道
             channel = AsynchronousServerSocketChannel.open();
             //绑定端口
-            channel.bind(new InetSocketAddress(port));
+            InetSocketAddress local = new InetSocketAddress(port);
+            channel.bind(local);
             System.out.println("服务器已启动，端口号：" + port);
         } catch (IOException e) {
             e.printStackTrace();
@@ -32,6 +33,7 @@ public class AsyncServerHandler implements Runnable {
         latch = new CountDownLatch(1);
         //用于接收客户端的连接
         channel.accept(this, new AcceptHandler());
+        System.out.println("开始接受客户端连接");
         try {
             latch.await();//保证守护线程不会退出
         } catch (InterruptedException e) {

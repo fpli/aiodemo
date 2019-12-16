@@ -7,7 +7,7 @@ package aio.server;
  */
 public class Server {
 
-	private static int DEFAULT_PORT = 12345;
+	private static final int DEFAULT_PORT = 12345;
 	private static AsyncServerHandler serverHandle;
 	public volatile static long clientCount = 0;
 
@@ -16,9 +16,6 @@ public class Server {
 	}
 	
 	public static synchronized void start(int port){
-		if (serverHandle!=null){
-			return;
-		}
 		serverHandle = new AsyncServerHandler(port);
 		new Thread(serverHandle, "Server").start();
 	}
