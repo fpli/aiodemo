@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Client {
 	
 	private static final String DEFAULT_HOST = "127.0.0.1";
-	private static final int DEFAULT_PORT = 8083;
+	private static final int DEFAULT_PORT = 12345;
 	private static AsyncClientHandler clientHandle;
 	
 	public static synchronized void start(String ip, int port){

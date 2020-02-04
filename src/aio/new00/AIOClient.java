@@ -2,6 +2,7 @@ package aio.new00;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.channels.AsynchronousChannelGroup;
 import java.nio.channels.AsynchronousSocketChannel;
@@ -59,8 +60,10 @@ public class AIOClient implements Runnable {
                             byteBuffer.flip();// 切换到读模式(channel的read操作对应buffer的写操作, 所以需要切换模式)
                             System.out.println(Thread.currentThread().getName() + " client read data: " + new String(byteBuffer.array()));
                             try {
-                                byteBuffer.clear();//切换到写模式
-                                if (client != null) client.close();
+                                Buffer buffer = byteBuffer.clear();//切换到写模式
+                                if (client != null) {
+                                    client.close();
+                                }
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -100,7 +103,7 @@ public class AIOClient implements Runnable {
                             System.out.println(Thread.currentThread().getName() + " client read data: " + new String(byteBuffer.array()));
                             try {
                                 byteBuffer.clear();
-                                if (client != null) client.close();
+                                client.close();
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
