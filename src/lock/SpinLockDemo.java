@@ -51,5 +51,10 @@ public class SpinLockDemo {
 
             spinLockDemo.myUnLock();
         }, "BB").start();
+
+        // jstack 6365|grep 18e4 -A60
+        while (true){
+            new Object();
+        }
     }
 }
