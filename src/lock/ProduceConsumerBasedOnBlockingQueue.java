@@ -5,7 +5,8 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/**
+/**fo
+ * fo
  * 生产者消费者基于阻塞队列版
  * volatile/CAS/AtomicInteger/BlockingQueue/线程交互/原子引用(AtomicReference)
  */
