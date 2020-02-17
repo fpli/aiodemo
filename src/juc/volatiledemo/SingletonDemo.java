@@ -1,7 +1,7 @@
 package juc.volatiledemo;
 
 public class SingletonDemo {
-
+    // DCL机制不一定线程安全，原因是有指令重排的存在，加入volatile可以禁止指令重排
     private static volatile SingletonDemo singleton = null;
 
     private SingletonDemo(){
@@ -14,6 +14,7 @@ public class SingletonDemo {
             synchronized (SingletonDemo.class){
                 if (null == singleton){
                     singleton = new SingletonDemo();
+                    // new SingletonDemo(); 分成3步完成 1 分配对象内存空间 2 初始化对象 3 设置intance指向刚分配的内存地址，此时instance != null
                 }
             }
         }
