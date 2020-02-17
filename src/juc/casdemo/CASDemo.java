@@ -1,4 +1,4 @@
-package lock;
+package juc.casdemo;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
