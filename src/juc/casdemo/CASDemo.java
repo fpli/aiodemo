@@ -3,7 +3,7 @@ package juc.casdemo;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * 1 CAS是什么 ？ ===> compareAndSet
+ * 1 CAS是什么 ？ ===> Compare And Swap
  *      比较并交换
  *
  * 2 CAS底层原理:自旋锁 + Unsafe 类
@@ -23,7 +23,8 @@ public class CASDemo {
 
     public static void main(String[] args) {
         AtomicInteger atomicInteger = new AtomicInteger(4);
-        atomicInteger.compareAndSet(4, 2020);
-        atomicInteger.getAndIncrement();
+        //thread  do some things
+        System.out.println(atomicInteger.compareAndSet(4, 2020));
+        System.out.println(atomicInteger.get());
     }
 }
