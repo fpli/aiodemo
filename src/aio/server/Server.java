@@ -2,7 +2,6 @@ package aio.server;
 
 /**
  * AIO Server端
- * @author C5287463
  *
  */
 public class Server {

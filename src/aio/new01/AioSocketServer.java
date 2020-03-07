@@ -16,7 +16,6 @@ import java.util.concurrent.Executors;
  * Java AIO(Proactor模式)框架中，只实现了两种网络IO通道AsynchronousServerSocketChannel(服务器监听通道),AsynchronousSocketChannel(socket套接字通道)。
  * 但是无论哪种通道他们都有独立的FileDescriptor(文件标识符),attachment(附件,附件可以是任意对象,类似“通道上下文”)
  * 并被独立的SocketChannelReadHandle类实例引用。
- * @author C5287463
  */
 public class AioSocketServer {
 
