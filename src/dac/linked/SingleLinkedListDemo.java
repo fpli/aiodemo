@@ -48,7 +48,7 @@ public class SingleLinkedListDemo {
         reversePrint(singleLinkedList.getHead());
     }
 
-    // 反向输出链表中的结点
+    // 百度面试题  反向输出链表中的结点
     public static void reversePrint(HeroNode head){
         if (head.next == null){
             return;
@@ -206,6 +206,7 @@ class SingleLinkedList{
     }
 
     /**
+     * 新浪面试题
      * 倒数第k个结点
      * @param  k
      * @return
@@ -228,8 +229,9 @@ class SingleLinkedList{
         return helper;
     }
 
-    // 单向链表反转  002250 414946
-    // 思路 1 先定义一个头结点 reverseHead = new HeroNode();
+    // 腾讯面试题 单向链表反转  002250 414946
+    // 思路
+    // 1 先定义一个头结点 reverseHead = new HeroNode();
     // 2 从头到尾遍历原来的链表，每遍历一个结点，并将其摘下，并放在新的链表的最前端
     // 3 原来的链表的head.next = reverseHead.next;
     public void revorse(){
