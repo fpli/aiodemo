@@ -1,4 +1,4 @@
-package dac;
+package dac.linked;
 
 /**
  * 约瑟夫问题:

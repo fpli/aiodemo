@@ -1,4 +1,4 @@
-package dac;
+package dac.stack;
 
 import java.util.NoSuchElementException;
 
