@@ -1,5 +1,7 @@
 package dac.linked;
 
+import java.util.Stack;
+
 public class SingleLinkedListDemo {
 
     public static void main(String[] args) {
@@ -25,13 +27,43 @@ public class SingleLinkedListDemo {
         singleLinkedList.update(heroNode);
         singleLinkedList.list();
 
-        System.out.println("删除后链表的情况");
+        //System.out.println("删除后链表的情况");
         // 删除一个结点
-        singleLinkedList.del(heroNode1);
-        singleLinkedList.del(heroNode3);
-        singleLinkedList.del(heroNode4);
-        singleLinkedList.del(heroNode2);
+        //singleLinkedList.del(heroNode1);
+        //singleLinkedList.del(heroNode3);
+        //singleLinkedList.del(heroNode4);
+        //singleLinkedList.del(heroNode2);
+        System.out.println("查找倒数第一个");
+        System.out.println(singleLinkedList.getLastNode(2));
+        System.out.println();
         singleLinkedList.list();
+
+        //System.out.println(singleLinkedList.length());
+        System.out.println("反转之前");
+        singleLinkedList.revorse();
+        singleLinkedList.list();
+        System.out.println();
+        System.out.println();
+        System.out.println("反向输出链表中的结点");
+        reversePrint(singleLinkedList.getHead());
+    }
+
+    // 反向输出链表中的结点
+    public static void reversePrint(HeroNode head){
+        if (head.next == null){
+            return;
+        }
+        Stack<HeroNode> heroNodes = new Stack<>();
+        HeroNode cur = head.next;
+        // 将链表的所有结点压入栈中
+        while (cur != null){
+            heroNodes.push(cur);
+            cur = cur.next;
+        }
+
+        while (!heroNodes.isEmpty()){
+            System.out.println(heroNodes.pop());
+        }
     }
 
 }
@@ -140,6 +172,21 @@ class SingleLinkedList{
         }
     }
 
+    // 求链表中结点的个数
+    public int length(){
+        if (head.next == null){
+            return 0;
+        }
+        int length = 0;
+        HeroNode helper = head.next;
+        while (helper != null){
+            length++;
+            helper = helper.next;
+        }
+        return length;
+    }
+
+
     // 显示链表【遍历】
     public void list(){
         if (head.next == null){
@@ -156,6 +203,60 @@ class SingleLinkedList{
             System.out.println(helper);
             helper = helper.next;
         }
+    }
+
+    /**
+     * 倒数第k个结点
+     * @param  k
+     * @return
+     */
+    public HeroNode getLastNode(int k){
+        if (head.next == null){
+            return null;
+        }
+        int size = length();
+        // 查找第(size-k)位置，倒数第k个结点
+        if (k <= 0 || k > size){
+            return null;
+        }
+        // 定义一个辅助指针
+        HeroNode helper = head.next;
+        int index = size -k;
+        for (int i = 0; i < index; i++) {
+            helper = helper.next;
+        }
+        return helper;
+    }
+
+    // 单向链表反转  002250 414946
+    // 思路 1 先定义一个头结点 reverseHead = new HeroNode();
+    // 2 从头到尾遍历原来的链表，每遍历一个结点，并将其摘下，并放在新的链表的最前端
+    // 3 原来的链表的head.next = reverseHead.next;
+    public void revorse(){
+        // 当前链表为空，或者只有一个结点，无需反转，直接返回
+        if (head.next == null || head.next.next == null){
+            return;
+        }
+        // 定义一个辅助指针，帮助遍历原来的链表
+        HeroNode helper = head.next;
+        // 很重要，指向当前结点的下一个结点，不然后边结点就断掉了
+        HeroNode next   = null;
+        // 新链表的头结点
+        HeroNode reverseNode = new HeroNode(-1,"", "");
+        // 遍历原来的链表
+        while (helper != null){
+            next = helper.next;//先暂时保存当前结点的下一个结点，否则原链表断掉
+            helper.next = reverseNode.next;// 将当前结点的下一个结点指向新的链表的头结点
+            reverseNode.next = helper;
+            helper = next; // 让helper后移
+        }
+
+        // 将head.next指向reverseNode.next, 实现单向链表的反转
+        head.next = reverseNode.next;
+    }
+
+    public HeroNode getHead() {
+        return head;
     }
 }
 
