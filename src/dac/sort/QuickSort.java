@@ -1,35 +1,14 @@
-package dac;
+package dac.sort;
 
-public class RecursionDemo {
+public class QuickSort {
 
     public static void main(String[] args) {
-        print(50);
-        System.out.println(factorial(10));
-        //int[] arr = {-9, 78, 0, 23, -567, 70, -1,900, 4561};
-
-
-        //System.out.println("arr=" + Arrays.toString(arr));
-    }
-
-    // 递归打印出1..n
-    public static void print(int n){
-        if (n > 1){
-            print(n-1);
+        int[] array = new int[80000];
+        for (int i = 0; i < 80000; i++){
+            array[i] = (int) (Math.random() * 80000);
         }
-        System.out.printf("n=%d \n", n);
+        quickSort(array, 0, array.length -1);
     }
-
-    // 求n的阶层
-    public static int factorial(int n){
-        if (n == 1){
-            return 1;
-        } else {
-            //int result =factorial(n-1);
-            //return n * result;
-            return n * factorial(n-1);
-        }
-    }
-
     /* 快速排序是对冒泡排序的一种改进。
         基本思想是:通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小。
         然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列。
