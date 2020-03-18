@@ -28,7 +28,9 @@ public class RecursionDemo {
         if (n == 1){
             return 1;
         } else {
-            return factorial(n-1) * n;
+            int result =factorial(n-1);
+            //return n * result;
+            return n * factorial(n-1);
         }
     }
 

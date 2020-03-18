@@ -229,7 +229,7 @@ class SingleLinkedList{
         return helper;
     }
 
-    // 腾讯面试题 单向链表反转  002250 414946
+    // 腾讯面试题 单向链表反转
     // 思路
     // 1 先定义一个头结点 reverseHead = new HeroNode();
     // 2 从头到尾遍历原来的链表，每遍历一个结点，并将其摘下，并放在新的链表的最前端
