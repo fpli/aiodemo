@@ -4,7 +4,7 @@ import java.time.Duration;
 import java.time.LocalTime;
 
 /**
- * 冒泡排序算法优化，增加flag表示变量
+ * 冒泡排序算法优化，增加flag表识变量
  */
 public class BubbleSort {
 

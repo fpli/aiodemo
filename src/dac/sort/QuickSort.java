@@ -1,14 +1,28 @@
 package dac.sort;
 
+import java.time.Duration;
+import java.time.LocalTime;
+
+/**
+ * 快速排序算法
+ * 快速排序(QuickSort)是对冒泡排序的一种改进。基本思想是:通过一趟排序将要排序的数据分割程独立的两部分，
+ * 其中一部分的所有数据都比另外一部分的所有数据都要小，然后再按此方法对这两部分数据分别进行快速排序，
+ * 整个排序过程可以递归进行，以此达到整个数据变成有序序列
+ */
 public class QuickSort {
 
     public static void main(String[] args) {
         int[] array = new int[80000];
         for (int i = 0; i < 80000; i++){
-            array[i] = (int) (Math.random() * 80000);
+            array[i] = (int) (Math.random() * 8000000);
         }
+
+        LocalTime start = LocalTime.now();
         quickSort(array, 0, array.length -1);
+        LocalTime end = LocalTime.now();
+        System.out.println(Duration.between(start, end).getSeconds());
     }
+
     /* 快速排序是对冒泡排序的一种改进。
         基本思想是:通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小。
         然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列。
