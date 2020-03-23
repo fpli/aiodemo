@@ -25,7 +25,7 @@ public class MonkeyTao {
         int prev = 0;   //表示前一天
         int day = 9;
         while(day > 0){
-            prev = (1+next)*2;   // next 表示后一天
+            prev = (1+next) * 2;   // next 表示后一天
             next = prev;
             day--;
         }
@@ -37,7 +37,7 @@ public class MonkeyTao {
         int next = 1;            // 第10天 剩1个
         int prev = 0;            //表示前一天
         for(int day = 9; day > 0; day--){
-            prev = (1+next)*2;   // next 表示后一天
+            prev = (1+next) * 2;   // next 表示后一天
             next = prev;
         }
         System.out.println(prev);

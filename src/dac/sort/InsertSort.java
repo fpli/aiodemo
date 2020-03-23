@@ -11,7 +11,7 @@ import java.util.Arrays;
 public class InsertSort {
 
     public static void main(String[] args) {
-       int[] arr = {1, 2, 3, 6, 5 ,4};
+        int[] arr = {1, 2, 3, 6, 5, 4};
         insertSort(arr);
         System.out.println(Arrays.toString(arr));
         /*int[] arr = new int[80000];
