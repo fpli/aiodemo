@@ -24,12 +24,12 @@ public class BubbleSort {
     }
 
     public static void bubbleSort(int[] arr){
-        // 冒泡排序算法的时间复杂度O(n^2)
+        // 冒泡排序算法的时间复杂度O(n^2) 平方阶
         int temp = 0;// 临时变量
         boolean flag = false;// 标识变量,是否进行过交换
         for (int i = 0; i < arr.length - 1; i++) {
             for (int j = 0; j < arr.length -1 - i; j++) {
-                // 如果前面的数比后面的数大，则交换
+                // 如果前面的数比后面的数大，则交换, 从小到大排序
                 if (arr[j] > arr[j+1]){
                     flag = true;
                     temp = arr[j];

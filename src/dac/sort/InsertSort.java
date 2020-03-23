@@ -11,23 +11,24 @@ import java.util.Arrays;
 public class InsertSort {
 
     public static void main(String[] args) {
-       /* int[] arr = {101, 34, 119, 1, -1 ,89};
+       int[] arr = {1, 2, 3, 6, 5 ,4};
         insertSort(arr);
-        System.out.println(Arrays.toString(arr));*/
-        int[] arr = new int[80000];
+        System.out.println(Arrays.toString(arr));
+        /*int[] arr = new int[80000];
         for (int i = 0; i < 80000; i++) {
             arr[i] = (int)(Math.random() * 8000000);
         }
         LocalTime start = LocalTime.now();
         insertSort(arr);
         LocalTime end = LocalTime.now();
-        System.out.println(Duration.between(start, end).getSeconds());
+        System.out.println(Duration.between(start, end).getSeconds());*/
     }
 
-    // 插入排序
+    // 插入排序 时间复杂度 O(N^2) 平方阶
     public static void insertSort(int[] arr){
         int insertVal = 0;
         int insertIndex = 0;
+        // i从1开始，不是从0 ， 初始状态分为一个元素的有序序列， 2～n 的(n-1)个无序序列
         for (int i = 1; i < arr.length ; i++) {
             // 定义待插入的数
             insertVal = arr[i];
@@ -37,7 +38,7 @@ public class InsertSort {
             * 说明
             * 1 insertIndex >= 0 保证在给insertVal找插入位置，不越界
             * 2 insertVal < arr[insertIndex] 待插入的数，还没有找到插入位置
-            * 3 就需要将arr[insertIndex]后移
+            * 3 就需要将arr[insertIndex]后移,insertVal qian yi
             * */
             while (insertIndex >= 0 && insertVal < arr[insertIndex]){
                 arr[insertIndex + 1] = arr[insertIndex];

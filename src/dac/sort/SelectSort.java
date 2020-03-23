@@ -21,10 +21,10 @@ public class SelectSort {
         System.out.println(Duration.between(start, end).getSeconds());
     }
 
-    // 选择排序算法
+    // 选择排序算法 时间复杂度O(n^2)平方阶
     public static void selectSort(int[] arr){
         // 选择排序算法时间复杂度O(n^2)
-        for (int i = 0; i < arr.length -1; i++) {
+        for (int i = 0; i < arr.length - 1; i++) {
             int minIndex = i;
             int min = arr[i];
             for (int j = i+1; j < arr.length; j++) {
