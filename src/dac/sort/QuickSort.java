@@ -8,6 +8,13 @@ import java.time.LocalTime;
  * 快速排序(QuickSort)是对冒泡排序的一种改进。基本思想是:通过一趟排序将要排序的数据分割程独立的两部分，
  * 其中一部分的所有数据都比另外一部分的所有数据都要小，然后再按此方法对这两部分数据分别进行快速排序，
  * 整个排序过程可以递归进行，以此达到整个数据变成有序序列
+ *
+ *快速排序是C.R.A.Hoare于1962年提出的一种划分交换排序。它采用了一种分治的策略，通常称其为分治法(Divide-and-ConquerMethod)。
+ * 该方法的基本思想是：
+ * 1．先从数列中取出一个数作为基准数。
+ * 2．分区过程，将比这个数大的数全放到它的右边，小于或等于它的数全放到它的左边。
+ * 3．再对左右区间重复第二步，直到各区间只有一个数。
+ * 虽然快速排序称为分治法，但分治法这三个字显然无法很好的概括快速排序的全部步骤。因此我的对快速排序作了进一步的说明：挖坑填数+分治法：
  */
 public class QuickSort {
 
@@ -39,8 +46,8 @@ public class QuickSort {
             while (array[l] < pivot){
                 l += 1;
             }
-            // 在pivot的右边一直找，找到小于等于pivot值，才退出
-            while (array[r] > pivot){
+            // 在pivot的右边一直找，找到小于pivot值，才退出 ,保证右边的都大于等于中轴值
+            while (array[r] >= pivot){
                 r -= 1;
             }
 
@@ -53,12 +60,12 @@ public class QuickSort {
             array[l] = array[r];
             array[r] = temp;
 
-            // 如果交换完后，发现这个array[l] == pivot值相等， r-- , 前移
+            // 如果交换完后，发现这个array[l] == pivot值相等， r-- , r pointer 前移
             if (array[l] == pivot){
                 r -= 1;
             }
 
-            // 如果交换完后，发现这个array[r] == pivot 值相等 l++, 后移
+            // 如果交换完后，发现这个array[r] == pivot 值相等 l++, l pointer 后移
             if (array[r] == pivot){
                 l += 1;
             }
@@ -78,6 +85,31 @@ public class QuickSort {
         // 向右递归
         if (right > l){
             quickSort(array, l, right);
+        }
+    }
+
+    //快速排序  x取区间第一个数为基准数
+    void quick_sort(int s[], int l, int r)
+    {
+        if (l < r)
+        {
+            //Swap(s[l], s[(l + r) / 2]); //将中间的这个数和第一个数交换 参见注1
+            int i = l, j = r, x = s[l];
+            while (i < j)
+            {
+                while(i < j && s[j] >= x) // 从右向左找第一个小于x的数
+                    j--;
+                if(i < j)
+                    s[i++] = s[j];
+
+                while(i < j && s[i] < x) // 从左向右找第一个大于等于x的数
+                    i++;
+                if(i < j)
+                    s[j--] = s[i];
+            }
+            s[i] = x;//返回调整后基准数的位置 i
+            quick_sort(s, l, i - 1); // 左边递归调用
+            quick_sort(s, i + 1, r); // 右边递归调用
         }
     }
 }

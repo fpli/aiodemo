@@ -32,7 +32,7 @@ public class ShellSort {
         for (int gap = arr.length / 2; gap > 0; gap /= 2){
             for (int i = gap; i < arr.length; i++) {
                 // 遍历各组中所有的元素
-                for (int j = i - gap; j >= 0 ; j -= gap) {
+                for (int j = i - gap; j >= 0; j -= gap) {
                     // 如果当前元素大于加上步长后的那个元素，交换
                     if (arr[j] > arr[j + gap]){
                         temp = arr[j];

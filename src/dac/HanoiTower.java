@@ -3,27 +3,6 @@ package dac;
 public class HanoiTower {
 
     public static void main(String[] args) {
-        new Thread(){
-            @Override
-            public void run() {
-                hanoiTower(25, 'A', 'B', 'C');
-            }
-        }.start();
-
-        new Thread(){
-            @Override
-            public void run() {
-                hanoiTower(25, 'A', 'B', 'C');
-            }
-        }.start();
-
-        new Thread(){
-            @Override
-            public void run() {
-                hanoiTower(25, 'A', 'B', 'C');
-            }
-        }.start();
-
         hanoiTower(23, 'A', 'B', 'C');
     }
 
