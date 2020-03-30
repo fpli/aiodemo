@@ -74,7 +74,7 @@ class CircleArrayQueue{
 
     // 判断队列是否空
     public boolean isEmpty(){
-        return rear ==front;
+        return rear == front;
     }
 
     public void addQueue(int value){
