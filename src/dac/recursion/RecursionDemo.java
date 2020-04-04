@@ -1,4 +1,4 @@
-package dac;
+package dac.recursion;
 
 public class RecursionDemo {
 

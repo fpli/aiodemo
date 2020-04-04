@@ -8,8 +8,8 @@ import java.time.LocalTime;
  * 快速排序(QuickSort)是对冒泡排序的一种改进。基本思想是:通过一趟排序将要排序的数据分割程独立的两部分，
  * 其中一部分的所有数据都比另外一部分的所有数据都要小，然后再按此方法对这两部分数据分别进行快速排序，
  * 整个排序过程可以递归进行，以此达到整个数据变成有序序列
- *
- *快速排序是C.R.A.Hoare于1962年提出的一种划分交换排序。它采用了一种分治的策略，通常称其为分治法(Divide-and-ConquerMethod)。
+ * <p>
+ * 快速排序是C.R.A.Hoare于1962年提出的一种划分交换排序。它采用了一种分治的策略，通常称其为分治法(Divide-and-ConquerMethod)。
  * 该方法的基本思想是：
  * 1．先从数列中取出一个数作为基准数。
  * 2．分区过程，将比这个数大的数全放到它的右边，小于或等于它的数全放到它的左边。
@@ -20,12 +20,12 @@ public class QuickSort {
 
     public static void main(String[] args) {
         int[] array = new int[80000];
-        for (int i = 0; i < 80000; i++){
+        for (int i = 0; i < 80000; i++) {
             array[i] = (int) (Math.random() * 8000000);
         }
 
         LocalTime start = LocalTime.now();
-        quickSort(array, 0, array.length -1);
+        quickSort(array, 0, array.length - 1);
         LocalTime end = LocalTime.now();
         System.out.println(Duration.between(start, end).getSeconds());
     }
@@ -34,77 +34,74 @@ public class QuickSort {
         基本思想是:通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小。
         然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列。
      */
-    public static void quickSort(int[] array, int left, int right){
+    public static void quickSort(int[] array, int left, int right) {
         int l = left;
         int r = right;
         // pivot 中轴值
         int pivot = array[(left + right) / 2];
         int temp = 0;// 临时变量，作为交换时使用
         // while循环的目的是让比pivot值小的值放到左边, 比pivot大的值放到右边
-        while (l < r){
+        while (l < r) {
             // 在pivot的左边一直找，找到大于等于pivot的值才退出
-            while (array[l] < pivot){
+            while (array[l] < pivot) {
                 l += 1;
             }
             // 在pivot的右边一直找，找到小于pivot值，才退出 ,保证右边的都大于等于中轴值
-            while (array[r] >= pivot){
+            while (array[r] > pivot) {
                 r -= 1;
             }
 
             // l >= r说明pivot的左右两边值，已经按照左边全部小于等于pivot值，右边全部大于等于pivot的值
-            if (l >= r){
+            if (l >= r) {
                 break;
             }
             // 交换
-            temp     = array[l];
+            temp = array[l];
             array[l] = array[r];
             array[r] = temp;
 
             // 如果交换完后，发现这个array[l] == pivot值相等， r-- , r pointer 前移
-            if (array[l] == pivot){
+            if (array[l] == pivot) {
                 r -= 1;
             }
 
             // 如果交换完后，发现这个array[r] == pivot 值相等 l++, l pointer 后移
-            if (array[r] == pivot){
+            if (array[r] == pivot) {
                 l += 1;
             }
         }
 
         // 如果l == r, 必须l++, r-- 否则为出现栈溢出
-        if (l == r){
+        if (l == r) {
             l += 1;
             r -= 1;
         }
 
         // 向左递归
-        if (left < r){
+        if (left < r) {
             quickSort(array, left, r);
         }
 
         // 向右递归
-        if (right > l){
+        if (right > l) {
             quickSort(array, l, right);
         }
     }
 
     //快速排序  x取区间第一个数为基准数
-    void quick_sort(int s[], int l, int r)
-    {
-        if (l < r)
-        {
+    void quick_sort(int s[], int l, int r) {
+        if (l < r) {
             //Swap(s[l], s[(l + r) / 2]); //将中间的这个数和第一个数交换 参见注1
             int i = l, j = r, x = s[l];
-            while (i < j)
-            {
-                while(i < j && s[j] >= x) // 从右向左找第一个小于x的数
+            while (i < j) {
+                while (i < j && s[j] >= x) // 从右向左找第一个小于x的数
                     j--;
-                if(i < j)
+                if (i < j)
                     s[i++] = s[j];
 
-                while(i < j && s[i] < x) // 从左向右找第一个大于等于x的数
+                while (i < j && s[i] < x) // 从左向右找第一个大于等于x的数
                     i++;
-                if(i < j)
+                if (i < j)
                     s[j--] = s[i];
             }
             s[i] = x;//返回调整后基准数的位置 i
