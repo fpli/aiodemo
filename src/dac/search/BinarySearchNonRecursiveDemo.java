@@ -6,7 +6,7 @@ package dac.search;
 public class BinarySearchNonRecursiveDemo {
     public static void main(String[] args) {
         int[] arr = {1, 5, 78, 80, 100, 345, 600};
-        int index = search(arr, 345);
+        int index = search(arr, 1);
         System.out.println("index = " + index);
     }
 
