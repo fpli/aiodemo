@@ -43,8 +43,8 @@ public class RSAEncrypt {
         keyPairGen.initialize(1024, new SecureRandom());
         KeyPair keyPair = keyPairGen.generateKeyPair();
         RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
-        RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
-        String publicKeyString = Base64.getEncoder().encodeToString(publicKey.getEncoded());
+        RSAPublicKey  publicKey  = (RSAPublicKey) keyPair.getPublic();
+        String publicKeyString  = Base64.getEncoder().encodeToString(publicKey.getEncoded());
         String privateKeyString = Base64.getEncoder().encodeToString((privateKey.getEncoded()));
         keyMap.put(0, publicKeyString);
         keyMap.put(1, privateKeyString);

@@ -60,7 +60,7 @@ public class NIOServer {
                         //该方法只会写入小于socket's output buffer空闲区域的任何字节数
                         //并返回写入的字节数，可能是0字节。
                        int count = channel.write(buffer);
-                        System.out.println("write count:"+count);
+                       System.out.println("write count:"+count);
                     }
                     //发送完了就取消写事件，否则下次还会进入该分支
                     key.interestOps(key.interestOps() & ~SelectionKey.OP_WRITE);
