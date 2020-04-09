@@ -15,12 +15,19 @@ package dac.recursive;
 public class MonkeyTao {
 
     public static void main(String[] args) {
-        int amount = total(1);
-        System.out.println(amount);
+        //int amount = total(1);
+        //System.out.println(amount);
         System.out.println(whileWay());
+        System.out.println(forWay());
     }
 
     //解法二 递归实现
+
+    /**
+     * day 在[10, 1]区间
+     * @param day
+     * @return day 当天的数量
+     */
     public static int total(int day){
         if (day == 10){
             return 1;
@@ -31,26 +38,32 @@ public class MonkeyTao {
 
     //解法三 while 循环
     public static int whileWay(){
-        int next = 1;   // 第10天 剩1个
-        int prev = 0;   //表示前一天
+        int count = 1;   // 第10天 剩1个
         int day = 9;
         while(day > 0){
-            prev = (1+next) * 2;   // next 表示后一天
-            next = prev;
+            count = (1+count) * 2;   // next 表示后一天
             day--;
         }
-        return prev;
+        return count;
     }
 
     //解法一、for 循环实现
     public static int forWay(){
-        int next = 1;            // 第10天 剩1个
-        int prev = 0;            //表示前一天
+        int count = 1;            // 第10天 剩1个
         for(int day = 9; day > 0; day--){
-            prev = (1+next) * 2;   // next 表示后一天
-            next = prev;
+            count = (1+count) * 2;   // next 表示后一天
         }
-        System.out.println(prev);
-        return prev;
+        return count;
+    }
+
+    public static void arr(){
+        int[] array = new int[10];
+        array[9] = 1;
+        int day = 8;
+        while (day>=0){
+            array[day] = (array[day+1] + 1) * 2;
+            day--;
+        }
+        System.out.println(array[0]);
     }
 }
