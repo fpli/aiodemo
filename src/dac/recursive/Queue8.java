@@ -26,7 +26,7 @@ public class Queue8 {
             }
         }
     }
-
+    // y = f(x); y1 = f(x1) , y2 = f(x2) if x1 == x2  y1 == y2
     private boolean judge(int n){
         for (int i = 0; i < n; i++) {
             if (array[i] == array[n] || Math.abs(n-i) == Math.abs(array[n] - array[i])){
