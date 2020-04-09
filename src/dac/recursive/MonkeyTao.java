@@ -1,4 +1,4 @@
-package dac.stack;
+package dac.recursive;
 
 /**
  * 经典算法猴子吃桃问题
