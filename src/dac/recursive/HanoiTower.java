@@ -2,13 +2,17 @@ package dac.recursive;
 
 public class HanoiTower {
 
+    static int count;
+
     public static void main(String[] args) {
-        hanoiTower(23, 'A', 'B', 'C');
+        hanoiTower(5, 'A', 'B', 'C');
+        System.out.println("总共:"+count + "次");
     }
 
     // 汉诺塔的移动方法
     // 使用分治算法
     public static void hanoiTower(int num, char a, char b, char c) {
+        count++;
         // 如果只有一个盘直接A塔移动到C塔
         if (num == 1) {
             System.out.println("第1个盘从\t" + a + "->" + c);
