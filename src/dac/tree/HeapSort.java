@@ -32,7 +32,7 @@ public class HeapSort {
 //
 //        adjustHeap(array, 0, array.length);
 //        System.out.println("第2次调整" + Arrays.toString(array));// 9,6,8,5,4
-
+        // 调整成大顶堆
         for (int i = array.length / 2 - 1; i >= 0; i--) {
             adjustHeap(array, i, array.length);
         }
