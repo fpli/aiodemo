@@ -73,9 +73,7 @@ public class HorseChessBoard {
 
     // 根据当前的这一步的所有下一步的选择数目进行非递减排序
     public static void sort(ArrayList<Point> ps){
-        ps.sort(new Comparator<Point>() {
-            @Override
-            public int compare(Point o1, Point o2) {
+        ps.sort((Point o1, Point o2) -> {
                 int count1 = next(o1).size(); // 当前这一步o1的下一步的选择数目
                 int count2 = next(o2).size();
                 if (count1 < count2) {
@@ -86,7 +84,7 @@ public class HorseChessBoard {
                     return 1;
                 }
             }
-        });
+        );
     }
 
     /**
