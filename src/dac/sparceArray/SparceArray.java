@@ -33,5 +33,17 @@ public class SparceArray {
         for (int i = 0; i < sparseArray.length; i++) {
             System.out.printf("%d\t%d\t%d\n", sparseArray[i][0], sparseArray[i][1], sparseArray[i][2]);
         }
+
+        int[][] tempArray = new int[sparseArray[0][0]][sparseArray[0][1]];
+        for (int i = 1; i < sparseArray.length; i++) {
+            tempArray[sparseArray[i][0]][sparseArray[i][1]] = sparseArray[i][2];
+        }
+        System.out.println("恢复后的二维数组");
+        for (int i = 0; i < tempArray.length; i++) {
+            for (int i1 = 0; i1 < tempArray[i].length; i1++) {
+                System.out.print(tempArray[i][i1] + "  ");
+            }
+            System.out.println();
+        }
     }
 }
