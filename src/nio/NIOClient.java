@@ -34,7 +34,7 @@ public class NIOClient {
         socketChannel.configureBlocking(false);
         //连接远程主机
         socketChannel.connect(new InetSocketAddress("127.0.0.1", 9000));
-        //注册事件
+        //注册事件 同时注册连接就绪事件和读就绪事件
         socketChannel.register(selector, SelectionKey.OP_CONNECT | SelectionKey.OP_READ);
         //循环处理
         while (true) {

@@ -1,5 +1,6 @@
 package nio;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
@@ -33,7 +34,7 @@ public class NIOServer {
                     SocketChannel channel = ((ServerSocketChannel) key.channel()).accept();
                     channel.configureBlocking(false);// 配置为非阻塞模式
                     channel.register(selector, SelectionKey.OP_READ);        // 为SocketChannel注册可读事件，等待数据到来
-                    socketChannel.register(selector, SelectionKey.OP_ACCEPT);// 再次为ServerSocketChannel注册接受事件
+                    //socketChannel.register(selector, SelectionKey.OP_ACCEPT);// 再次为ServerSocketChannel注册接受事件
                 }
 
                 if (key.isValid() && key.isReadable()) {
@@ -43,6 +44,7 @@ public class NIOServer {
                     if (receiveCount == -1) {// 对端已经关闭了通道
                         channel.close();
                         keyIterator.remove();
+                        key.cancel();
                         continue;
                     }
                     readBuffer.flip();
@@ -61,6 +63,14 @@ public class NIOServer {
                         //并返回写入的字节数，可能是0字节。
                        int count = channel.write(buffer);
                        System.out.println("write count:"+count);
+                       if (count < 0){
+                           throw new EOFException();
+                       }
+                       if (count == 0){
+                           key.interestOps(key.interestOps() | SelectionKey.OP_WRITE);
+                           selector.wakeup();
+                           break;
+                       }
                     }
                     //发送完了就取消写事件，否则下次还会进入该分支
                     key.interestOps(key.interestOps() & ~SelectionKey.OP_WRITE);
