@@ -4,6 +4,7 @@ package dac.search;
  * 二分查找非递归实现
  */
 public class BinarySearchNonRecursiveDemo {
+
     public static void main(String[] args) {
         int[] arr = {1, 5, 78, 80, 100, 345, 600};
         int index = search(arr, 1);
