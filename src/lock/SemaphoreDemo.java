@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
  *  Semaphore(信号量) 有减 有增
  */
 public class SemaphoreDemo {
+
     public static void main(String[] args) {
         Semaphore semaphore = new Semaphore(3);// 模拟3个停车位
 
