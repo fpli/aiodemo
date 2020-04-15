@@ -43,6 +43,5 @@ public class DeadLockDemo {
         DeadLockShareResource deadLockShareResourceBA = new DeadLockShareResource(lockB, lockA);
         new Thread(deadLockShareResourceAB, "AAA" ).start();
         new Thread(deadLockShareResourceBA, "BBB" ).start();
-
     }
 }
