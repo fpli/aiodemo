@@ -12,7 +12,7 @@ import java.util.concurrent.Executors;
 /**
  * 在Java NIO(Reactor模式)框架中，我们说到了一个重要概念“selector”（选择器）。
  * 它负责代替应用查询中所有已注册的通道到操作系统中进行IO事件轮询、管理当前注册的通道集合，定位发生事件的通道等操操作；
- * 但是在Java AIO框架中，由于应用程序不是“轮询”方式(轮询就绪事件)，而是订阅-通知方式，所以不再需要“selector”（选择器）了，改由channel通道直接到操作系统注册监听。
+ * 但是在Java AIO框架中，由于应用程序不是“轮询”方式(轮询就绪事件)，而是订阅-通知方式，所以不再需要"Selector"(选择器）了，改由channel通道直接到操作系统注册监听。
  * Java AIO(Proactor模式)框架中，只实现了两种网络IO通道AsynchronousServerSocketChannel(服务器监听通道),AsynchronousSocketChannel(socket套接字通道)。
  * 但是无论哪种通道他们都有独立的FileDescriptor(文件标识符),attachment(附件,附件可以是任意对象,类似“通道上下文”)
  * 并被独立的SocketChannelReadHandle类实例引用。

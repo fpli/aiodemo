@@ -9,17 +9,17 @@ public class SelectSort {
         int[] arr = {101, 34, 119, 1, -1, 90, 123};
         System.out.println(Arrays.toString(arr));
         System.out.println("排序后");
-        selectSort(arr);
+        selectSort2(arr);
         System.out.println(Arrays.toString(arr));
 
-        /*int[] arr = new int[80000];
+        int[] array = new int[80000];
         for (int i = 0; i < 80000; i++) {
-            arr[i] = (int)(Math.random() * 8000000);
+            array[i] = (int)(Math.random() * 8000000);
         }
         LocalTime start = LocalTime.now();
-        selectSort(arr);
+        selectSort(array);
         LocalTime end = LocalTime.now();
-        System.out.println(Duration.between(start, end).getSeconds());*/
+        System.out.println(Duration.between(start, end).getSeconds());
     }
 
     // 选择排序算法 时间复杂度O(n^2)平方阶

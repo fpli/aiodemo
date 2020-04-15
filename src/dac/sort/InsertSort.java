@@ -14,14 +14,14 @@ public class InsertSort {
         int[] arr = {1, 2, 3, 6, 5, 4};
         insertSort(arr);
         System.out.println(Arrays.toString(arr));
-        /*int[] arr = new int[80000];
+        int[] array = new int[80000];
         for (int i = 0; i < 80000; i++) {
-            arr[i] = (int)(Math.random() * 8000000);
+            array[i] = (int)(Math.random() * 8000000);
         }
         LocalTime start = LocalTime.now();
-        insertSort(arr);
+        insertSort(array);
         LocalTime end = LocalTime.now();
-        System.out.println(Duration.between(start, end).getSeconds());*/
+        System.out.println(Duration.between(start, end).getSeconds());
     }
 
     // 插入排序 时间复杂度 O(N^2) 平方阶

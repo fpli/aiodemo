@@ -36,7 +36,6 @@ public class BubbleSort {
                     arr[j] = arr[j+1];
                     arr[j+1] = temp;
                 }
-
             }
             //System.out.println("第"+(i + 1) + "趟排序后的数组");
             //System.out.println(Arrays.toString(arr));
