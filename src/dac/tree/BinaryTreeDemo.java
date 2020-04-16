@@ -1,6 +1,7 @@
 package dac.tree;
 
 public class BinaryTreeDemo {
+
     public static void main(String[] args) {
         HeroNode root = new HeroNode(1, "宋江");
         HeroNode node2 = new HeroNode(2, "吴用");
@@ -25,6 +26,7 @@ public class BinaryTreeDemo {
         System.out.println("前序遍历");
         binaryTree.preOrder();
     }
+
 }
 
 class BinaryTree {

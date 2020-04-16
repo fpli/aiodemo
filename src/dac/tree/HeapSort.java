@@ -8,9 +8,9 @@ public class HeapSort {
 
     public static void main(String[] args) {
         // 要求将数据进行升序排列
-        //int[] array = {4, 6, 8, 5, 9, -1, 90, 89, -99};
-        //heapSort(array);
-        //System.out.println("调整" + Arrays.toString(array));
+        int[] array = {4, 6, 8, 5, 9, -1, 90, 89, -99};
+        heapSort(array);
+        System.out.println("调整" + Arrays.toString(array));
 
         int[] arr = new int[8000000];
         for (int i = 0; i < 8000000; i++) {
