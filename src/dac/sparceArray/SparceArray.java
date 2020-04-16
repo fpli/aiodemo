@@ -9,19 +9,19 @@ public class SparceArray {
         int sum = 0;
         for (int[] ints : chessArray) {
             for (int anInt : ints) {
-                if (anInt != 0){
+                if (anInt != 0) {
                     sum++;
                 }
             }
         }
-        int[][] sparseArray = new int[sum+1][3];
+        int[][] sparseArray = new int[sum + 1][3];
         sparseArray[0][0] = 11;
         sparseArray[0][1] = 11;
         sparseArray[0][2] = sum;
         int count = 0;
         for (int i = 0; i < chessArray.length; i++) {
             for (int j = 0; j < chessArray[i].length; j++) {
-                if (chessArray[i][j] != 0){
+                if (chessArray[i][j] != 0) {
                     count++;
                     sparseArray[count][0] = i;
                     sparseArray[count][1] = j;

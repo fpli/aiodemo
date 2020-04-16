@@ -56,6 +56,7 @@ public class NIOClient {
                     } else {
                         System.out.print("连接服务端失败");
                     }
+                    channel.write(ByteBuffer.wrap("one two".getBytes()));
                 }
                 if (key.isReadable()) {
                     SocketChannel channel = (SocketChannel) key.channel();

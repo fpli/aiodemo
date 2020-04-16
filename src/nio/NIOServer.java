@@ -48,6 +48,7 @@ public class NIOServer {
                         continue;
                     }
                     readBuffer.flip();
+                    System.out.println(new String(readBuffer.array()));
                     //handler Buffer
                     //一般是响应客户端的数据
                     //直接是write写不就完事了嘛，为啥需要write事件？
