@@ -23,7 +23,7 @@ public class MergeSort {
         LocalTime end = LocalTime.now();
         System.out.println(Duration.between(start, end).getSeconds());
     }
-
+    // 分 + 治 两个阶段
     public static void mergeSort(int[] array, int left, int right, int[] tempArray) {
         if (left < right) {
             int mid = (left + right) / 2;
@@ -31,7 +31,7 @@ public class MergeSort {
             mergeSort(array, left, mid, tempArray);
 
             mergeSort(array, mid + 1, right, tempArray);
-
+            // 治 的过程
             merge(array, left, mid, right, tempArray);
         }
     }
