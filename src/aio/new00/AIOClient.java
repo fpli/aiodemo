@@ -150,8 +150,8 @@ public class AIOClient implements Runnable {
     public static void main(String[] args) {
         try {
             new Thread(new AIOClient("127.0.0.1", 8989)).start();
-            System.in.read();//阻塞主线程，保证JVM不会退出
-        } catch (IOException e) {
+            //System.in.read();//阻塞主线程，保证JVM不会退出
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

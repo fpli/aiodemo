@@ -80,7 +80,7 @@ public class AIOServer implements Runnable {
                             String msg = "服务器推送的数据时间间隔:" + random + "秒";
                             System.out.println(msg);
                             channel.write(ByteBuffer.wrap(msg.getBytes("UTF-8"))).get();
-                            Thread.sleep(random * 1000);
+                            //Thread.sleep(random * 1000);
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -105,7 +105,7 @@ public class AIOServer implements Runnable {
                 }
 
             });
-            System.in.read();//保证守护线程不会退出
+            //System.in.read();//保证守护线程不会退出
         } catch (Exception e) {
             e.printStackTrace();
         }
