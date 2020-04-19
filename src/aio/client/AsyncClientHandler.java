@@ -59,8 +59,7 @@ public class AsyncClientHandler implements CompletionHandler<Void, AsyncClientHa
 		ByteBuffer readBuffer = ByteBuffer.allocate(1024);
 		clientChannel.read(readBuffer, readBuffer, new ReadHandler(clientChannel, latch));
 	}
-	
-	//连接服务器失败
+
 	@Override
 	public void failed(Throwable exc, AsyncClientHandler attachment) {
 		System.err.println("连接服务器失败...");
