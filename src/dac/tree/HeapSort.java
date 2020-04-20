@@ -25,13 +25,7 @@ public class HeapSort {
     //堆排序
     public static void heapSort(int[] array) {
         int temp = 0;
-        //System.out.println("堆排序");
-//        推导过程
-//        adjustHeap(array, 1, array.length);
-//        System.out.println("第1次调整" + Arrays.toString(array));// 4,9,8,5,6
-//
-//        adjustHeap(array, 0, array.length);
-//        System.out.println("第2次调整" + Arrays.toString(array));// 9,6,8,5,4
+
         // 调整成大顶堆
         for (int i = array.length / 2 - 1; i >= 0; i--) {
             adjustHeap(array, i, array.length);
