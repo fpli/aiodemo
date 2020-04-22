@@ -49,7 +49,7 @@ public class MergeSort {
         int i = left;
         int j = mid + 1;
         int t = 0;// 指向tempArray的当前索引
-        // 1
+        // 1 左右两个数组比较大小后拷贝到临时数组，直到一个数组结束
         while (i <= mid && j <= right) {
             if (array[i] <= array[j]) {
                 tempArray[t] = array[i];
@@ -61,7 +61,7 @@ public class MergeSort {
                 j += 1;
             }
         }
-        // 2
+        // 2 把剩余的一个数组拷贝到临时数组
         while (i <= mid) {
             tempArray[t] = array[i];
             t += 1;
@@ -74,7 +74,7 @@ public class MergeSort {
             j += 1;
         }
 
-        // 3
+        // 3 把临时数组的元素拷贝到原始数组
         t = 0;
         int tempLeft = left;
         while (tempLeft <= right) {
