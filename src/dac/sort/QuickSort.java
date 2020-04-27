@@ -25,7 +25,7 @@ public class QuickSort {
         }
 
         LocalTime start = LocalTime.now();
-        quickSort(array, 0, array.length - 1);
+        quickSort2(array, 0, array.length - 1);
         LocalTime end = LocalTime.now();
         System.out.println(Duration.between(start, end).getSeconds());
     }
@@ -89,24 +89,33 @@ public class QuickSort {
     }
 
     //快速排序  x取区间第一个数为基准数
-    void quick_sort(int s[], int l, int r) {
-        if (l < r) {
-            //Swap(s[l], s[(l + r) / 2]); //将中间的这个数和第一个数交换 参见注1
-            int i = l, j = r, x = s[l];
-            while (i < j) {
-                while (i < j && s[j] >= x) // 从右向左找第一个小于x的数
+    public static void quickSort2(int[] array, int left, int right){
+        if (left < right){
+            // 以left索引的数作为基准数
+            int i = left;
+            int j = right;
+            int pivot = array[i];
+            while (i < j){
+                // 从右边找第一个小于基准数的数
+                while (j > i && array[j] > pivot){
                     j--;
-                if (i < j)
-                    s[i++] = s[j];
-
-                while (i < j && s[i] < x) // 从左向右找第一个大于等于x的数
+                }
+                if (j > i){
+                    array[i] = array[j];
+                }
+                // 从左边向右边找第一个大于基准数的数
+                while (i < j && array[i] <= pivot){
                     i++;
-                if (i < j)
-                    s[j--] = s[i];
+                }
+                if (i < j){
+                    array[j] = array[i];
+                }
             }
-            s[i] = x;//返回调整后基准数的位置 i
-            quick_sort(s, l, i - 1); // 左边递归调用
-            quick_sort(s, i + 1, r); // 右边递归调用
+            array[i] = pivot;
+            // 此时 i 左边都小于等于基准值的数, i右边都是大于等于基准数的数
+            quickSort2(array, left, i -1);
+            quickSort2(array, i + 1, right);
         }
     }
+
 }
