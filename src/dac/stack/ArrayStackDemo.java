@@ -53,7 +53,6 @@ class ArrayStack {
     public int pop(){
         //先判断是否空
         if (isEmpty()){
-            //
             throw new NoSuchElementException("栈空");
         }
         int value = stack[top];

@@ -1,6 +1,6 @@
 package dac.sparceArray;
 
-public class SparceArray {
+public class SparseArray {
 
     public static void main(String[] args) {
         int[][] chessArray = new int[11][11];
