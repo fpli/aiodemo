@@ -4,7 +4,6 @@ import java.awt.*;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Comparator;
 
 public class HorseChessBoard {
 
@@ -19,8 +18,8 @@ public class HorseChessBoard {
     public static void main(String[] args) {
         X = 8;
         Y = 8;
-        int row = 1; // 马初始位置的行，从1开始编号
-        int column = 1;// 马初始位置的列，从1开始编号
+        int row = 6; // 马初始位置的行，从1开始编号
+        int column = 3;// 马初始位置的列，从1开始编号
         // 创建棋盘
         int[][] chessboard = new int[X][Y];
         visited = new boolean[X * Y];// 初始值都为false
