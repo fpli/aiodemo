@@ -30,6 +30,29 @@ public class PeachDivideAlgorithm {
         return getResult(currentMonkeyCounter -1);// 递归前进段
     }
 
+    /**
+     * x 代表 第5只拿的桃子数量
+     * y(n) 代表 第n只猴子分桃时的桃子总量
+     * n        y(n)
+     * 5       y(5) = x * 5 + 1
+     * 4       (y(4) -1) / 5 * 4 = y(5) ==> y(4) = 5 * y(5) / 4 +1 ==> 5 * (x * 5 +1) / 4 + 1 ==> 1.25 * y(5) + 1 ==> 1.25 * (x *5 +1 ) +1 ==> 6.25 * x + 2.25
+     * 3       (y(3) -1) / 5 * 4 = y(4)  ==> y(3) = 5 * y(4) / 4 +1 ==> 5 * (5 * (x * 5 +1) / 4 + 1) / 4 + 1 ==> 1.25 * y(4) +1 ==> 1.25 * (6.25 *x + 2.25) + 1 ==> 7.8125 *x + 3.8125
+     * 2       (y(2) -1) / 5 * 4 = y(3)  ==> y(2) = 1.25 * y(3) + 1 ==> 1.25 * (7.8125 *x + 3.8125) + 1 ==> 9.765625 * x + 5.765625‬
+     * 1      y(1) = 1.25 (9.765625 * x + 5.765625) + 1 ==> 12.20703125 * x + 8.20703125
+     * y(n) = 1.25 y(n+1) + 1;
+     *
+     *          for (int i = 0; i < 5000; i++) {
+     *             double f = f(i);
+     *             if (f % 1 == 0){
+     *                 System.out.println(i);
+     *                 System.out.println(f);
+     *             }
+     *         }
+     */
+    public static double f(int x){
+        return 12.20703125 * x + 8.20703125;
+    }
+
 
     public static void main(String[] args) {
         monkeyCount = 5;
