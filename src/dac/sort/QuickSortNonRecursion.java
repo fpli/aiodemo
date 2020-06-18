@@ -1,0 +1,77 @@
+package dac.sort;
+
+import java.util.Arrays;
+
+public class QuickSortNonRecursion {
+
+    /**
+     * 找基准
+     *
+     * @param array
+     * @param low
+     * @param high
+     * @return
+     */
+    public static int partion(int[] array, int low, int high) {
+        int tmp = array[low];
+        while (low < high) {
+            while (low < high && array[high] >= tmp) {
+                --high;
+            }
+            if (low >= high) {
+                break;
+            } else {
+                array[low] = array[high];
+            }
+            while (low < high && array[low] <= tmp) {
+                ++low;
+            }
+            if (low >= high) {
+                break;
+            } else {
+                array[high] = array[low];
+            }
+        }
+        array[low] = tmp;
+        return low;
+    }
+
+    public static void QuickSort(int[] array) {
+        int[] stack = new int[array.length];
+        int top = 0;
+        int low = 0;
+        int high = array.length - 1;
+        int par = partion(array, low, high);
+        //  入栈
+        if (par > low + 1) {
+            stack[top++] = low;
+            stack[top++] = par - 1;
+        }
+        if (par < high - 1) {
+            stack[top++] = par + 1;
+            stack[top++] = high;
+        }
+        //出栈
+        while (top > 0) {
+            high = stack[--top];
+            low = stack[--top];
+            par = partion(array, low, high);
+            //再入栈
+            if (par > low + 1) {
+                stack[top++] = low;
+                stack[top++] = par - 1;
+            }
+            if (par < high - 1) {
+                stack[top++] = par + 1;
+                stack[top++] = high;
+            }
+        }
+
+    }
+
+    public static void main(String[] args) {
+        int[] array = {5, 8, 4, 3, 6, 7, 2, 400, 432, 543, 43};
+        QuickSort(array);
+        System.out.println(Arrays.toString(array));
+    }
+}
