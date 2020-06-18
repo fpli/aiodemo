@@ -22,7 +22,7 @@ public class MonkeyTao {
     }
 
     //解法二 递归实现
-
+    // f(n) = (f(n+1) + 1) * 2
     /**
      * day 在[10, 1]区间
      * @param day
