@@ -5,7 +5,7 @@ public class HanoiTower {
     static int count;
 
     public static void main(String[] args) {
-        hanoiTower(5, 'A', 'B', 'C');
+        hanoiTower(15, 'A', 'B', 'C');
         System.out.println("总共:"+count + "次");
     }
 
