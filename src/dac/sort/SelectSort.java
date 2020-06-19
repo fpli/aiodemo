@@ -5,11 +5,12 @@ import java.time.LocalTime;
 import java.util.Arrays;
 
 public class SelectSort {
+
     public static void main(String[] args) {
         int[] arr = {101, 34, 119, 1, -1, 90, 123};
         System.out.println(Arrays.toString(arr));
-        System.out.println("排序后");
         selectSort2(arr);
+        System.out.println("排序后");
         System.out.println(Arrays.toString(arr));
 
         int[] array = new int[80000];
@@ -46,7 +47,7 @@ public class SelectSort {
 
     //
     public static void selectSort2(int[] array) {
-        int position = array.length - 1;
+        int position;
         int max;
         for (int i = array.length - 1; i > 0; i--) {
             position = i;

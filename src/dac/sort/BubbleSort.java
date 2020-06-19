@@ -2,6 +2,7 @@ package dac.sort;
 
 import java.time.Duration;
 import java.time.LocalTime;
+import java.util.Arrays;
 
 /**
  * 冒泡排序算法优化，增加flag表识变量
@@ -9,18 +10,18 @@ import java.time.LocalTime;
 public class BubbleSort {
 
     public static void main(String[] args) {
-        //int[] arr = {3, 9, -1, 10, 20};
-        //int[] arr = {1, 2, 3, 4, 5, 6};
-        int[] arr = new int[80000];
+        int[] array = {3, 9, -1, 10, 20};
+        bubbleSort(array);
+        System.out.println(Arrays.toString(array));
+
+        array = new int[80000];
         for (int i = 0; i < 80000; i++) {
-            arr[i] = (int)(Math.random() * 8000000);
+            array[i] = (int)(Math.random() * 8000000);
         }
         LocalTime start = LocalTime.now();
-        bubbleSort(arr);
+        bubbleSort(array);
         LocalTime end = LocalTime.now();
         System.out.println(Duration.between(start, end).getSeconds());
-        //System.out.println(Arrays.toString(arr));
-
     }
 
     public static void bubbleSort(int[] arr){

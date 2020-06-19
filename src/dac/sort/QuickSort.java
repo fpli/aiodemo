@@ -2,6 +2,7 @@ package dac.sort;
 
 import java.time.Duration;
 import java.time.LocalTime;
+import java.util.Arrays;
 
 /**
  * 快速排序算法
@@ -19,7 +20,12 @@ import java.time.LocalTime;
 public class QuickSort {
 
     public static void main(String[] args) {
-        int[] array = new int[80000];
+
+        int[] array = {3, 9, -1, 10, 20};
+        quickSort(array, 0, array.length -1);
+        System.out.println(Arrays.toString(array));
+
+        array = new int[80000];
         for (int i = 0; i < 80000; i++) {
             array[i] = (int) (Math.random() * 8000000);
         }
@@ -30,15 +36,15 @@ public class QuickSort {
         System.out.println(Duration.between(start, end).getSeconds());
     }
 
-    /* 快速排序是对冒泡排序的一种改进。
-        基本思想是:通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小。
-        然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列。
+    /** 快速排序是对冒泡排序的一种改进。
+     *   基本思想是:通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小。
+     *   然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列。
      */
     public static void quickSort(int[] array, int left, int right) {
         int l = left;
         int r = right;
         // pivot 中轴值
-        int pivot = array[(left + right) / 2];
+        int pivot = array[(left + right) >> 1];
         int temp = 0;// 临时变量，作为交换时使用
         // while循环的目的是让比pivot值小的值放到左边, 比pivot大的值放到右边
         while (l < r) {

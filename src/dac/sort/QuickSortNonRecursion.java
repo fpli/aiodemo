@@ -7,10 +7,10 @@ public class QuickSortNonRecursion {
     /**
      * 找基准
      *
-     * @param array
-     * @param low
-     * @param high
-     * @return
+     * @param array 数列
+     * @param low   数组索引 低位
+     * @param high  数组索引 高位
+     * @return 基准位置索引
      */
     public static int partion(int[] array, int low, int high) {
         int tmp = array[low];

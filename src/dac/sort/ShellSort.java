@@ -13,14 +13,15 @@ import java.util.Arrays;
 public class ShellSort {
 
     public static void main(String[] args) {
-        /*int[] arr = {8,9,1,7,2,3,5,4,6,0,-1};
-        shellSort(arr);*/
-        int[] arr = new int[80000];
+        int[] arr = {8,9,1,7,2,3,5,4,6,0,-1};
+        shellSort(arr);
+        System.out.println(Arrays.toString(arr));
+        int[] array2 = new int[80000];
         for (int i = 0; i < 80000; i++) {
-            arr[i] = (int)(Math.random() * 8000000);
+            array2[i] = (int)(Math.random() * 8000000);
         }
         LocalTime start = LocalTime.now();
-        shellSort2(arr);
+        shellSort2(array2);
         LocalTime end = LocalTime.now();
         System.out.println(Duration.between(start, end).getSeconds());
     }
@@ -29,7 +30,7 @@ public class ShellSort {
     public static void shellSort(int[] arr){
         int temp = 0;
         //int count = 0;
-        for (int gap = arr.length / 2; gap > 0; gap /= 2){
+        for (int gap = arr.length >> 1; gap > 0; gap >>= 1){
             for (int i = gap; i < arr.length; i++) {
                 // 遍历各组中所有的元素
                 for (int j = i - gap; j >= 0; j -= gap) {
@@ -48,7 +49,7 @@ public class ShellSort {
     // 移位式的希尔排序
     public static void shellSort2(int[] arr){
         // 增量gap,并逐步的缩小增量
-        for (int gap = arr.length / 2; gap > 0; gap /= 2){
+        for (int gap = arr.length >> 1; gap > 0; gap >>= 2){
             // 从第gap个元素，逐个对其所在的组进行直接插入排序
             for (int i = gap; i < arr.length; i++) {
                 int j = i;
