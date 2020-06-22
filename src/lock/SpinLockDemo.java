@@ -58,6 +58,6 @@ public class SpinLockDemo {
 
         // ps -mp 6365 -o THREAD,tid,time
         // jstack 6365|grep 18e4 -A60
-       //  查看java进程是否有死锁
+       //  查看java进程是否有死锁 命令组合
     }
 }
