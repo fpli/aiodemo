@@ -23,7 +23,7 @@ class ShareResource{
     public void print5(){
         lock.lock();
         try {
-            // 1 判断
+            // 1 判断 使用while判断，不使用if , if不能防止虚假唤醒
             while (number != 1){
                 condition1.await();
             }
