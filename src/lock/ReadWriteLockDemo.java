@@ -19,7 +19,7 @@ class MyCache {
     public void put(String key, Object value) {
         readWriteLock.writeLock().lock();
         try {
-            System.out.println(Thread.currentThread().getName() + "\t 正在写入:" + key);
+            System.out.println("线程" + Thread.currentThread().getName() + "正在写入:key=" + key);
             try {
                 // 暂停一会线程
                 TimeUnit.MILLISECONDS.sleep(300);
@@ -27,7 +27,7 @@ class MyCache {
                 e.printStackTrace();
             }
             map.put(key, value);
-            System.out.println(Thread.currentThread().getName() + "\t 写入完成:" + key);
+            System.out.println("线程" + Thread.currentThread().getName() + "写入完成:key=" + key);
         } finally {
             readWriteLock.writeLock().unlock();
         }
@@ -37,7 +37,7 @@ class MyCache {
     public Object get(String key){
         readWriteLock.readLock().lock();
         try {
-            System.out.println(Thread.currentThread().getName() + "\t 正在读取:" + key);
+            System.out.println("线程" + Thread.currentThread().getName() + "正在读取:key=" + key);
             try {
                 // 暂停一会线程
                 TimeUnit.MILLISECONDS.sleep(300);
@@ -45,7 +45,7 @@ class MyCache {
                 e.printStackTrace();
             }
             Object value = map.get(key);
-            System.out.println(Thread.currentThread().getName() + "\t 读取完成:" + value);
+            System.out.println("线程" + Thread.currentThread().getName() + "读取完成:value=" + value);
             return value;
         } finally {
             readWriteLock.readLock().unlock();
