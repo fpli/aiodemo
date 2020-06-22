@@ -4,6 +4,10 @@ import java.time.Duration;
 import java.time.LocalTime;
 import java.util.Arrays;
 
+/**
+ * 堆排序时间复杂度: T(n) = O(nlog n) 线性对数阶
+ * 堆排序是树存储结构的一种应用
+ */
 public class HeapSort {
 
     public static void main(String[] args) {
@@ -26,7 +30,7 @@ public class HeapSort {
     public static void heapSort(int[] array) {
         int temp = 0;
 
-        // 调整成大顶堆
+        // 调整成大顶堆 从下至上，所以i--
         for (int i = array.length / 2 - 1; i >= 0; i--) {
             adjustHeap(array, i, array.length);
         }
@@ -38,6 +42,7 @@ public class HeapSort {
             temp = array[j];
             array[j] = array[0];
             array[0] = temp;
+            // 调整成大顶堆
             adjustHeap(array, 0, j);
         }
 
