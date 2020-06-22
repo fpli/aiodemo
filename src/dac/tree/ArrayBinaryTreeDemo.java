@@ -8,7 +8,7 @@ public class ArrayBinaryTreeDemo {
         arrayBinaryTree.preOrder(0);
     }
 }
-// 实现顺序存储二叉树(数组可以转化成树，树转化成数组)
+// 实现顺序存储二叉树(数组可以转化成树，树转化成数组)，是堆排序的基础，数组看成树，调整成大顶堆做升序排列
 class ArrayBinaryTree {
 
     private int[] array;

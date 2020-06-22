@@ -30,7 +30,7 @@ public class BinaryTreeDemo {
 }
 
 class BinaryTree {
-
+    // 树的根结点， 是整颗树的起点
     private HeroNode root;
 
     public void preOrder() {
@@ -90,16 +90,19 @@ class BinaryTree {
  * 结点
  */
 class HeroNode {
+    // 数据域
     private int no;
     private String name;
-    private HeroNode left;
-    private HeroNode right;
+
+    // next域
+    private HeroNode left; // 左子树
+    private HeroNode right;// 右子树
 
     public HeroNode(int no, String name) {
         this.no = no;
         this.name = name;
     }
-
+    // 前序遍历
     public void preOrder() {
         System.out.println(this);
         if (left != null) {
@@ -109,7 +112,7 @@ class HeroNode {
             right.preOrder();
         }
     }
-
+    // 中序遍历
     public void infixOrder() {
         if (left != null) {
             left.infixOrder();
@@ -119,7 +122,7 @@ class HeroNode {
             right.infixOrder();
         }
     }
-
+    // 后序遍历
     public void postOrder() {
         if (left != null) {
             left.postOrder();
@@ -129,7 +132,7 @@ class HeroNode {
         }
         System.out.println(this);
     }
-
+    // 前序查找
     public HeroNode preOrderSearch(int no) {
         HeroNode result = null;
         if (this.no == no) {
@@ -149,7 +152,7 @@ class HeroNode {
         }
         return result;
     }
-
+    // 中序查找
     public HeroNode infixOrderSearch(int no) {
         HeroNode result = null;
         if (left != null) {
@@ -169,7 +172,7 @@ class HeroNode {
         }
         return result;
     }
-
+    // 后序查找
     public HeroNode postOrderSearch(int no) {
         HeroNode result = null;
         if (left != null) {
@@ -194,7 +197,7 @@ class HeroNode {
 
         return result;
     }
-
+    // 删除结点
     public void delNode(int no) {
         if (this.left != null && this.left.no == no) {
             this.left = null;
