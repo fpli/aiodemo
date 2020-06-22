@@ -15,7 +15,7 @@ public class BinarySearchNonRecursiveDemo {
         int left = 0;
         int right = arr.length - 1;
         while (left <= right) {
-            int mid = (left + right) >> 1;
+            int mid = (left + right) >>> 1;// >>> 无符号右移 高位补0
             if (target == arr[mid]) {
                 return mid;
             } else if (target > arr[mid]) {//向右查找
