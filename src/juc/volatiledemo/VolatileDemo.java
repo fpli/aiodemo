@@ -25,7 +25,7 @@ class MyData {
 }
 
 /**
- * volatile 保证可见性，不保证原子性，禁止指令重排
+ * volatile 保证可见性，不保证原子性，禁止指令重排, 是一种轻量级的同步解决方案，乞丐版
  * 1 验证volatle的可见性 ，可见性是一种及时通知机制
  * 1.1 假如int number = 0; number变量之前根本没有添加volatile关键字修饰,没有可见性
  * 1.2 添加了volatile，可以解决可见性问题。
