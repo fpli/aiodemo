@@ -12,7 +12,7 @@ public class SpinLockDemo {
     // 原子引用持有的对象是线程
     AtomicReference<Thread> threadAtomicReference = new AtomicReference<>();
 
-    // 加锁
+    // 加锁，用循环代替阻塞
     public void myLock(){
         Thread thread = Thread.currentThread();
         System.out.println(thread.getName() + "\t come in ...");
@@ -32,6 +32,7 @@ public class SpinLockDemo {
         new Thread(()->{
             spinLockDemo.myLock();
             // 线程做自己的任务
+            System.out.println(Thread.currentThread().getName()+"\t do something start");
             try {
                 TimeUnit.SECONDS.sleep(5);
             } catch (InterruptedException e){
@@ -39,10 +40,12 @@ public class SpinLockDemo {
             }
 
             spinLockDemo.myUnLock();
+            System.out.println(Thread.currentThread().getName()+"\t do something end");
         }, "AA").start();
 
         new Thread(()->{
             spinLockDemo.myLock();
+            System.out.println(Thread.currentThread().getName()+"\t do something start");
             try {
                 TimeUnit.SECONDS.sleep(1);
             } catch (InterruptedException e){
@@ -50,12 +53,11 @@ public class SpinLockDemo {
             }
 
             spinLockDemo.myUnLock();
+            System.out.println(Thread.currentThread().getName()+"\t do something end");
         }, "BB").start();
 
         // ps -mp 6365 -o THREAD,tid,time
         // jstack 6365|grep 18e4 -A60
-        while (true){
-            new Object();
-        }
+       //  查看java进程是否有死锁
     }
 }
