@@ -49,7 +49,7 @@ public class ShellSort {
     // 移位式的希尔排序
     public static void shellSort2(int[] arr){
         // 增量gap,并逐步的缩小增量
-        for (int gap = arr.length >> 1; gap > 0; gap >>= 2){
+        for (int gap = arr.length >> 1; gap > 0; gap >>= 1){
             // 从第gap个元素，逐个对其所在的组进行直接插入排序
             for (int i = gap; i < arr.length; i++) {
                 int j = i;
