@@ -12,7 +12,7 @@ public class QuickSortNonRecursion {
      * @param high  数组索引 高位
      * @return 基准位置索引
      */
-    public static int partion(int[] array, int low, int high) {
+    public static int partition(int[] array, int low, int high) {
         int tmp = array[low];
         while (low < high) {
             while (low < high && array[high] >= tmp) {
@@ -41,7 +41,7 @@ public class QuickSortNonRecursion {
         int top = 0;
         int low = 0;
         int high = array.length - 1;
-        int par = partion(array, low, high);
+        int par = partition(array, low, high);
         //  入栈
         if (par > low + 1) {
             stack[top++] = low;
@@ -55,7 +55,7 @@ public class QuickSortNonRecursion {
         while (top > 0) {
             high = stack[--top];
             low = stack[--top];
-            par = partion(array, low, high);
+            par = partition(array, low, high);
             //再入栈
             if (par > low + 1) {
                 stack[top++] = low;
