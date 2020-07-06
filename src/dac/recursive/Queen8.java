@@ -1,6 +1,6 @@
 package dac.recursive;
 
-public class Queue8 {
+public class Queen8 {
 
     int max = 8;
 
@@ -9,8 +9,8 @@ public class Queue8 {
     static int count = 0;
 
     public static void main(String[] args) {
-        Queue8 queue8 = new Queue8();
-        queue8.check(0);
+        Queen8 queen8 = new Queen8();
+        queen8.check(0);
         System.out.println("total:" + count);
     }
 
