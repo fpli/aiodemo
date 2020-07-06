@@ -10,7 +10,7 @@ public class Hanoi {
             System.out.print(A + "——>" + C + "\n");
         } else {
             recursionHanoi(n - 1, A, C, B);         //使用递归先把A塔最上面的n-1个盘子移动到B塔上，C为过渡塔
-            System.out.print(A + "——>" + C + "\n");       //把A塔中底下最大的圆盘，移动到C塔上
+            System.out.print(A + "——>" + C + "\n");    //把A塔中底下最大的圆盘，移动到C塔上
             recursionHanoi(n - 1, B, A, C);         //使用递归把B塔上n-1个盘子移动到C塔上，A为过渡塔
         }
     }
@@ -59,14 +59,14 @@ public class Hanoi {
 
         //开始移动
         for (int i = 1; i < (1 << n); i++) {                  //总共要执行2^n-1(1<<n-1)步移动
-            int m = 0;                                //m代表第m块盘子hanoiPlate[m]
+            int m = 0;                                        //m代表第m块盘子hanoiPlate[m]
 
             //根据步骤数i来判断移动哪块盘子以及如何移动
             for (int j = i; j > 0; j = j / 2) {
-                if (j % 2 != 0) {    //此步骤光看代码代码有点抽象，建议手动写一下n = 2时的具体移动路径的j、m值变化
+                if (j % 2 != 0) {                            //此步骤光看代码代码有点抽象，建议手动写一下n = 2时的具体移动路径的j、m值变化
                     System.out.println("(" + (m + 1) + ")" + hanoiPlate[m] + "->" + next[index[m]][hanoiPlate[m] - 'A']);
                     hanoiPlate[m] = next[index[m]][hanoiPlate[m] - 'A'];
-                    break;                           //移动盘子后则退出这层循环
+                    break;                                   //移动盘子后则退出这层循环
                 }
                 m++;
             }
