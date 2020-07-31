@@ -18,8 +18,8 @@ import javax.crypto.Cipher;
  * RSA(RSA加密算法是非对称加密算法) 加密与解密
  * 使用RSA加密算法需要使用公钥和私钥, 公钥公开给他人，私钥自己保管。(公钥与私钥组成秘钥对)
  * 业务场景:
- * 1 使用公钥加密，使用私钥解码。
- * 2 使用私钥签名，使用公钥验签。
+ * 1 使用公钥加密，使用私钥解码。 a 给 b 发信 先使用b的公钥对内容进行加密，再使用a自己的私钥签名，最后发送
+ * 2 使用私钥签名，使用公钥验签。 b 收到信件时 先用a的公钥验签，再使用b自己私钥解密，最后得到信息内容
  */
 public class RSAEncrypt {
 
@@ -53,35 +53,37 @@ public class RSAEncrypt {
     /**
      * 功能: 公钥加密
      *
-     * @param str
+     * @param original
      * @param publicKey
      * @return
      * @throws Exception
      */
-    public static String encrypt(String str, String publicKey) throws Exception {
+    public static String encrypt(String original, String publicKey) throws Exception {
         byte[] encodedKey = Base64.getDecoder().decode(publicKey);
         RSAPublicKey pubKey = (RSAPublicKey) KeyFactory.getInstance("RSA").generatePublic(new X509EncodedKeySpec(encodedKey));
         Cipher cipher = Cipher.getInstance("RSA");
         cipher.init(Cipher.ENCRYPT_MODE, pubKey);
-        String outStr = Base64.getEncoder().encodeToString(cipher.doFinal(str.getBytes("UTF-8")));
+        byte[] bytes = cipher.doFinal(original.getBytes("UTF-8"));
+        String outStr = Base64.getEncoder().encodeToString(bytes);
         return outStr;
     }
 
     /**
      * 描述: 私钥解密
      *
-     * @param str
+     * @param ciphertext
      * @param privateKey
      * @return
      * @throws Exception
      */
-    public static String decrypt(String str, String privateKey) throws Exception {
-        byte[] inputByte = Base64.getDecoder().decode(str.getBytes("UTF-8"));
+    public static String decrypt(String ciphertext, String privateKey) throws Exception {
+        byte[] inputByte = Base64.getDecoder().decode(ciphertext.getBytes("UTF-8"));
         byte[] encodedKey = Base64.getDecoder().decode(privateKey);
         RSAPrivateKey priKey = (RSAPrivateKey) KeyFactory.getInstance("RSA").generatePrivate(new PKCS8EncodedKeySpec(encodedKey));
         Cipher cipher = Cipher.getInstance("RSA");
         cipher.init(Cipher.DECRYPT_MODE, priKey);
-        String outStr = new String(cipher.doFinal(inputByte));
+        byte[] bytes = cipher.doFinal(inputByte);
+        String outStr = new String(bytes);
         return outStr;
     }
 }
