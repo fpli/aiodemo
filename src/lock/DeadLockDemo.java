@@ -4,8 +4,8 @@ import java.util.concurrent.TimeUnit;
 
 class DeadLockShareResource implements Runnable{
 
-    private String lockA;
-    private String lockB;
+    private final String lockA;
+    private final String lockB;
 
     public DeadLockShareResource(String lockA, String lockB) {
         this.lockA = lockA;
