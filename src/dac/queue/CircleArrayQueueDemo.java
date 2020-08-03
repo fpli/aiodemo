@@ -7,7 +7,7 @@ public class CircleArrayQueueDemo {
 
     public static void main(String[] args) {
         CircleArrayQueue queue = new CircleArrayQueue(4);
-        char key = ' ';//菜单key
+        char key;//菜单key
         Scanner scanner = new Scanner(System.in);
         boolean loop = true;
         while (loop){
@@ -28,8 +28,8 @@ public class CircleArrayQueueDemo {
                     break;
                 case 'g':
                     try {
-                        int reault = queue.getQueue();
-                        System.out.printf("取出的数据是%d\n", reault);
+                        int result = queue.getQueue();
+                        System.out.printf("取出的数据是%d\n", result);
                     } catch (Exception e){
                         System.out.println(e.getMessage());
                     }
@@ -56,11 +56,11 @@ public class CircleArrayQueueDemo {
 
 class CircleArrayQueue{
 
-    private int maxSize; //表示数组的最大容量
+    private final int maxSize; //表示数组的最大容量
     private int front;  // 队列头
     private int rear;   // 指向队列的最后一个元素的后一个位置，预留一个空间
 
-    private int[] arr;  // 该数据用于存放数据，模拟队列
+    private final int[] arr;  // 该数据用于存放数据，模拟队列
 
     public CircleArrayQueue(int arrMaxSize){
         maxSize = arrMaxSize;
