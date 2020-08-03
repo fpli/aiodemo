@@ -39,8 +39,8 @@ public class SingleLinkedListDemo {
         singleLinkedList.list();
 
         //System.out.println(singleLinkedList.length());
-        System.out.println("反转之前");
-        singleLinkedList.revorse();
+        System.out.println("翻转之前");
+        singleLinkedList.reverse();
         singleLinkedList.list();
         System.out.println();
         System.out.println();
@@ -79,10 +79,7 @@ class SingleLinkedList{
         // 因为head结点不能动，需要一个辅助指针
         HeroNode helper = head;
         // 遍历链表
-        while (true){
-            if (helper.next == null){
-                break;
-            }
+        while (helper.next != null) {
             helper = helper.next;
         }
         //此时 helper指向链表的最后一个结点
@@ -195,11 +192,8 @@ class SingleLinkedList{
         }
         // 因为头结点不能动，因此我们需要一个辅助变量
         HeroNode helper = head.next;
-        while (true){
+        while (helper != null) {
             // 判断是否到链表最后一个结点
-            if (helper == null){
-                break;
-            }
             System.out.println(helper);
             helper = helper.next;
         }
@@ -209,7 +203,7 @@ class SingleLinkedList{
      * 新浪面试题
      * 倒数第k个结点
      * @param  k
-     * @return
+     * @return helper
      */
     public HeroNode getLastNode(int k){
         if (head.next == null){
@@ -234,7 +228,7 @@ class SingleLinkedList{
     // 1 先定义一个头结点 reverseHead = new HeroNode();
     // 2 从头到尾遍历原来的链表，每遍历一个结点，并将其摘下，并放在新的链表的最前端
     // 3 原来的链表的head.next = reverseHead.next;
-    public void revorse(){
+    public void reverse(){
         // 当前链表为空，或者只有一个结点，无需反转，直接返回
         if (head.next == null || head.next.next == null){
             return;
@@ -242,7 +236,7 @@ class SingleLinkedList{
         // 定义一个辅助指针，帮助遍历原来的链表
         HeroNode helper = head.next;
         // 很重要，指向当前结点的下一个结点，不然后边结点就断掉了
-        HeroNode next   = null;
+        HeroNode next;
         // 新链表的头结点
         HeroNode reverseNode = new HeroNode(-1,"", "");
         // 遍历原来的链表
