@@ -17,7 +17,7 @@ public class SpinLockDemo {
         Thread thread = Thread.currentThread();
         System.out.println(thread.getName() + "\t come in ...");
         while (!threadAtomicReference.compareAndSet(null, thread)){
-
+            System.out.println("current thread set failed, continue next loop");
         }
     }
     // 释放锁

@@ -9,7 +9,9 @@ public class MyThreadPoolExecutor {
         for (int i = 0; i < 200; i++) {
             executorService.execute(() -> {
                 System.out.println(Thread.currentThread().getName() + "\t执行业务" + (1 << 13));
+                System.out.println("current thread do more things");
             });
         }
+        executorService.shutdown();
     }
 }

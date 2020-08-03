@@ -15,10 +15,10 @@ class ShareResource{
 
     private int number = 1;//标识位  1 : A 线程  2 : B线程  3 : C 线程
 
-    private Lock lock = new ReentrantLock();
-    private Condition condition1 = lock.newCondition();
-    private Condition condition2 = lock.newCondition();
-    private Condition condition3 = lock.newCondition();
+    private final Lock lock = new ReentrantLock();
+    private final Condition condition1 = lock.newCondition();
+    private final Condition condition2 = lock.newCondition();
+    private final Condition condition3 = lock.newCondition();
 
     public void print5(){
         lock.lock();
