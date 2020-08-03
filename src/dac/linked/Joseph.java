@@ -2,7 +2,7 @@ package dac.linked;
 
 /**
  * 约瑟夫问题:
- *  josehpu问题为:设编号为1,2,..n的n个人围坐一圈，约定编号为k(1<=k<=n)的人
+ *  Joseph问题为:设编号为1,2,..n的n个人围坐一圈，约定编号为k(1<=k<=n)的人
  *  从1开始报数，数到m的那个人出列，他的下一位又从1开始报数，数到m的那个人又出列
  *  依次类推，直到所有人出列为止，由此产生一个出队编号的序列。
  *
@@ -25,7 +25,7 @@ package dac.linked;
  *  helper.next = first;
  *  原来first指向的节点就没有任何引用，就会被回收
  */
-public class Josephu {
+public class Joseph {
 
     public static void main(String[] args) {
         // 测试一把构建环型链表和遍历是否OK
