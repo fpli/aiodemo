@@ -31,7 +31,7 @@ public class AcceptSocketChannelCompletionHandler implements CompletionHandler<A
     @Override
     public void completed(AsynchronousSocketChannel socketChannel, ConcurrentMap<String, AsynchronousSocketChannel> attachment) {
         System.out.print("completed(AsynchronousSocketChannel result, ByteBuffer attachment)");
-        //每次都要重新注册监听（一次注册，一次通知(OS调用APP)），但是由于“文件状态标示符”是独享的，所以不需要担心有“漏掉的”事件
+        //每次都要重新注册监听（一次注册，一次通知(OS调用APP)），但是由于File Descriptor是独享的，所以不需要担心有“漏掉的”事件
         this.serverSocketChannel.accept(attachment, this);
         String hostName = null;
         try {

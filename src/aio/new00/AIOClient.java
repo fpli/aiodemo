@@ -16,8 +16,8 @@ import java.util.concurrent.TimeUnit;
 public class AIOClient implements Runnable {
 
     private AsynchronousChannelGroup group;   //异步通道组 封装处理异步通道的网络IO操作
-    private String host;
-    private int port;
+    private final String host;
+    private final int port;
 
     public AIOClient(String host, int port) {
         this.host = host;
@@ -42,7 +42,7 @@ public class AIOClient implements Runnable {
             final AsynchronousSocketChannel client  = AsynchronousSocketChannel.open(group);
             final AsynchronousSocketChannel client2 = AsynchronousSocketChannel.open(group);
             //注册客户端连接完成事件
-            client.connect(new InetSocketAddress(host, port), null, new CompletionHandler<Void, Object>() {
+            client.connect(new InetSocketAddress(host, port), null, new CompletionHandler<>() {
 
                 @Override
                 public void completed(Void result, Object attachment) {
@@ -60,10 +60,8 @@ public class AIOClient implements Runnable {
                             byteBuffer.flip();// 切换到读模式(channel的read操作对应buffer的写操作, 所以需要切换模式)
                             System.out.println(Thread.currentThread().getName() + " client read data: " + new String(byteBuffer.array()));
                             try {
-                                Buffer buffer = byteBuffer.clear();//切换到写模式
-                                if (client != null) {
-                                    client.close();
-                                }
+                                byteBuffer.clear();//切换到写模式
+                                client.close();
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -87,7 +85,7 @@ public class AIOClient implements Runnable {
             });
 
             //连接2
-            client2.connect(new InetSocketAddress(host, port), null, new CompletionHandler<Void, Object>() {
+            client2.connect(new InetSocketAddress(host, port), null, new CompletionHandler<>() {
 
                 @Override
                 public void completed(Void result, Object attachment) {

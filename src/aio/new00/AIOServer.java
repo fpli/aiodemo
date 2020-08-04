@@ -17,8 +17,8 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class AIOServer implements Runnable {
 
-    private int port;
-    private int threadSize;
+    private final int port;
+    private final int threadSize;
     protected AsynchronousChannelGroup asynchronousChannelGroup;
 
     protected AsynchronousServerSocketChannel serverChannel;
@@ -55,23 +55,20 @@ public class AIOServer implements Runnable {
                     try {
                         System.out.println("client host: " + channel.getRemoteAddress().toString());
                         System.out.println("local host: " + channel.getLocalAddress());
-                        new Thread() {
-
-                            public void run() {
-                                while (true) {
-                                    try {
-                                        final ByteBuffer echoBuffer = ByteBuffer.allocateDirect(1024);
-                                        echoBuffer.clear();
-                                        channel.read(echoBuffer).get();
-                                        echoBuffer.flip();
-                                        System.out.println("received : " + Charset.defaultCharset().decode(echoBuffer));
-                                        Thread.sleep(2000);
-                                    } catch (InterruptedException | ExecutionException e) {
-                                        e.printStackTrace();
-                                    }
+                        new Thread(() -> {
+                            while (true) {
+                                try {
+                                    final ByteBuffer echoBuffer = ByteBuffer.allocateDirect(1024);
+                                    echoBuffer.clear();
+                                    channel.read(echoBuffer).get();
+                                    echoBuffer.flip();
+                                    System.out.println("received : " + Charset.defaultCharset().decode(echoBuffer));
+                                    Thread.sleep(2000);
+                                } catch (InterruptedException | ExecutionException e) {
+                                    e.printStackTrace();
                                 }
                             }
-                        }.start();
+                        }).start();
 
                         int random = ThreadLocalRandom.current().nextInt(2);
                         System.out.println("server deal request execute: " + random + "s");
@@ -82,11 +79,7 @@ public class AIOServer implements Runnable {
                             channel.write(ByteBuffer.wrap(msg.getBytes("UTF-8"))).get();
                             //Thread.sleep(random * 1000);
                         }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } catch (ExecutionException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     } finally {
                         //服务端已经接收客户端成功了，为什么还要调用accept方法？因为一个AsynchronousServerSocketChannel可以接收成千上万个客户端

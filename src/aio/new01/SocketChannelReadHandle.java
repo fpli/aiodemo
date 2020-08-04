@@ -13,7 +13,7 @@ import java.nio.channels.CompletionHandler;
  * 重要的说明：一个SocketChannel都会有唯一的一个独立工作的SocketChannelReadHandle对象（CompletionHandler接口的实现），
  * 其中又都将独享一个“文件状态标示”对象FileDescriptor、
  * 一个独立的由程序员定义的Buffer缓存（这里我们使用的是ByteBuffer）、
- * 所以不用担心在服务器端会出现“窜对象”这种情况，因为JAVA AIO框架已经帮您组织好了。<p>
+ * 所以不用担心在服务器端会出现“窜对象”这种情况，因为Java AIO框架已经帮您组织好了。<p>
  * 
  * 但是最重要的,用于生成Channel的对象：AsynchronousChannelProvider是单例模式,无论在哪组SocketChannel，
  * 都是一个对象引用（但这没关系,因为您不会直接操作这个AsynchronousChannelProvider对象）。

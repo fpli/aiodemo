@@ -46,7 +46,7 @@ public class AioSocketServer {
         serverSocket.accept(globalMap, new AcceptSocketChannelCompletionHandler(serverSocket));
 
         //等待,以便观察现象（这个和要讲解的原理本身没有任何关系，只是为了保证守护线程不会退出）
-        synchronized(waitObject) {
+        synchronized (waitObject) {
             waitObject.wait();
         }
     }
