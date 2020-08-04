@@ -59,7 +59,6 @@ public class AIOServer implements Runnable {
                             while (true) {
                                 try {
                                     final ByteBuffer echoBuffer = ByteBuffer.allocateDirect(1024);
-                                    echoBuffer.clear();
                                     channel.read(echoBuffer).get();
                                     echoBuffer.flip();
                                     System.out.println("received : " + Charset.defaultCharset().decode(echoBuffer));
@@ -76,8 +75,8 @@ public class AIOServer implements Runnable {
                         for (int count = 0; count < 50; count++) {
                             String msg = "服务器推送的数据时间间隔:" + random + "秒";
                             System.out.println(msg);
-                            channel.write(ByteBuffer.wrap(msg.getBytes("UTF-8"))).get();
-                            //Thread.sleep(random * 1000);
+                            Integer sentCount = channel.write(ByteBuffer.wrap(msg.getBytes("UTF-8"))).get();
+                            System.out.println("it has sent count is " + sentCount);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
