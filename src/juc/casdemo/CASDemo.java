@@ -1,5 +1,8 @@
 package juc.casdemo;
 
+import java.nio.file.Path;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -23,8 +26,24 @@ public class CASDemo {
 
     public static void main(String[] args) {
         AtomicInteger atomicInteger = new AtomicInteger(4);
-        //thread  do some things
+        //a thread  does something
         System.out.println(atomicInteger.compareAndSet(4, 2020));
         System.out.println(atomicInteger.get());
+        int num = 10_000_901;
+        System.out.println(num);
+        LocalDateTime now = LocalDateTime.now();
+        System.out.println(now);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String format = dateTimeFormatter.format(now);
+        System.out.println(format);
+        Path path = Path.of(System.getProperty("user.home"));
+        System.out.println(path);
+        System.out.println(path.isAbsolute());
+        path.forEach((path1 -> {
+            System.out.println(path1);
+            System.out.println(path1.isAbsolute());
+        }));
+        Path root = path.getRoot();
+        System.out.println(root);
     }
 }
