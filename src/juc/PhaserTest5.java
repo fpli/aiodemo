@@ -3,7 +3,7 @@ package juc;
 import java.util.concurrent.Phaser;
 import java.util.concurrent.TimeUnit;
 
-public class PhaserTest6 {
+public class PhaserTest5 {
 
     //
     private static final int TASKS_PER_PHASER = 4;
