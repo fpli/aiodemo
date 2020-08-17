@@ -23,7 +23,7 @@ import javax.crypto.Cipher;
  */
 public class RSAEncrypt {
 
-    private static Map<Integer, String> keyMap = new HashMap<>();
+    private static final Map<Integer, String> keyMap = new HashMap<>();
 
     public static void main(String[] args) throws Exception {
         genKeyPair();
