@@ -32,7 +32,7 @@ public class AsyncServerHandler implements Runnable {
         //生产环境就不需要担心这个问题，因为服务端是不会退出的
         latch = new CountDownLatch(1);
         //用于接收客户端的连接
-        channel.accept(this, new AcceptHandler());
+        channel.accept(this, new AcceptCompletionHandler());
         System.out.println("开始接受客户端连接");
         try {
             latch.await();//保证守护线程不会退出

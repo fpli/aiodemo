@@ -5,19 +5,18 @@ import java.nio.ByteBuffer;
 import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.CompletionHandler;
 import java.nio.charset.StandardCharsets;
-import java.util.concurrent.CountDownLatch;
 
 /**
  * 读取操作完成处理器
  */
-public class ReadHandler implements CompletionHandler<Integer, ByteBuffer> {
+public class ReadCompletionHandler implements CompletionHandler<Integer, ByteBuffer> {
 	
 	private AsynchronousSocketChannel clientChannel;
-	private CountDownLatch latch;
+	private ByteBuffer dst;
 	
-	public ReadHandler(AsynchronousSocketChannel clientChannel, CountDownLatch latch) {
+	public ReadCompletionHandler(AsynchronousSocketChannel clientChannel, ByteBuffer dst) {
 		this.clientChannel = clientChannel;
-		this.latch = latch;
+		this.dst = dst;
 	}
 	
 	/**
@@ -33,13 +32,14 @@ public class ReadHandler implements CompletionHandler<Integer, ByteBuffer> {
 			}
 			return;
 		}
-		attachment.flip();
-		byte[] bytes = new byte[attachment.remaining()];
-		attachment.get(bytes);
-		String body;
-		body = new String(bytes, StandardCharsets.UTF_8);
+		dst.flip();
+		byte[] bytes = new byte[dst.remaining()];
+		dst.get(bytes);
+		String body = new String(bytes, StandardCharsets.UTF_8);
 		System.out.println("客户端收到结果:"+ body);
-		clientChannel.read(attachment, attachment, this);
+		System.out.println("start next read...");
+		dst.compact();
+		clientChannel.read(dst, attachment, this);
 	}
 	
 	@Override
@@ -47,7 +47,6 @@ public class ReadHandler implements CompletionHandler<Integer, ByteBuffer> {
 		System.err.println("数据读取失败...");
 		try {
 			clientChannel.close();
-			latch.countDown();
 		} catch (IOException e) {
 			
 		}

@@ -4,7 +4,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.CompletionHandler;
 
-public class AcceptHandler implements CompletionHandler<AsynchronousSocketChannel, AsyncServerHandler> {
+public class AcceptCompletionHandler implements CompletionHandler<AsynchronousSocketChannel, AsyncServerHandler> {
 
     @Override
     public void completed(AsynchronousSocketChannel channel, AsyncServerHandler serverHandler) {
@@ -17,9 +17,10 @@ public class AcceptHandler implements CompletionHandler<AsynchronousSocketChanne
 
 
         //创建新的Buffer
-        ByteBuffer buffer = ByteBuffer.allocate(1024);
+        ByteBuffer dst = ByteBuffer.allocate(1024);
+        ByteBuffer buffer = ByteBuffer.allocate(1024 * 8);
         //异步读  第三个参数为接收消息回调的业务Handler
-        channel.read(buffer, buffer, new ReadHandler(channel));
+        channel.read(dst, buffer, new ReadCompletionHandler(channel, dst));
     }
 
     @Override
