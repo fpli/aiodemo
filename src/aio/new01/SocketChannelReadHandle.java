@@ -1,11 +1,11 @@
 package aio.new01;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.ByteBuffer;
 import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.CompletionHandler;
+import java.nio.charset.StandardCharsets;
 
 /**
  * 负责对每一个SocketChannel的数据获取事件进行监听。<p>
@@ -57,13 +57,9 @@ public class SocketChannelReadHandle implements CompletionHandler<Integer, Strin
         byte[] contexts = new byte[result.intValue()];
         this.dst.flip();//flip是为了用户程序读作准备(数据从dst取出)
         this.dst.get(contexts, 0, result.intValue());
-        try {
-            String nowContent = new String(contexts , 0, result.intValue(), "UTF-8");
-            historyContext.append(nowContent);
-            System.out.print("================目前的传输结果：" + historyContext);
-        } catch (UnsupportedEncodingException e) {
-            
-        }
+        String nowContent = new String(contexts , 0, result.intValue(), StandardCharsets.UTF_8);
+        historyContext.append(nowContent);
+        System.out.print("================目前的传输结果：" + historyContext);
 
         //=========================================================================
         //          以“over”符号作为客户端完整信息的标记
@@ -79,7 +75,7 @@ public class SocketChannelReadHandle implements CompletionHandler<Integer, Strin
             //根据具体业务需要具体处理,这里直接回发数据
             ByteBuffer src = null;
             try {
-                src = ByteBuffer.wrap(URLEncoder.encode("业务处理完后的数据", "UTF-8").getBytes());
+                src = ByteBuffer.wrap(URLEncoder.encode("业务处理完后的数据", StandardCharsets.UTF_8).getBytes());
                 do {
                 	socketChannel.write(src);
                 } while (src.hasRemaining());

@@ -1,10 +1,10 @@
 package aio.client;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.CompletionHandler;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -37,12 +37,8 @@ public class ReadHandler implements CompletionHandler<Integer, ByteBuffer> {
 		byte[] bytes = new byte[attachment.remaining()];
 		attachment.get(bytes);
 		String body;
-		try {
-			body = new String(bytes, "UTF-8");
-			System.out.println("客户端收到结果:"+ body);
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
+		body = new String(bytes, StandardCharsets.UTF_8);
+		System.out.println("客户端收到结果:"+ body);
 		clientChannel.read(attachment, attachment, this);
 	}
 	

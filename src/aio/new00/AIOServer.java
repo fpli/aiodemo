@@ -8,6 +8,7 @@ import java.nio.channels.AsynchronousServerSocketChannel;
 import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.CompletionHandler;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadLocalRandom;
@@ -75,7 +76,7 @@ public class AIOServer implements Runnable {
                         for (int count = 0; count < 50; count++) {
                             String msg = "服务器推送的数据时间间隔:" + random + "秒";
                             System.out.println(msg);
-                            Integer sentCount = channel.write(ByteBuffer.wrap(msg.getBytes("UTF-8"))).get();
+                            Integer sentCount = channel.write(ByteBuffer.wrap(msg.getBytes(StandardCharsets.UTF_8))).get();
                             System.out.println("it has sent count is " + sentCount);
                         }
                     } catch (Exception e) {
