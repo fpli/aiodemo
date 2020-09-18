@@ -1,5 +1,6 @@
 package desDemo;
 
+import java.nio.charset.StandardCharsets;
 import java.security.KeyFactory;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
@@ -63,7 +64,7 @@ public class RSAEncrypt {
         RSAPublicKey pubKey = (RSAPublicKey) KeyFactory.getInstance("RSA").generatePublic(new X509EncodedKeySpec(encodedKey));
         Cipher cipher = Cipher.getInstance("RSA");
         cipher.init(Cipher.ENCRYPT_MODE, pubKey);
-        byte[] bytes = cipher.doFinal(original.getBytes("UTF-8"));
+        byte[] bytes = cipher.doFinal(original.getBytes(StandardCharsets.UTF_8));
         String outStr = Base64.getEncoder().encodeToString(bytes);
         return outStr;
     }
@@ -77,7 +78,7 @@ public class RSAEncrypt {
      * @throws Exception
      */
     public static String decrypt(String ciphertext, String privateKey) throws Exception {
-        byte[] inputByte = Base64.getDecoder().decode(ciphertext.getBytes("UTF-8"));
+        byte[] inputByte = Base64.getDecoder().decode(ciphertext.getBytes(StandardCharsets.UTF_8));
         byte[] encodedKey = Base64.getDecoder().decode(privateKey);
         RSAPrivateKey priKey = (RSAPrivateKey) KeyFactory.getInstance("RSA").generatePrivate(new PKCS8EncodedKeySpec(encodedKey));
         Cipher cipher = Cipher.getInstance("RSA");
