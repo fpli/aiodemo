@@ -30,6 +30,7 @@ public class FunctionTest {
         });
 
         System.out.println((System.currentTimeMillis() - start));
+
         System.out.println("Stream takeWhile ....");
         IntStream.of(12, 4, 3, 6, 8, 9).takeWhile((x) -> x % 2 == 0 ).forEach(System.out::println);
         System.out.println("Stream dropWhile Api");
