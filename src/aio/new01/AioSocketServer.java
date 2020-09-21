@@ -4,10 +4,7 @@ import java.net.InetSocketAddress;
 import java.nio.channels.AsynchronousChannelGroup;
 import java.nio.channels.AsynchronousServerSocketChannel;
 import java.nio.channels.AsynchronousSocketChannel;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 /**
  * 在Java NIO(Reactor模式)框架中，我们说到了一个重要概念“selector”（选择器）。
@@ -19,7 +16,6 @@ import java.util.concurrent.Executors;
  */
 public class AioSocketServer {
 
-    private static final Object waitObject = new Object();
     private static final ConcurrentMap<String, AsynchronousSocketChannel> globalMap = new ConcurrentHashMap<>();
     
     /**
@@ -35,20 +31,19 @@ public class AioSocketServer {
          * 3、这个线程池是用来得到操作系统的“IO事件通知”的,不是用来进行“得到IO数据后的业务处理的”。要进行后者的操作,您可以再使用一个池（最好不要混用）
          * 4、您也可以不使用线程池（不推荐）,如果决定不使用线程池,直接AsynchronousServerSocketChannel.open()就行了。
          * */
-        ExecutorService threadPool = Executors.newFixedThreadPool(5);
-        AsynchronousChannelGroup group = AsynchronousChannelGroup.withThreadPool(threadPool);
-        final AsynchronousServerSocketChannel serverSocket = AsynchronousServerSocketChannel.open(group);
+        //ExecutorService threadPool = Executors.newFixedThreadPool(5);
+        //AsynchronousChannelGroup asynchronousChannelGroup = AsynchronousChannelGroup.withCachedThreadPool(threadPool, 2);
+
+        AsynchronousChannelGroup asynchronousChannelGroup = AsynchronousChannelGroup.withFixedThreadPool(2, Executors.defaultThreadFactory());
+
+        //AsynchronousChannelGroup asynchronousChannelGroup = AsynchronousChannelGroup.withThreadPool(threadPool); // with a bug
+        final AsynchronousServerSocketChannel serverSocket = AsynchronousServerSocketChannel.open(asynchronousChannelGroup);
 
         //设置要监听的端口“0.0.0.0”代表本机所有IP设备
         serverSocket.bind(new InetSocketAddress("0.0.0.0", 8083));
         //为AsynchronousServerSocketChannel注册监听，注意只是为AsynchronousServerSocketChannel通道注册监听
         //并不包括为 随后客户端和服务器 SocketChannel通道注册的监听
         serverSocket.accept(globalMap, new AcceptSocketChannelCompletionHandler(serverSocket));
-
-        //等待,以便观察现象（这个和要讲解的原理本身没有任何关系，只是为了保证守护线程不会退出）
-        synchronized (waitObject) {
-            waitObject.wait();
-        }
     }
     
 }

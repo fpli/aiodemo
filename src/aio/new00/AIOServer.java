@@ -105,7 +105,7 @@ public class AIOServer implements Runnable {
     }
 
     public static void main(String[] args) throws IOException {
-        new Thread(new AIOServer(8989, 10)).start();
+        new Thread(new AIOServer(8989, 2)).start();
     }
 
 }
