@@ -3,6 +3,8 @@ package juc;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.function.Function;
 import java.util.stream.IntStream;
 
@@ -43,6 +45,14 @@ public class FunctionTest {
         System.out.println(Arrays.toString(array));
         swap(array);
         System.out.println(Arrays.toString(array));
+
+        ExecutorService executorService = Executors.newFixedThreadPool(2);
+
+        executorService.submit(()->{
+            System.out.println(Thread.currentThread().getName());
+        });
+
+        System.out.println("done");
     }
 
     public static void swap(int[] array){

@@ -18,9 +18,10 @@ public class PhaserTest2 {
 
         //
         System.out.println("Press ENTER to continue");
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        reader.readLine();
+        //BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        //reader.readLine();
         phaser.arriveAndDeregister();// no block
+        System.out.println(Thread.currentThread().getName() + "--->>>");
     }
 
     public static class Task implements Runnable {
@@ -35,6 +36,11 @@ public class PhaserTest2 {
 
         @Override
         public void run() {
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             phaser.arriveAndAwaitAdvance();// arrive and block current thread
             System.out.println("in Task.run(), phase: " + phaser.getPhase() + ", id: " + this.id);
         }
