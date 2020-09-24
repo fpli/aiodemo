@@ -1,10 +1,11 @@
-package juc;
+package juc.thread.synchronizers.countdownlatch;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.concurrent.CountDownLatch;
 
 public class ProgressThread extends Thread {
+
     public static final int PROGRESS_WIDTH = 350;
     private static final int CATCH_UP_COUNT = 75;
     private final JProgressBar progressBar;
@@ -15,8 +16,7 @@ public class ProgressThread extends Thread {
         this.latch = latch;
         this.slowness = slowness;
         progressBar = new JProgressBar();
-        progressBar.setPreferredSize(
-                new Dimension(PROGRESS_WIDTH - 30, 25));
+        progressBar.setPreferredSize(new Dimension(PROGRESS_WIDTH - 30, 25));
         progressBar.setStringPainted(true);
     }
 

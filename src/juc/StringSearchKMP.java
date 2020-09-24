@@ -13,6 +13,8 @@ public class StringSearchKMP {
         System.out.println(index);
         index = knuthMorrisPratt("BBC ABCDAB ABCDABCDABDE", "AB ABC", 0);
         System.out.println(index);
+        int[] ints = lengthKMP("aaaab".toCharArray());
+        System.out.println(Arrays.toString(ints));
     }
 
     /**

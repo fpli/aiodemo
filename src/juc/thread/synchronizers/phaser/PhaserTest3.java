@@ -1,4 +1,4 @@
-package juc;
+package juc.thread.synchronizers.phaser;
 
 import java.util.concurrent.Phaser;
 

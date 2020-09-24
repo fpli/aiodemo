@@ -1,7 +1,5 @@
-package juc;
+package juc.thread.synchronizers.phaser;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.concurrent.Phaser;
 
 public class PhaserTest2 {
