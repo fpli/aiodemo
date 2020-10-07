@@ -7,7 +7,7 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
- * 资源类
+ * Shared resource
  */
 class MyCache {
 
@@ -15,37 +15,37 @@ class MyCache {
     //private Lock lock = new ReentrantLock();
     private ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
 
-    // 写操作
+    // writing operation
     public void put(String key, Object value) {
         readWriteLock.writeLock().lock();
         try {
-            System.out.println("线程" + Thread.currentThread().getName() + "正在写入:key=" + key);
+            System.out.println("thread" + Thread.currentThread().getName() + "is writing:key=" + key);
             try {
-                // 暂停一会线程
+                // pause 0.3 second
                 TimeUnit.MILLISECONDS.sleep(300);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             map.put(key, value);
-            System.out.println("线程" + Thread.currentThread().getName() + "写入完成:key=" + key);
+            System.out.println("thread" + Thread.currentThread().getName() + "has written:key=" + key);
         } finally {
             readWriteLock.writeLock().unlock();
         }
     }
 
-    // 读操作
+    // reading operation
     public Object get(String key){
         readWriteLock.readLock().lock();
         try {
-            System.out.println("线程" + Thread.currentThread().getName() + "正在读取:key=" + key);
+            System.out.println("thread" + Thread.currentThread().getName() + "is reading:key=" + key);
             try {
-                // 暂停一会线程
+                // pause 0.3 second
                 TimeUnit.MILLISECONDS.sleep(300);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             Object value = map.get(key);
-            System.out.println("线程" + Thread.currentThread().getName() + "读取完成:value=" + value);
+            System.out.println("thread" + Thread.currentThread().getName() + "has read:value=" + value);
             return value;
         } finally {
             readWriteLock.readLock().unlock();
@@ -54,15 +54,7 @@ class MyCache {
 }
 
 /**
- * 多个线程同时读取一个资源类没有任何问题，所以为了满足并发量，读取共享资源应该可以同时进行。
- * 但是
- * 如果有一个线程想去写共享资源来，就不应该再有其他线程对该资源进行读或写
- * 小总结:
- *  读-读能共存
- *  读-写不能共存
- *  写-写不能共存
- *
- *  写操作: 原子 + 独占, 整个过程必须是一个完整的统一体,中间不许被分割,不许被打断
+ * read-write operations in a coincidence
  */
 public class ReadWriteLockDemo {
 

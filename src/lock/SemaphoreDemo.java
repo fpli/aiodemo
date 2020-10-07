@@ -4,22 +4,21 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 抢车位
- *  固定3个车位
- *  Semaphore(信号量) 有减 有增
+ *  three stop position
+ *  Semaphore
  */
 public class SemaphoreDemo {
 
     public static void main(String[] args) {
-        Semaphore semaphore = new Semaphore(3);// 模拟3个停车位
+        Semaphore semaphore = new Semaphore(3);// three
 
-        for (int i = 1; i <= 6 ; i++) {// 模拟6部汽车
+        for (int i = 1; i <= 6 ; i++) {// six cars
             new Thread(()->{
                 try {
                     semaphore.acquire();
-                    System.out.println(Thread.currentThread().getName() + "\t 抢到车位");
+                    System.out.println(Thread.currentThread().getName() + "\t got a position");
                     TimeUnit.SECONDS.sleep(3);
-                    System.out.println(Thread.currentThread().getName() + "\t 停车3 s 后离开车位");
+                    System.out.println(Thread.currentThread().getName() + "\t stop 3 minutes, and leaves");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {
