@@ -53,6 +53,7 @@ public class FunctionTest {
         });
 
         System.out.println("done");
+        executorService.shutdown();
     }
 
     public static void swap(int[] array){
