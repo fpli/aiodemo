@@ -4,22 +4,22 @@ import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 
 /***
- * 向上计数，到达同步点
+ * CyclicBarrier
  */
 public class CyclicBarrierDemo {
 
     public static void main(String[] args) {
         CyclicBarrier cyclicBarrier = new CyclicBarrier(7, ()->{
-            System.out.println("召唤神龙");
+            System.out.println("call master");
         });
 
         for (int i = 1; i <= 7 ; i++) {
             final int tempInt = i;
             new Thread(()->{
-                System.out.println(Thread.currentThread().getName() + "\t收集到第" + tempInt+ "颗龙珠");
+                System.out.println(Thread.currentThread().getName() + "\tcollect " + tempInt+ " item");
                 try {
-                    cyclicBarrier.await();
-                    System.out.println(Thread.currentThread().getName() + "继续执行");
+                    cyclicBarrier.await(); // block current thread, till parties threads arrive the barrier, then go on
+                    System.out.println(Thread.currentThread().getName() + "go on");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (BrokenBarrierException e) {

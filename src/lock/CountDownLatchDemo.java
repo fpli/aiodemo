@@ -3,22 +3,22 @@ package lock;
 import java.util.concurrent.CountDownLatch;
 
 /**
- * 下自习，班主任关门
- *  倒计数锁存器, 计数为0, 解锁阻塞线程
+ *  mock up a shutdown light after students leave classroom
+ *  CountDownLatch the count down to zero, then the blocking thread go on
  */
 public class CountDownLatchDemo {
 
     public static void main(String[] args) throws Exception {
         CountDownLatch countDownLatch = new CountDownLatch(6);
 
-        for (int i = 1; i <=6 ; i++) {
+        for (int i = 1; i <= 6 ; i++) {
             new Thread(()->{
-                System.out.println(Thread.currentThread().getName() + "\t 上完自习, 离开教室");
+                System.out.println(Thread.currentThread().getName() + "\t after class and leave classroom");
                 countDownLatch.countDown();
             }, String.valueOf(i)).start();
         }
 
-        countDownLatch.await();
-        System.out.println(Thread.currentThread().getName() + "\t 班主任最后关门");
+        countDownLatch.await();// block the caller thread, till count threads down to zero, then the caller thread go on
+        System.out.println(Thread.currentThread().getName() + "\t the master of class shutdown the light");
     }
 }

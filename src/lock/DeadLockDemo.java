@@ -15,24 +15,24 @@ class DeadLockShareResource implements Runnable{
     @Override
     public void run() {
         synchronized (lockA){
-            System.out.println(Thread.currentThread().getName() + "\t线程持有锁:" + lockA + "\t 尝试获取:" + lockB );
+            System.out.println(Thread.currentThread().getName() + "\thold:" + lockA + "\t try to hold:" + lockB );
             try {
                 TimeUnit.SECONDS.sleep(2);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             synchronized (lockB){
-                System.out.println(Thread.currentThread().getName() + "\t线程持有锁:" + lockB);
+                System.out.println(Thread.currentThread().getName() + "\thold:" + lockB);
             }
         }
     }
 }
 
 /**
- * 死锁 代码产生
- * 死锁定位分析
- * jps -l  : 查找java进程id
- * jstack pid : 根据进程id看详情
+ * deadlock demo
+ * analyze deadlock
+ * jps -l  : find a java's id
+ * jstack pid : view details of given pid
  */
 public class DeadLockDemo {
 
