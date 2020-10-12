@@ -13,14 +13,14 @@ class MyResource {
 
     private volatile boolean flag = true; // 默认开启,进行生产+消费
     private AtomicInteger atomicInteger = new AtomicInteger();
-    private BlockingQueue<String> blockingQueue = null;
+    private BlockingQueue<String> blockingQueue;
 
     public MyResource(BlockingQueue<String> blockingQueue) {
         this.blockingQueue = blockingQueue;
     }
 
     public void myProduce() throws Exception {
-        String data = null;
+        String data;
         boolean retValue;
         while (flag){
             data = atomicInteger.incrementAndGet() + "";
@@ -36,7 +36,7 @@ class MyResource {
     }
 
     public void myConsumer() throws Exception{
-        String result = null;
+        String result;
         while (flag){
             result = blockingQueue.poll(2, TimeUnit.SECONDS);
             if (result == null || result.equalsIgnoreCase("")){
@@ -50,7 +50,7 @@ class MyResource {
         }
     }
 
-    public void stop() throws Exception{
+    public void stop() {
         flag = false;
     }
 

@@ -9,7 +9,7 @@ public class RunExample {
         CompletableFuture<Void> cf = CompletableFuture.runAsync(() -> {
             System.out.println("running, in thread: " + Thread.currentThread().getName());
         });
-        cf.join();//waits until task is completed
+        cf.join();//The main thread waits until task is completed
 
         System.out.println("main exiting, thread: " + Thread.currentThread().getName());
     }
