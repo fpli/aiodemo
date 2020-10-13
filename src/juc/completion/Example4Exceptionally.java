@@ -11,7 +11,8 @@ public class Example4Exceptionally {
 
     private static void runTasks(int i) {
         System.out.printf("-- input: %s --%n", i);
-        CompletableFuture.supplyAsync(() -> 16 / i)
+        CompletableFuture
+                .supplyAsync(() -> 16 / i)
                 .thenApply(input -> input + 1)
                 .thenApply(input -> input + 3)
                 .exceptionally(exception -> {
