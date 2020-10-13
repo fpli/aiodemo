@@ -11,14 +11,12 @@ public class Example3Exceptionally {
 
     private static void runTasks(int i) {
         System.out.printf("-- input: %s --%n", i);
-        CompletableFuture
-                .supplyAsync(() -> {
-                    return 16 / i;
-                }).exceptionally(exception -> {
+        CompletableFuture.supplyAsync(() -> {
+            return 16 / i;
+        }).exceptionally(exception -> {
             System.out.println("in exceptionally");
             System.err.println(exception);
-            return 1;})
-                .thenApply(input -> input * 3)
-                .thenAccept(System.out::println);
+            return 1;
+        }).thenApply(input -> input * 3).thenAccept(System.out::println);
     }
 }
