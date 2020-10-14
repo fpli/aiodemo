@@ -4,7 +4,8 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * Following methods of CompletableFuture can be used to start tasks which return a result
+ * Creating and Running tasks that return results
+ *     Following methods of CompletableFuture can be used to start tasks which return a result
  *      public static <U> CompletableFuture<U> supplyAsync(Supplier<U> supplier);
  *      public static <U> CompletableFuture<U> supplyAsync(Supplier<U> supplier, Executor executor)
  */

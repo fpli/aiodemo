@@ -4,6 +4,10 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * The methods which return CompletionStage<Void> or CompletableFuture<Void> can only be chained with a method which takes a Runnable.
+ * The methods which return CompletionStage<U> can be chained with methods which takes Consumer<U> or Function<U,R>.
+ */
 public class SupplyExample4 {
 
     public static void main(String[] args) {
@@ -17,7 +21,7 @@ public class SupplyExample4 {
                 throw new RuntimeException(e);
             }
         }).thenAccept(System.out::println)
-                .thenRun(() -> System.out.println("Task finished"))
-                .join();
+          .thenRun(() -> System.out.println("Task finished"))
+          .join();
     }
 }

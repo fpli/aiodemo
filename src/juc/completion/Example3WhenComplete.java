@@ -2,6 +2,9 @@ package juc.completion;
 
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * Following example handles exception in an exceptionally() stage placed before whenComplete() stage
+ */
 public class Example3WhenComplete {
 
     public static void main(String[] args) throws Exception {
@@ -20,7 +23,6 @@ public class Example3WhenComplete {
                     return 1;
                 })
                 .whenComplete((input, exception) -> {
-
                     if (exception != null) {
                         System.out.println("exception occurs");
                         System.err.println(exception);
