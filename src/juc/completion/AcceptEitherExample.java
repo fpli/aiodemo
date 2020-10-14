@@ -21,7 +21,7 @@ public class AcceptEitherExample {
 
     private static CompletableFuture<Integer> getOtherCompletable() {
         return CompletableFuture.supplyAsync(() -> {
-            ThreadSleep(100);
+            ThreadSleep(100);//it will be canceled, because it is slower than another stage.
             int i = ThreadLocalRandom.current().nextInt(1, 10);
             System.out.println("value to be return from 'other' completable: " + i);
             return i;

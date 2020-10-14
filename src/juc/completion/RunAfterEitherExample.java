@@ -16,7 +16,7 @@ public class RunAfterEitherExample {
 
     private static CompletableFuture<Void> getOtherCompletable() {
         return CompletableFuture.runAsync(() -> {
-            ThreadSleep(15);
+            ThreadSleep(15);// it will be canceled because it is slower than another stage.
             System.out.println("Running other completable");
         });
     }
