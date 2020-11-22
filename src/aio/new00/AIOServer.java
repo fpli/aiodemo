@@ -12,6 +12,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.TimeUnit;
 
 /**
  * AsynchronousServerSocketChannel
@@ -47,7 +48,7 @@ public class AIOServer implements Runnable {
                 return;
             }
             // 注册服务器端接受完成事件
-            serverChannel.accept(this, new CompletionHandler<AsynchronousSocketChannel, AIOServer>() {
+            serverChannel.accept(this, new CompletionHandler<>() {
                 // attachment <==> AIOServer.this
                 @Override
                 public void completed(final AsynchronousSocketChannel channel, AIOServer attachment) {
@@ -63,7 +64,7 @@ public class AIOServer implements Runnable {
                                     channel.read(echoBuffer).get();
                                     echoBuffer.flip();
                                     System.out.println("received : " + Charset.defaultCharset().decode(echoBuffer));
-                                    Thread.sleep(2000);
+                                    TimeUnit.SECONDS.sleep(2);
                                 } catch (InterruptedException | ExecutionException e) {
                                     e.printStackTrace();
                                 }
@@ -104,7 +105,7 @@ public class AIOServer implements Runnable {
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         new Thread(new AIOServer(8989, 2)).start();
     }
 
