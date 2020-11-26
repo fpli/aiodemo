@@ -56,6 +56,7 @@ public class HttpsUtil {
             }
         });
         httpsConn.setRequestMethod(method);
+        httpsConn.setInstanceFollowRedirects(false);
         httpsConn.setDoInput(true);
         httpsConn.setDoOutput(true);
         return httpsConn;
