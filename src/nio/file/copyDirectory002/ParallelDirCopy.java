@@ -17,8 +17,7 @@ public class ParallelDirCopy {
     }
 
     public static void copyDirInParallel(String srcDir, String destinationParentDir)
-        throws IOException
-    {
+            throws IOException {
         Path source = Paths.get(srcDir);
 
         Path destination = Paths.get(destinationParentDir).resolve(source.getFileName().toString());
@@ -54,8 +53,7 @@ public class ParallelDirCopy {
     }
 
     private static void copyFiles(Path source, Path destination)
-        throws IOException
-    {
+            throws IOException {
         Files.walk(source, FileVisitOption.FOLLOW_LINKS)
                 .parallel()
                 .filter(Files::isRegularFile)
@@ -81,8 +79,7 @@ public class ParallelDirCopy {
     }
 
     private static void createDirectories(Path source, Path destination)
-        throws IOException
-    {
+            throws IOException {
         Files.walk(source,
                 FileVisitOption.FOLLOW_LINKS).parallel()
                 .filter(Files::isDirectory).filter(ParallelDirCopy::haveNoChildFolder).distinct()
@@ -110,6 +107,7 @@ public class ParallelDirCopy {
         return Arrays.stream(files)
                 .noneMatch(File::isDirectory);
     }
+
     private static void copyDirectoriesDateAttributes(Path source, Path destination)
             throws IOException {
         copyDateAttributes(source, destination);
