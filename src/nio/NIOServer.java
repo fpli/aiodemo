@@ -17,13 +17,13 @@ public class NIOServer {
         //打开选择器
         Selector selector = Selector.open();
         //打开通到
-        ServerSocketChannel socketChannel = ServerSocketChannel.open();
+        ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
         //配置非阻塞模型
-        socketChannel.configureBlocking(false);
+        serverSocketChannel.configureBlocking(false);
         //绑定端口
-        socketChannel.bind(new InetSocketAddress(9000));
+        serverSocketChannel.bind(new InetSocketAddress(9000));
         //注册事件，OP_ACCEPT只适用于ServerSocketChannel
-        socketChannel.register(selector, SelectionKey.OP_ACCEPT);
+        serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
         while (true) {
             selector.select();// 该方法为阻塞方法
             Set<SelectionKey> selectionKeys = selector.selectedKeys();
@@ -34,14 +34,14 @@ public class NIOServer {
                     SocketChannel channel = ((ServerSocketChannel) key.channel()).accept();
                     channel.configureBlocking(false);// 配置为非阻塞模式
                     channel.register(selector, SelectionKey.OP_READ);        // 为SocketChannel注册可读事件，等待数据到来
-                    //socketChannel.register(selector, SelectionKey.OP_ACCEPT);// 再次为ServerSocketChannel注册接受事件
+                    //serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);// 再次为ServerSocketChannel注册接受事件
                 }
 
                 if (key.isValid() && key.isReadable()) {
                     SocketChannel channel = (SocketChannel) key.channel();
                     ByteBuffer readBuffer = ByteBuffer.allocate(512);
                     int receiveCount = channel.read(readBuffer);
-                    if (receiveCount == -1) {// 对端已经关闭了通道
+                    if (receiveCount == -1) {// the input side of a socket is shut down by one thread
                         channel.close();
                         keyIterator.remove();
                         key.cancel();
@@ -62,16 +62,7 @@ public class NIOServer {
                     while (buffer.hasRemaining()) {
                         //该方法只会写入小于socket's output buffer空闲区域的任何字节数
                         //并返回写入的字节数，可能是0字节。
-                       int count = channel.write(buffer);
-                       System.out.println("write count:"+count);
-                       if (count < 0){
-                           throw new EOFException();
-                       }
-                       if (count == 0){
-                           key.interestOps(key.interestOps() | SelectionKey.OP_WRITE);
-                           selector.wakeup();
-                           break;
-                       }
+                       channel.write(buffer);
                     }
                     //发送完了就取消写事件，否则下次还会进入该分支
                     key.interestOps(key.interestOps() & ~SelectionKey.OP_WRITE);

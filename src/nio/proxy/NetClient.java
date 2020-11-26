@@ -7,10 +7,10 @@ public class NetClient {
     private UserServiceI userServiceI = new UserServiceImpl();
 
     public Object getBean(Class<?> serviceClass){
-
        return Proxy.newProxyInstance(Thread.currentThread().getContextClassLoader(), new Class[]{serviceClass}, (proxy, method, args) -> {
+           System.out.println(proxy.getClass());
            return userServiceI.say((String) args[0]);
-        });
-
+       });
     }
+
 }

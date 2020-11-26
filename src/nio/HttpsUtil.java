@@ -21,11 +21,11 @@ public class HttpsUtil {
 
     static final class DefaultTrustManager implements X509TrustManager {
         @Override
-        public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+        public void checkClientTrusted(X509Certificate[] chain, String authType) {
         }
 
         @Override
-        public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+        public void checkServerTrusted(X509Certificate[] chain, String authType) {
         }
 
         @Override
@@ -49,12 +49,7 @@ public class HttpsUtil {
         URL url = new URL(uri);
         HttpsURLConnection httpsConn = (HttpsURLConnection) url.openConnection();
         httpsConn.setSSLSocketFactory(ssf);
-        httpsConn.setHostnameVerifier(new HostnameVerifier() {
-            @Override
-            public boolean verify(String arg0, SSLSession arg1) {
-                return true;
-            }
-        });
+        httpsConn.setHostnameVerifier((hostname, session) -> true);
         httpsConn.setRequestMethod(method);
         httpsConn.setInstanceFollowRedirects(false);
         httpsConn.setDoInput(true);

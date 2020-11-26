@@ -61,7 +61,6 @@ public class NIOClient {
                 if (key.isReadable()) {
                     SocketChannel channel = (SocketChannel) key.channel();
                     ByteBuffer buffer = ByteBuffer.allocate(500 * 1024 * 1024);
-                    buffer.clear();
                     int receiveCount = channel.read(buffer);
                     if (receiveCount == -1) {
                         // 对端关闭了channel, 本地也需要关闭通道
@@ -69,6 +68,7 @@ public class NIOClient {
                         keyIterator.remove();
                         continue;
                     }
+                    buffer.flip();
                     //buffer Handler
                 }
                 keyIterator.remove();

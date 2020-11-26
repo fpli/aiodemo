@@ -33,14 +33,14 @@ public class JDK11HttpClient {
                 .followRedirects(HttpClient.Redirect.ALWAYS)
                 .build();
 
-        HttpRequest getRequest = HttpRequest.newBuilder()
+        HttpRequest httpRequest = HttpRequest.newBuilder()
                 .GET()
                 .uri(URI.create("https://cn.bing.com/?ensearch=1&rdr=1&rdrig=CAD65DDB538243BBA6CE458BA1C51102"))
                 .header("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36")
                 .build();
 
-        HttpResponse<String> response = client.send(getRequest, HttpResponse.BodyHandlers.ofString());
-        String respnseBody = response.body();
-        System.out.println(respnseBody);
+        HttpResponse<String> response = client.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+        String responseBody = response.body();
+        System.out.println(responseBody);
     }
 }
