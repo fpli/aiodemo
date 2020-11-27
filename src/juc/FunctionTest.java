@@ -23,12 +23,12 @@ public class FunctionTest {
         List<String> strings = f1.apply(100);
 
         System.out.println(strings.size());
-        strings.forEach( str -> System.out.println(str));
+        strings.forEach( str -> System.out.println(str + Thread.currentThread().getName()));
         System.out.println("f1 apply");
-        List<String> strings1 = f1.apply(2000);
+        List<String> strings1 = f1.apply(200000);
 
-        strings1.stream().forEach((str)-> {
-            System.out.println(str);
+        strings1.stream().parallel().forEach((str)-> {
+            System.out.println(str + Thread.currentThread().getName());
         });
 
         System.out.println((System.currentTimeMillis() - start));
