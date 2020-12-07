@@ -45,7 +45,7 @@ public class QuickSort {
         int r = right;
         // pivot 中轴值
         int pivot = array[(left + right) >> 1];
-        int temp = 0;// 临时变量，作为交换时使用
+        int temp;// 临时变量，作为交换时使用
         // while循环的目的是让比pivot值小的值放到左边, 比pivot大的值放到右边
         while (l < r) {
             // 在pivot的左边一直找，找到大于等于pivot的值才退出

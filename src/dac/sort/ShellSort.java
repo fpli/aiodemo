@@ -28,7 +28,7 @@ public class ShellSort {
 
     // 交换式的希尔排序
     public static void shellSort(int[] arr){
-        int temp = 0;
+        int temp;
         //int count = 0;
         for (int gap = arr.length >> 1; gap > 0; gap >>= 1){
             for (int i = gap; i < arr.length; i++) {
