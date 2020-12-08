@@ -20,9 +20,7 @@ public class JDK11HttpClient {
         try {
             ctx = SSLContext.getInstance("TLS");
             ctx.init(new KeyManager[0], new TrustManager[] { new HttpsUtil.DefaultTrustManager() }, new SecureRandom());
-        } catch (KeyManagementException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
+        } catch (KeyManagementException | NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
 

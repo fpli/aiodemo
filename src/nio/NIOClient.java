@@ -52,9 +52,9 @@ public class NIOClient {
                     }
                     boolean result = channel.isConnected();
                     if (result) {
-                        System.out.println("已经完成连接");
+                        System.out.println("it has connected.");
                     } else {
-                        System.out.print("连接服务端失败");
+                        System.out.print("it's failed to connect server socket.");
                     }
                     channel.write(ByteBuffer.wrap("one two".getBytes()));
                 }
@@ -63,7 +63,7 @@ public class NIOClient {
                     ByteBuffer buffer = ByteBuffer.allocate(500 * 1024 * 1024);
                     int receiveCount = channel.read(buffer);
                     if (receiveCount == -1) {
-                        // 对端关闭了channel, 本地也需要关闭通道
+                        // the input side of a socket is shut down by one thread
                         channel.close();
                         keyIterator.remove();
                         continue;

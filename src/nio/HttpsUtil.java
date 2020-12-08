@@ -1,21 +1,12 @@
 package nio;
 
+import javax.net.ssl.*;
 import java.io.*;
 import java.net.URL;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
-
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.KeyManager;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
-import javax.net.ssl.SSLSocketFactory;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
 
 public class HttpsUtil {
 
@@ -39,11 +30,10 @@ public class HttpsUtil {
         try {
             ctx = SSLContext.getInstance("TLS");
             ctx.init(new KeyManager[0], new TrustManager[] { new DefaultTrustManager() }, new SecureRandom());
-        } catch (KeyManagementException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
+        } catch (KeyManagementException | NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
+        assert ctx != null;
         SSLSocketFactory ssf = ctx.getSocketFactory();
 
         URL url = new URL(uri);
@@ -58,28 +48,28 @@ public class HttpsUtil {
     }
 
     private static byte[] getBytesFromStream(InputStream is) throws IOException {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ByteArrayOutputStream baas = new ByteArrayOutputStream();
         byte[] kb = new byte[1024];
         int len;
         while ((len = is.read(kb)) != -1) {
-            baos.write(kb, 0, len);
+            baas.write(kb, 0, len);
         }
-        byte[] bytes = baos.toByteArray();
-        baos.close();
+        byte[] bytes = baas.toByteArray();
+        baas.close();
         is.close();
         return bytes;
     }
 
     private static void setBytesToStream(OutputStream os, byte[] bytes) throws IOException {
-        ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
+        ByteArrayInputStream basis = new ByteArrayInputStream(bytes);
         byte[] kb = new byte[1024];
         int len;
-        while ((len = bais.read(kb)) != -1) {
+        while ((len = basis.read(kb)) != -1) {
             os.write(kb, 0, len);
         }
         os.flush();
         os.close();
-        bais.close();
+        basis.close();
     }
 
     public static byte[] doGet(String uri) throws IOException {
