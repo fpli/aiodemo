@@ -10,7 +10,6 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.WebSocket;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -28,7 +27,7 @@ public class JDK11HttpClient {
         SSLContext ctx = null;
         try {
             ctx = SSLContext.getInstance("TLS");
-            ctx.init(new KeyManager[0], new TrustManager[] { new HttpsUtil.DefaultTrustManager() }, new SecureRandom());
+            ctx.init(new KeyManager[0], new TrustManager[]{new HttpsUtil.DefaultTrustManager()}, new SecureRandom());
         } catch (KeyManagementException | NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
@@ -67,15 +66,15 @@ public class JDK11HttpClient {
                     }
                 }).join();
         webSocket.sendText("hello ", false);
-        webSocket.sendText("world ",true);
+        webSocket.sendText("world ", true);
 
         TimeUnit.SECONDS.sleep(10);
         webSocket.sendClose(WebSocket.NORMAL_CLOSURE, "ok").join();
     }
 
-    public void testConcurrentRequests(){
+    public void testConcurrentRequests() {
         HttpClient client = HttpClient.newHttpClient();
-        List<String> urls = List.of("http://www.baidu.com","http://www.alibaba.com/","http://www.tencent.com");
+        List<String> urls = List.of("http://www.baidu.com", "http://www.alibaba.com/", "http://www.tencent.com");
         List<HttpRequest> requests = urls.stream()
                 .map(url -> HttpRequest.newBuilder(URI.create(url)))
                 .map(reqBuilder -> reqBuilder.build())
@@ -85,10 +84,10 @@ public class JDK11HttpClient {
                 .map(request -> client.sendAsync(request, HttpResponse.BodyHandlers.ofString()))
                 .collect(Collectors.toList());
         futures.stream()
-                .forEach(e -> e.whenComplete((resp,err) -> {
-                    if(err != null){
+                .forEach(e -> e.whenComplete((resp, err) -> {
+                    if (err != null) {
                         err.printStackTrace();
-                    }else{
+                    } else {
                         System.out.println(resp.body());
                         System.out.println(resp.statusCode());
                     }
@@ -104,7 +103,7 @@ public class JDK11HttpClient {
                 .uri(URI.create("http://localhost:8080/file/download"))
                 .build();
 
-        CompletableFuture<Path> result = client.sendAsync(request, HttpResponse.BodyHandlers.ofFile(Paths.get("/tmp/body.txt")))
+        CompletableFuture<Path> result = client.sendAsync(request, HttpResponse.BodyHandlers.ofFile(Path.of("/tmp/body.txt")))
                 .thenApply(HttpResponse::body);
         System.out.println(result.get());
     }
@@ -113,7 +112,7 @@ public class JDK11HttpClient {
         HttpClient client = HttpClient.newBuilder().build();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://www.w3school.com.cn/demo/demo_form.asp"))
-                .header("Content-Type","application/x-www-form-urlencoded")
+                .header("Content-Type", "application/x-www-form-urlencoded")
                 .POST(HttpRequest.BodyPublishers.ofString("name1=value1&name2=value2"))
                 .build();
 
@@ -127,7 +126,7 @@ public class JDK11HttpClient {
                 .build();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:8080/json/cookie"))
-                .header("Cookie","JSESSIONID=4f994730-32d7-4e22-a18b-25667ddeb636; userId=java11")
+                .header("Cookie", "JSESSIONID=4f994730-32d7-4e22-a18b-25667ddeb636; userId=java11")
                 .timeout(Duration.ofMillis(5009))
                 .build();
         HttpResponse<String> response =
