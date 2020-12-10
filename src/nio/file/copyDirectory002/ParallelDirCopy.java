@@ -104,8 +104,7 @@ public class ParallelDirCopy {
         if (files == null) {//empty folder
             return true;
         }
-        return Arrays.stream(files)
-                .noneMatch(File::isDirectory);
+        return Arrays.stream(files).noneMatch(File::isDirectory);
     }
 
     private static void copyDirectoriesDateAttributes(Path source, Path destination)

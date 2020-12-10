@@ -42,7 +42,7 @@ public class CopyUtil {
         Files.walkFileTree(from, EnumSet.of(FileVisitOption.FOLLOW_LINKS), Integer.MAX_VALUE, new MyCopyDirVisitor(from, to));
     }
 
-    public static void copyFile (File toCopy, File mainDestination) throws IOException {
+    public static void copyFile(File toCopy, File mainDestination) throws IOException {
         if (!mainDestination.exists()) {
             mainDestination.mkdirs();
         }
