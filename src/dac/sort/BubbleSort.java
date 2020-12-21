@@ -24,18 +24,18 @@ public class BubbleSort {
         System.out.println(Duration.between(start, end).getSeconds());
     }
 
-    public static void bubbleSort(int[] arr){
+    public static void bubbleSort(int[] array){
         // 冒泡排序算法的时间复杂度O(n^2) 平方阶
-        int temp = 0;// 临时变量
+        int temp;// 临时变量
         boolean flag = false;// 标识变量,是否进行过交换
-        for (int i = 0; i < arr.length - 1; i++) {
-            for (int j = 0; j < arr.length -1 - i; j++) {
-                // 如果前面的数比后面的数大，则交换, 从小到大排序
-                if (arr[j] > arr[j+1]){
+        for (int i = 0; i < array.length - 1; i++) {
+            for (int j = 0; j < array.length -1 - i; j++) {
+                // ascend
+                if (array[j] > array[j+1]){
                     flag = true;
-                    temp = arr[j];
-                    arr[j] = arr[j+1];
-                    arr[j+1] = temp;
+                    temp = array[j];
+                    array[j] = array[j+1];
+                    array[j+1] = temp;
                 }
             }
             //System.out.println("第"+(i + 1) + "趟排序后的数组");
@@ -44,7 +44,7 @@ public class BubbleSort {
                 // 在一趟排序中，一次交换都没有发生过
                 break;
             } else {
-                flag = false;// 重置flag,进行下此判断
+                flag = false;// reset flag
             }
         }
     }

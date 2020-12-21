@@ -24,23 +24,23 @@ public class SelectSort {
     }
 
     // 选择排序算法 时间复杂度O(n^2)平方阶
-    public static void selectSort(int[] arr) {
+    public static void selectSort(int[] array) {
         int minIndex, min;
         // 选择排序算法时间复杂度O(n^2)
-        for (int i = 0; i < arr.length - 1; i++) {
+        for (int i = 0; i < array.length - 1; i++) {
             minIndex = i;
 
-            for (int j = i + 1; j < arr.length; j++) {
-                if (arr[minIndex] > arr[j]) {//说明假定的最小值，并不是最小的
+            for (int j = i + 1; j < array.length; j++) {
+                if (array[minIndex] > array[j]) {//说明假定的最小值，并不是最小的
                     minIndex = j; // 重置minIndex
                 }
             }
 
             // 将最小值，放在arr[minIndex], 即交换
             if (minIndex != i) {
-                min = arr[minIndex];
-                arr[minIndex] = arr[i];
-                arr[i] = min;
+                min = array[minIndex];
+                array[minIndex] = array[i];
+                array[i] = min;
             }
         }
     }

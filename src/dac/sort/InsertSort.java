@@ -25,29 +25,29 @@ public class InsertSort {
     }
 
     // 插入排序 时间复杂度 O(N^2) 平方阶
-    public static void insertSort(int[] arr){
-        int insertVal = 0;
-        int insertIndex = 0;
+    public static void insertSort(int[] array){
+        int insertVal;
+        int insertIndex;
         // i从1开始，不是从0 ， 初始状态分为一个元素的有序序列， 2～n 的(n-1)个无序序列
-        for (int i = 1; i < arr.length ; i++) {
+        for (int i = 1; i < array.length ; i++) {
             // 定义待插入的数
-            insertVal = arr[i];
+            insertVal = array[i];
             insertIndex = i-1; // 即arr[i]的前面这个数的下标
             /*
             * 给insertVal找到插入的位置
             * 说明
             * 1 insertIndex >= 0 保证在给insertVal找插入位置，不越界
-            * 2 insertVal < arr[insertIndex] 待插入的数，还没有找到插入位置
+            * 2 insertVal < array[insertIndex] 待插入的数，还没有找到插入位置
             * 3 就需要将arr[insertIndex]后移,insertVal qian yi
             * */
-            while (insertIndex >= 0 && insertVal < arr[insertIndex]){
-                arr[insertIndex + 1] = arr[insertIndex];
+            while (insertIndex >= 0 && insertVal < array[insertIndex]){
+                array[insertIndex + 1] = array[insertIndex];
                 insertIndex--;
             }
 
             if (insertIndex + 1 != i){
                 // 当退出while循环时，说明插入的位置找到，insertIndex + 1
-                arr[insertIndex + 1] = insertVal;
+                array[insertIndex + 1] = insertVal;
             }
         }
     }

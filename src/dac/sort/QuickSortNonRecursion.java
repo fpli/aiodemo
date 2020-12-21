@@ -36,7 +36,7 @@ public class QuickSortNonRecursion {
         return low;
     }
 
-    public static void QuickSort(int[] array) {
+    public static void quickSort(int[] array) {
         int[] stack = new int[array.length];
         int top = 0;
         int low = 0;
@@ -71,7 +71,7 @@ public class QuickSortNonRecursion {
 
     public static void main(String[] args) {
         int[] array = {5, 8, 4, 3, 6, 7, 2, 400, 432, 543, 43};
-        QuickSort(array);
+        quickSort(array);
         System.out.println(Arrays.toString(array));
     }
 }

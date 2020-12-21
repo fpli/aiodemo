@@ -24,7 +24,7 @@ public class ClientConnectCompletionHandler implements CompletionHandler<Void, C
 
 	public void init(){
 		try {
-			//创建异步的客户端通道
+			//open a AsynchronousSocketChannel to connect the server socket
 			clientChannel = AsynchronousSocketChannel.open();
 			clientChannel.setOption(StandardSocketOptions.SO_KEEPALIVE, true);
 			SocketAddress remote = new InetSocketAddress(host, port);
