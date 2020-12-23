@@ -7,7 +7,7 @@ package dac.linked;
  *  依次类推，直到所有人出列为止，由此产生一个出队编号的序列。
  *
  *  提示：
- *  用一个不带头节点的循环链表来处理josephu问题，先构成一个由n个节点的单循环链表，
+ *  用一个不带头节点的循环链表来处理Joseph问题，先构成一个由n个节点的单循环链表，
  *  然后由k结点起从1开始计数，计到m时，对应结点从链表中删除，然后再从被删除结点的下一个结点又从1开始计数，
  *  直到最后一个结点从链表中删除算法结束。
  *
@@ -39,8 +39,8 @@ public class Joseph {
 }
 
 // 创建一个环形的单向链表
-class CircleSingleLinkedList{
-    // 创建一个first节点，当前没有编号
+class CircleSingleLinkedList {
+    // 创建一个first结点(单向链表的头结点)，当前没有编号
     private Boy first = null;
 
     // 添加小孩结点，构成一个环形的链表
@@ -61,9 +61,9 @@ class CircleSingleLinkedList{
                 first.setNext(first);// 构成环
                 curBoy = first;
             } else {
-                curBoy.setNext(boy); // curBor.next = boy 指向变更
-                boy.setNext(first);
-                curBoy = boy;
+                curBoy.setNext(boy); // curBor.next = boy 指向变更 (当前结点的指针域重新赋值指向新创建的结点)
+                boy.setNext(first);  // 新创建的结点的next指针域指向链表的头结点，再次成闭单向闭环链表
+                curBoy = boy;        // 辅助指针指向新创建的结点
             }
         }
     }
@@ -102,7 +102,7 @@ class CircleSingleLinkedList{
      */
     public void countBoy(int startNo, int countNum, int nums){
         // 先对数据进行校验
-        if (first == null || startNo <1 || startNo > nums){
+        if (first == null || startNo < 1 || startNo > nums){
             System.out.println("参数输入有误,请重新输入");
             return;
         }
@@ -117,7 +117,7 @@ class CircleSingleLinkedList{
         }
 
         // 小孩报数前，先让first和helper移动k-1次
-        for (int j = 0; j < startNo-1; j++){
+        for (int j = 0; j < startNo - 1; j++){
             first = first.getNext();
             helper = helper.getNext();
         }
@@ -127,27 +127,27 @@ class CircleSingleLinkedList{
             if (helper == first){//说明圈中只有一个人
                 break;
             }
-            // 让first和helper指针同时移动countNum-1次,然后出圈
+            // 让first和helper指针同时移动countNum-1次,然后(count-1)的下标结点出圈(remove node)
             for (int i = 0; i < countNum -1; i++) {
                 first = first.getNext();
                 helper = helper.getNext();
             }
             // 这时first指向的结点，就是要出圈的小孩结点
             System.out.printf("小孩%d出圈\n", first.getNo());
-            // 这时将first指向的结点出圈
-            first = first.getNext();
-            helper.setNext(first);
+            // 这时将first指向的结点出圈(first 引用重新赋值，指向新的结点)
+            first = first.getNext(); // = 赋值操作符 先计算右值，再计算左值， 最后完成赋值
+            helper.setNext(first); // Java中引用在stack中， = 左边的是引用，一个引用是long类型的存放内存地址，根据内存地址访问内存数据
         }
 
         System.out.printf("最后留在圈的小孩编号%d\n", helper.getNo());
     }
 }
 
-// 创建一个Boy类，表示一个节点
+// 创建一个Boy类，表示一个结点
 class Boy {
 
     private int no;//编号
-    private Boy next;//指向下一个节点，默认null
+    private Boy next;//指向下一个结点的指针域，默认null
 
     public Boy(int no) {
         this.no = no;

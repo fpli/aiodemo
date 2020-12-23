@@ -69,7 +69,7 @@ public class SingleLinkedListDemo {
 }
 
 // 定义单向链表, 管理结点
-class SingleLinkedList{
+class SingleLinkedList {
     // 先初始化链表的头结点， 头结点不能动
     private final HeroNode head = new HeroNode(0, "","");
 
@@ -256,7 +256,7 @@ class SingleLinkedList{
     }
 }
 
-class HeroNode{
+class HeroNode {
 
     public int no;
     public String name;
