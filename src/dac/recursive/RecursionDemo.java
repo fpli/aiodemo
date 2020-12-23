@@ -1,14 +1,17 @@
 package dac.recursive;
 
+import java.util.Arrays;
+
 public class RecursionDemo {
 
     public static void main(String[] args) {
         print(50);
+
         System.out.println(factorial(10));
-        //int[] arr = {-9, 78, 0, 23, -567, 70, -1,900, 4561};
 
-
-        //System.out.println("arr=" + Arrays.toString(arr));
+        int[] array = {-9, 78, 0, 23, -567, 70, -1, 900, 4561};
+        quickSort(array, 0, array.length -1);
+        System.out.println("array =" + Arrays.toString(array));
     }
 
     // 递归打印出1..n
@@ -19,13 +22,11 @@ public class RecursionDemo {
         System.out.printf("n=%d \n", n);
     }
 
-    // 求n的阶层
+    // 求n的阶层 n! = n * (n-1)!
     public static int factorial(int n) {
         if (n == 1) {
             return 1;
         } else {
-            //int result =factorial(n-1);
-            //return n * result;
             return n * factorial(n - 1);
         }
     }
@@ -39,7 +40,7 @@ public class RecursionDemo {
         int r = right;
         // pivot 中轴值
         int pivot = array[(left + right) / 2];
-        int temp = 0;// 临时变量，作为交换时使用
+        int temp;// 临时变量，作为交换时使用
         // while循环的目的是让比pivot值小的值放到左边
         // 比pivot大的值放到右边
         while (l < r) {
