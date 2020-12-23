@@ -29,10 +29,10 @@ public class InsertSort {
         int insertVal;
         int insertIndex;
         // i从1开始，不是从0 ， 初始状态分为一个元素的有序序列， 2～n 的(n-1)个无序序列
-        for (int i = 1; i < array.length ; i++) {
+        for (int i = 1; i < array.length; i++) {
             // 定义待插入的数
             insertVal = array[i];
-            insertIndex = i-1; // 即arr[i]的前面这个数的下标
+            insertIndex = i - 1; // 即array[i]的前面那个数的下标
             /*
             * 给insertVal找到插入的位置
             * 说明
