@@ -9,7 +9,7 @@ public class RecursionDemo {
 
         System.out.println(factorial(10));
 
-        int[] array = {-9, 78, 0, 23, 23, -567, 70, -1, 900, 4561};
+        int[] array = {-9, 78, 0, 23, 23, -567, 70, -1, 900, 4561, 23};
         quickSort(array, 0, array.length -1);
         System.out.println("array =" + Arrays.toString(array));
     }
