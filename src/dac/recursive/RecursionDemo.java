@@ -9,7 +9,7 @@ public class RecursionDemo {
 
         System.out.println(factorial(10));
 
-        int[] array = {-9, 78, 0, 23, -567, 70, -1, 900, 4561};
+        int[] array = {-9, 78, 0, 23, 23, -567, 70, -1, 900, 4561};
         quickSort(array, 0, array.length -1);
         System.out.println("array =" + Arrays.toString(array));
     }
@@ -33,7 +33,7 @@ public class RecursionDemo {
 
     /* 快速排序是对冒泡排序的一种改进。
         基本思想是:通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小。
-        然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列。
+        然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到全部数据变成有序序列。
      */
     public static void quickSort(int[] array, int left, int right) {
         int l = left;
@@ -41,8 +41,7 @@ public class RecursionDemo {
         // pivot 中轴值
         int pivot = array[(left + right) / 2];
         int temp;// 临时变量，作为交换时使用
-        // while循环的目的是让比pivot值小的值放到左边
-        // 比pivot大的值放到右边
+        // while循环的目的:让比pivot值小的值放到左边,比pivot大的值放到右边
         while (l < r) {
             // 在pivot的左边一直找，找到大于等于pivot的值才退出
             while (array[l] < pivot) {
