@@ -32,13 +32,13 @@ public class NIOServer {
                 if (key.isValid() && key.isAcceptable()) {
                     SocketChannel channel = ((ServerSocketChannel) key.channel()).accept();
                     channel.configureBlocking(false);// 配置为非阻塞模式
-                    channel.register(selector, SelectionKey.OP_READ);        // 为SocketChannel注册可读事件，等待数据到来
+                    channel.register(selector, SelectionKey.OP_READ, ByteBuffer.allocate(512));        // 为SocketChannel注册可读事件，等待数据到来
                     //serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);// 再次为ServerSocketChannel注册接受事件
                 }
 
                 if (key.isValid() && key.isReadable()) {
                     SocketChannel channel = (SocketChannel) key.channel();
-                    ByteBuffer readBuffer = ByteBuffer.allocate(512);
+                    ByteBuffer readBuffer = (ByteBuffer) key.attachment();
                     int receiveCount = channel.read(readBuffer);
                     if (receiveCount == -1) {// the input side of a socket is shut down by one thread
                         channel.close();

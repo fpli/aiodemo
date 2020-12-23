@@ -6,6 +6,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
+import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -33,7 +34,12 @@ public class NIOClient {
         //配置非阻塞模式
         socketChannel.configureBlocking(false);
         //连接远程主机
-        socketChannel.connect(new InetSocketAddress("127.0.0.1", 9000));
+        if (socketChannel.connect(new InetSocketAddress("127.0.0.1", 9000))){
+            while (!socketChannel.finishConnect()){
+                System.out.println("connecting server ...");
+            }
+        }
+        socketChannel.write(ByteBuffer.wrap("hi, i am java".getBytes(StandardCharsets.UTF_8)));
         //注册事件 同时注册连接就绪事件和读就绪事件
         socketChannel.register(selector, SelectionKey.OP_CONNECT | SelectionKey.OP_READ);
         //循环处理
@@ -48,7 +54,9 @@ public class NIOClient {
                     SocketChannel channel = (SocketChannel) key.channel();
                     //完成连接的建立
                     if (channel.isConnectionPending()) {
-                        channel.finishConnect();
+                        while (!channel.finishConnect()){
+                            System.out.println("connecting server...");
+                        }
                     }
                     boolean result = channel.isConnected();
                     if (result) {
