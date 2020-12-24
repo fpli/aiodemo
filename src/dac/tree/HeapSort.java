@@ -14,14 +14,14 @@ public class HeapSort {
         // 要求将数据进行升序排列
         int[] array = {4, 6, 8, 5, 9, -1, 90, 89, -99};
         heapSort(array);
-        System.out.println("调整" + Arrays.toString(array));
+        System.out.println("adjusted:" + Arrays.toString(array));
 
-        int[] arr = new int[8000000];
+        array = new int[8000000];
         for (int i = 0; i < 8000000; i++) {
-            arr[i] = (int)(Math.random() * 8000000);
+            array[i] = (int)(Math.random() * 8000000);
         }
         LocalTime start = LocalTime.now();
-        heapSort(arr);
+        heapSort(array);
         LocalTime end = LocalTime.now();
         System.out.println(Duration.between(start, end).getSeconds());
     }
