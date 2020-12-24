@@ -28,7 +28,7 @@ public class HeapSort {
 
     //堆排序
     public static void heapSort(int[] array) {
-        int temp = 0;
+        int temp;
 
         // 调整成大顶堆 从下至上，所以i--
         for (int i = array.length / 2 - 1; i >= 0; i--) {
