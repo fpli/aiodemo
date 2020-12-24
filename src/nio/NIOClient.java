@@ -8,6 +8,7 @@ import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
 import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
+import java.util.Scanner;
 import java.util.Set;
 
 /**
@@ -30,59 +31,66 @@ public class NIOClient {
         //打开选择器(多路复用器)
         Selector selector = Selector.open();
         //打开通道
-        SocketChannel socketChannel = SocketChannel.open();
+        SocketChannel socketChannel = SocketChannel.open(new InetSocketAddress("127.0.0.1", 9000));
         //配置非阻塞模式
         socketChannel.configureBlocking(false);
-        //连接远程主机
-        if (socketChannel.connect(new InetSocketAddress("127.0.0.1", 9000))){
-            while (!socketChannel.finishConnect()){
-                System.out.println("connecting server ...");
-            }
-        }
-        socketChannel.write(ByteBuffer.wrap("hi, i am java".getBytes(StandardCharsets.UTF_8)));
+        String userName = socketChannel.getLocalAddress().toString().substring(1);
+        System.out.println(userName + " is ok ");
+
         //注册事件 同时注册连接就绪事件和读就绪事件
-        socketChannel.register(selector, SelectionKey.OP_CONNECT | SelectionKey.OP_READ);
-        //循环处理
-        while (true) {
-            selector.select(); // 该方法为阻塞方法
-            Set<SelectionKey> keys = selector.selectedKeys();
-            Iterator<SelectionKey> keyIterator = keys.iterator();
-            while (keyIterator.hasNext()) {
-                SelectionKey key = keyIterator.next();
-                if (key.isConnectable()) {
-                    //连接建立或者连接建立不成功
-                    SocketChannel channel = (SocketChannel) key.channel();
-                    //完成连接的建立
-                    if (channel.isConnectionPending()) {
-                        while (!channel.finishConnect()){
-                            System.out.println("connecting server...");
+        socketChannel.register(selector, SelectionKey.OP_READ);
+        new Thread(){
+            @Override
+            public void run() {
+                try {
+                    //循环处理
+                    while (true) {
+                        int count = selector.select();// 该方法为阻塞方法
+                        if (count > 0){
+                            Iterator<SelectionKey> keyIterator = selector.selectedKeys().iterator();
+                            while (keyIterator.hasNext()) {
+                                SelectionKey key = keyIterator.next();
+                                if (key.isReadable()) {
+                                    SocketChannel channel = (SocketChannel) key.channel();
+                                    ByteBuffer buffer = ByteBuffer.allocate(500 * 1024 * 1024);
+                                    int receiveCount = channel.read(buffer);
+                                    if (receiveCount == -1) {
+                                        // the input side of a socket is shut down by one thread
+                                        channel.close();
+                                        keyIterator.remove();
+                                        continue;
+                                    }
+                                    buffer.flip();
+                                    //handle buffer
+                                }
+                                keyIterator.remove();
+                            }
+                        } else {
+                            System.out.println("no channel to use");
                         }
                     }
-                    boolean result = channel.isConnected();
-                    if (result) {
-                        System.out.println("it has connected.");
-                    } else {
-                        System.out.print("it's failed to connect server socket.");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    try {
+                        socketChannel.close();
+                        selector.close();
+                    } catch (IOException e2) {
+                        e2.printStackTrace();
                     }
-                    channel.write(ByteBuffer.wrap("one two".getBytes()));
                 }
-                if (key.isReadable()) {
-                    SocketChannel channel = (SocketChannel) key.channel();
-                    ByteBuffer buffer = ByteBuffer.allocate(500 * 1024 * 1024);
-                    int receiveCount = channel.read(buffer);
-                    if (receiveCount == -1) {
-                        // the input side of a socket is shut down by one thread
-                        channel.close();
-                        keyIterator.remove();
-                        continue;
-                    }
-                    buffer.flip();
-                    //buffer Handler
-                }
-                keyIterator.remove();
+            }
+        }.start();
+
+        Scanner scanner = new Scanner(System.in);
+        while (scanner.hasNextLine()){
+            String line = scanner.nextLine();
+            String info = userName + " say:" + line.trim();
+            try {
+                socketChannel.write(ByteBuffer.wrap(info.getBytes(StandardCharsets.UTF_8)));
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
-
     }
 
 }

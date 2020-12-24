@@ -55,7 +55,12 @@ public class GroupChatServer {
         } catch (Exception e){
             e.printStackTrace();
         } finally {
-
+            try {
+                listenerChannel.close();
+                selector.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -85,7 +90,7 @@ public class GroupChatServer {
     private void sendInfoToOtherClients(String msg, SocketChannel channel) throws IOException {
         System.out.println("server is dispatching");
         for (SelectionKey selectionKey : selector.keys()){
-            SocketChannel client = null;
+            SocketChannel client;
             SelectableChannel channel1 = selectionKey.channel();
             if (channel1 instanceof SocketChannel){
                 client = (SocketChannel) channel1;

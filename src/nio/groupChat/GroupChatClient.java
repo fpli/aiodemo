@@ -15,9 +15,9 @@ public class GroupChatClient {
     private static final String HOST = "127.0.0.1";
     private static final int    PORT = 6667;
 
-    private Selector selector;
-    private SocketChannel socketChannel;
-    private String userName;
+    private Selector        selector;
+    private SocketChannel   socketChannel;
+    private String          userName;
 
     public GroupChatClient() throws IOException {
         selector = Selector.open();
@@ -77,7 +77,6 @@ public class GroupChatClient {
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNextLine()){
             String line = scanner.nextLine();
-            System.out.println(line);
             chatClient.sendInfo(line.trim());
         }
     }
