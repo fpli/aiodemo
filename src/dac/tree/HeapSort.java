@@ -30,7 +30,7 @@ public class HeapSort {
     public static void heapSort(int[] array) {
         int temp;
 
-        // 调整成大顶堆 从下至上，所以i--
+        // 把每个结点调整成大顶堆 从右向左从下至上，所以i--
         for (int i = array.length / 2 - 1; i >= 0; i--) {
             adjustHeap(array, i, array.length);
         }
