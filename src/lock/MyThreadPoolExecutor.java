@@ -12,6 +12,37 @@ public class MyThreadPoolExecutor {
                 System.out.println("current thread do more things");
             });
         }
+        // submit runnable still wait when get
+        Future<?> future = executorService.submit(() -> {
+            try {
+                TimeUnit.SECONDS.sleep(5);
+                System.out.println("gfg");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        try {
+            future.get();
+            System.out.println("1212");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        Future<Integer> future1 = executorService.submit(() -> {
+            if (ThreadLocalRandom.current().nextBoolean()){
+                throw new Exception("");
+            }
+            return 0;
+        });
+        try {
+            System.out.println(future1.get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
         executorService.shutdown();
     }
 }
