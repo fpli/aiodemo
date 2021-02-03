@@ -1,7 +1,7 @@
 package aio.server;
 
 /**
- * AIO Server端
+ * AIO Server side
  *
  */
 public class Server {

@@ -68,7 +68,7 @@ public class AIOClient implements Runnable {
 
                         @Override
                         public void failed(Throwable exc, Object attachment) {
-                            System.out.println("read faield");
+                            System.out.println("read failed");
                             exc.printStackTrace();
                         }
 
@@ -77,7 +77,7 @@ public class AIOClient implements Runnable {
 
                 @Override
                 public void failed(Throwable exc, Object attachment) {
-                    System.out.println("client send field...");
+                    System.out.println("client connect failed.");
                     exc.printStackTrace();
                 }
 
