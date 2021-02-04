@@ -7,48 +7,42 @@ import java.util.concurrent.Executors;
 public class ExchangerExample {
 
     public static void main(String... args) throws InterruptedException {
-        Exchanger<MyExchangeData> exchanger = new Exchanger<MyExchangeData>();
+        Exchanger<MyExchangeData> exchanger = new Exchanger<>();
 
         ExecutorService es = Executors.newFixedThreadPool(2);
         //party1
-        es.execute(new Runnable() {
-            @Override
-            public void run() {
+        es.execute(() -> {
 
-                try {
-                    for (int i = 1; i <= 5; i++) {
-                        System.out.println("-- party1 next --");
-                        MyExchangeData data = new MyExchangeData("msg from party1 " + i);
-                        System.out.println("party1 calling exchange() with data: "+data);
-                        MyExchangeData exchange = exchanger.exchange(data);
-                        System.out.println("party1 exchange() returned and received: " + exchange);
-                        Thread.sleep(1000);
-                    }
-                } catch (InterruptedException e) {
-                    System.err.println(e);
+            try {
+                for (int i = 1; i <= 5; i++) {
+                    System.out.println("-- party1 next --");
+                    MyExchangeData data = new MyExchangeData("msg from party1 " + i);
+                    System.out.println("party1 calling exchange() with data: "+data);
+                    MyExchangeData exchange = exchanger.exchange(data);
+                    System.out.println("party1 exchange() returned and received: " + exchange);
+                    Thread.sleep(1000);
                 }
+            } catch (InterruptedException e) {
+                System.err.println(e);
             }
         });
 
         Thread.sleep(1000);
         //party2
-        es.execute(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    for (int i = 1; i <= 5; i++) {
-                        System.out.println("-- party2 next --");
-                        MyExchangeData data = new MyExchangeData("msg from party2 " + i);
-                        System.out.println("party2 calling exchange() with data: "+data);
-                        MyExchangeData exchange = exchanger.exchange(data);
-                        System.out.println("party2 exchange() returned and received: " + exchange);
-                        Thread.sleep(1000);
-                    }
-                    es.shutdown();
-
-                } catch (InterruptedException e) {
-                    System.err.println(e);
+        es.execute(() -> {
+            try {
+                for (int i = 1; i <= 5; i++) {
+                    System.out.println("-- party2 next --");
+                    MyExchangeData data = new MyExchangeData("msg from party2 " + i);
+                    System.out.println("party2 calling exchange() with data: "+data);
+                    MyExchangeData exchange = exchanger.exchange(data);
+                    System.out.println("party2 exchange() returned and received: " + exchange);
+                    Thread.sleep(1000);
                 }
+                es.shutdown();
+
+            } catch (InterruptedException e) {
+                System.err.println(e);
             }
         });
     }

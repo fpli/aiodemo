@@ -14,6 +14,7 @@ public class GroupChatClient {
 
     private static final String HOST = "127.0.0.1";
     private static final int    PORT = 6667;
+    private volatile boolean started;
 
     private Selector        selector;
     private SocketChannel   socketChannel;
@@ -24,6 +25,7 @@ public class GroupChatClient {
         socketChannel = SocketChannel.open(new InetSocketAddress(HOST, PORT));
         socketChannel.configureBlocking(false);
         socketChannel.register(selector, SelectionKey.OP_READ);
+        started = true;
         userName = socketChannel.getLocalAddress().toString().substring(1);
         System.out.println(userName + " is ok ");
     }
@@ -39,7 +41,7 @@ public class GroupChatClient {
 
     public void readData(){
         try {
-            while (true){
+            while (started){
                 int count = selector.select();
                 if (count > 0){
                     Iterator<SelectionKey> keyIterator = selector.selectedKeys().iterator();
@@ -63,21 +65,28 @@ public class GroupChatClient {
         }
     }
 
+    public void stop() throws IOException {
+        started = false;
+        socketChannel.close();
+        selector.close();
+    }
+
     public static void main(String[] args) throws IOException {
         GroupChatClient chatClient = new GroupChatClient();
 
-        new Thread(){
-
-            @Override
-            public void run() {
-                chatClient.readData();
-            }
-        }.start();
+        new Thread(() -> chatClient.readData()).start();
 
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNextLine()){
-            String line = scanner.nextLine();
-            chatClient.sendInfo(line.trim());
+            String line = scanner.nextLine().trim();
+            if (line.equals("bye")){
+                chatClient.stop();
+                break;
+            } else {
+                chatClient.sendInfo(line);
+            }
         }
+
+        System.out.println("I quit.");
     }
 }
