@@ -199,19 +199,20 @@ class HeroNode {
     }
     // 删除结点
     public void delNode(int no) {
-        if (this.left != null && this.left.no == no) {
-            this.left = null;
-            return;
-        }
-        if (this.right != null && this.right.no == no) {
-            this.right = null;
-            return;
-        }
         if (this.left != null) {
-            this.left.delNode(no);
+            if (this.left.no == no){
+                this.left = null;
+            } else {
+                this.left.delNode(no);
+            }
         }
+
         if (this.right != null) {
-            this.right.delNode(no);
+            if (this.right.no == no){
+                this.right = null;
+            } else {
+                this.right.delNode(no);
+            }
         }
     }
 
