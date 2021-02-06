@@ -22,7 +22,7 @@ public class BinaryTreeDemo {
         //binaryTree.postOrder();
         //System.out.println("search a node ...");
         //System.out.println(binaryTree.preOrderSearch(5));
-        binaryTree.delNode(3);
+        binaryTree.delNode(5);
         System.out.println("前序遍历");
         binaryTree.preOrder();
     }
@@ -202,6 +202,7 @@ class HeroNode {
         if (this.left != null) {
             if (this.left.no == no){
                 this.left = null;
+                return;
             } else {
                 this.left.delNode(no);
             }
@@ -210,6 +211,7 @@ class HeroNode {
         if (this.right != null) {
             if (this.right.no == no){
                 this.right = null;
+                return;
             } else {
                 this.right.delNode(no);
             }
