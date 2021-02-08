@@ -198,24 +198,30 @@ class HeroNode {
         return result;
     }
     // 删除结点
-    public void delNode(int no) {
+    public boolean delNode(int no) {
+        boolean flag = false;
+
         if (this.left != null) {
             if (this.left.no == no){
                 this.left = null;
-                return;
+                return true;
             } else {
-                this.left.delNode(no);
+                flag = this.left.delNode(no);
             }
         }
 
-        if (this.right != null) {
-            if (this.right.no == no){
-                this.right = null;
-                return;
-            } else {
-                this.right.delNode(no);
+        if (!flag){
+            if (this.right != null) {
+                if (this.right.no == no){
+                    this.right = null;
+                    return true;
+                } else {
+                    return this.right.delNode(no);
+                }
             }
         }
+
+        return false;
     }
 
     public int getNo() {
