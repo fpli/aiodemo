@@ -53,7 +53,7 @@ class AVLTree {
         return target.value;
     }
 
-    public int deleteLeftTreeMini(Node node) {
+    public int deleteLeftTreeMax(Node node) {
         Node target = node;
         while (target.right != null) {
             target = target.right;
