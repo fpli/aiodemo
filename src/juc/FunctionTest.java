@@ -1,7 +1,6 @@
 package juc;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -41,10 +40,10 @@ public class FunctionTest {
         IntStream.of(12, 4, 3, 6, 8, 9).filter(n -> n>6).filter(n-> n< 12).forEach(System.out::println);
 
         System.out.println("---------------");
-        int[] array = {4, 15};
-        System.out.println(Arrays.toString(array));
-        swap(array);
-        System.out.println(Arrays.toString(array));
+        int a = 4, b = 15;
+        System.out.printf("a = %d, b = %d \n", a, b);
+        swap(a, b);
+        System.out.printf("a = %d, b = %d \n", a, b);
 
         ExecutorService executorService = Executors.newFixedThreadPool(2);
 
@@ -56,9 +55,14 @@ public class FunctionTest {
         executorService.shutdown();
     }
 
-    public static void swap(int[] array){
-        array[0] = array[0] + array[1];
-        array[1] = array[0] - array[1];
-        array[0] = array[0] - array[1];
+    /**
+     * switch a and b using time space to reduce memory
+     * @param a
+     * @param b
+     */
+    public static void swap(int a, int b){
+        a = a + b;
+        b = a - b;
+        a = a - b;
     }
 }
