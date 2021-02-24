@@ -39,7 +39,7 @@ class MyResource {
         String result;
         while (flag){
             result = blockingQueue.poll(2, TimeUnit.SECONDS);
-            if (result == null || result.equalsIgnoreCase("")){
+            if (result == null || result.isEmpty()){
                 flag = false;
                 System.out.println(Thread.currentThread().getName() + "\t 超过2秒没有消费到数据,线程退出");
                 return;
