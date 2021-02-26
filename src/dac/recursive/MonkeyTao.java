@@ -43,9 +43,10 @@ public class MonkeyTao {
     //解法三 while 循环 while循环多用于未知迭代次数，
     public static int whileWay() {
         int count = 1;   // 第10天 剩1个
-        int day = 9;
-        while (day > 0) {
-            count = (1 + count) * 2;   // next 表示后一天
+        int day = 10;
+        while (day > 1) {
+            count++;
+            count = count * 2;
             day--;
         }
         return count;
@@ -53,9 +54,10 @@ public class MonkeyTao {
 
     //解法一、for 循环实现 for循环多用于已知迭代次数
     public static int forWay() {
-        int count = 1;            // 第10天 剩1个
-        for (int day = 9; day > 0; day--) {
-            count = (1 + count) * 2;   // next 表示后一天
+        int count = 1;            // 10th day, only 1 peach
+        for (int day = 10; day > 1; day--) {
+            count++;
+            count = count * 2;   // count the count of yesterday
         }
         return count;
     }
