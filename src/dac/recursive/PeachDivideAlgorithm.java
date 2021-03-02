@@ -39,6 +39,7 @@ public class PeachDivideAlgorithm {
                 System.out.println("the number of the peach:" + i);
             }
         }
+        f2();
     }
 
     /**
@@ -52,7 +53,7 @@ public class PeachDivideAlgorithm {
      *
      * 问他们台伙至少捕了多少条鱼?以及每个人醒来时见到了多少鱼？
      */
-    public void f(){
+    public static void f(){
         int n, j, k, l, m;
         for (n = 5; ; n++) {
             j = 4 * (n - 1) / 5;
@@ -63,6 +64,49 @@ public class PeachDivideAlgorithm {
                 System.out.printf("至少合伙捕鱼：%d条\n", n);
                 System.out.printf("分别见到鱼的条数：%d %d %d %d\n", j, k, l, m);
                 break;
+            }
+        }
+    }
+
+    /**
+     * 约瑟夫生者死者小游戏
+     * 30 个人在一条船上，超载，需要 15 人下船。
+     *
+     * 于是人们排成一队，排队的位置即为他们的编号。
+     *
+     * 报数，从 1 开始，数到 9 的人下船。
+     *
+     * 如此循环，直到船上仅剩 15 人为止，问都有哪些编号的人下船了呢？
+     */
+    public static void f2(){
+        int c = 0;
+        int i = 1;
+        int j = 0;
+        int[] a = new int[31];
+        int[] b = new int[31];
+        while (i <= 31) {
+            if (i == 31) {
+                i = 1;
+            } else if (c == 15) {
+                break;
+            } else {
+                if (b[i] != 0) {
+                    i++;
+                    continue;
+                } else {
+                    j++;
+                    if (j != 9) {
+                        i++;
+                        continue;
+                    } else {
+                        b[i] = 1;
+                        a[i] = j;
+                        j = 0;
+                        System.out.printf("第%d号下船了\n", i);
+                        i++;
+                        c++;
+                    }
+                }
             }
         }
     }
