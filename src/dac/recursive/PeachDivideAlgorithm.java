@@ -31,6 +31,18 @@ public class PeachDivideAlgorithm {
         return getResult(currentMonkeyCounter - 1);// 递归前进段
     }
 
+    public static boolean doWork(int counter, int peaches, final int parts){
+        if (counter == 0){
+            return true;
+        } else {
+            if (peaches < parts || peaches % parts != 1){
+                return false;
+            } else {
+                return doWork(counter -1, (peaches -1) / parts * (parts -1), parts);
+            }
+        }
+    }
+
     public static void main(String[] args) {
         monkeyCount = 5;
         for (int i = 0; i < 10000; i++) {// 桃子总数在10000以内的穷举
@@ -40,6 +52,19 @@ public class PeachDivideAlgorithm {
             }
         }
         f2();
+        f();
+        int i = 6, n = 0;
+        while (true){
+            if (doWork(5, i, 5)){
+                System.out.println("the number of the peaches:" + i + " is ok.");
+                n++;
+                if (n == 10){
+                    break;
+                }
+            }
+            i++;
+        }
+
     }
 
     /**
