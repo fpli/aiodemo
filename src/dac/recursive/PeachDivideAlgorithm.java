@@ -31,14 +31,14 @@ public class PeachDivideAlgorithm {
         return getResult(currentMonkeyCounter - 1);// 递归前进段
     }
 
-    public static boolean doWork(int counter, int peaches, final int parts){
+    public static boolean doWork(int counter, int peaches, final int parties){
         if (counter == 0){
             return true;
         } else {
-            if (peaches < parts || peaches % parts != 1){
+            if (peaches < parties || peaches % parties != 1){
                 return false;
             } else {
-                return doWork(counter -1, (peaches -1) / parts * (parts -1), parts);
+                return doWork(counter -1, (peaches -1) / parties * (parties -1), parties);
             }
         }
     }
