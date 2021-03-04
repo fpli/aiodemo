@@ -79,7 +79,7 @@ public class PeachDivideAlgorithm {
      * 如此循环，直到船上仅剩 15 人为止，问都有哪些编号的人下船了呢？
      */
     public static void f2(){
-        int c = 0;
+        int c = 0;// the number of out people  c 0-->15
         int i = 1;
         int j = 0;
         int[] a = new int[31];
@@ -87,10 +87,10 @@ public class PeachDivideAlgorithm {
         while (i <= 31) {
             if (i == 31) {
                 i = 1;
-            } else if (c == 15) {
+            } else if (c == 15) {// 30 - c = 15 is ok, game over. need to break loop
                 break;
             } else {
-                if (b[i] != 0) {
+                if (b[i] != 0) {// check whether out
                     i++;
                     continue;
                 } else {
@@ -99,10 +99,10 @@ public class PeachDivideAlgorithm {
                         i++;
                         continue;
                     } else {
-                        b[i] = 1;
+                        b[i] = 1; // mark out
                         a[i] = j;
-                        j = 0;
                         System.out.printf("第%d号下船了\n", i);
+                        j = 0;   // reset j to count again
                         i++;
                         c++;
                     }
