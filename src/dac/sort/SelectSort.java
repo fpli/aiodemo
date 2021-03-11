@@ -47,18 +47,17 @@ public class SelectSort {
 
     //
     public static void selectSort2(int[] array) {
-        int position;
-        int max;
+        int maxIndex, max;
         for (int i = array.length - 1; i > 0; i--) {
-            position = i;
+            maxIndex = i;
             for (int j = i - 1; j >= 0; j--) {
-                if (array[j] > array[position]) {
-                    position = j;
+                if (array[j] > array[maxIndex]) {
+                    maxIndex = j;
                 }
             }
-            if (position != i) {
-                max = array[position];
-                array[position] = array[i];
+            if (maxIndex != i) {
+                max = array[maxIndex];
+                array[maxIndex] = array[i];
                 array[i] = max;
             }
         }
