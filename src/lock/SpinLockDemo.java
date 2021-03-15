@@ -54,7 +54,7 @@ public class SpinLockDemo {
             System.out.println(Thread.currentThread().getName()+"\t do something end");
         }, "BB").start();
 
-        // ps -mp 6365 -o THREAD,tid,time
+        // ps -mp 6365 -o THREAD,tid,time  ps -mp pid号 -o THREAD,tid,lwp,nlwp,time,rss,size,%mem
         // jstack 6365|grep 18e4 -A60
        //  view java process
     }
