@@ -6,7 +6,7 @@ public class ThreadJoinExample {
         Task task1 = new Task();
         Thread thread1 = new Thread(task1);
         thread1.start();
-        thread1.join();//here the main thread will wait until thread1 fishes.
+        thread1.join();//here the main thread will wait until thread1 finishes.
         System.out.println("after join");
 
         Task task2 = new Task();

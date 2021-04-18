@@ -26,9 +26,9 @@ class MyResource {
             data = atomicInteger.incrementAndGet() + "";
             retValue = blockingQueue.offer(data, 2L, TimeUnit.SECONDS);
             if (retValue){
-                System.out.println(Thread.currentThread().getName() + "\t" + "插入队列" +data + "成功");
+                System.out.println(Thread.currentThread().getName() + "\t" + " 插入队列" +data + "成功");
             } else {
-                System.out.println(Thread.currentThread().getName() + "\t" + "插入队列" +data + "失败");
+                System.out.println(Thread.currentThread().getName() + "\t" + " 插入队列" +data + "失败");
             }
             TimeUnit.SECONDS.sleep(1);
         }
