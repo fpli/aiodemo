@@ -19,7 +19,7 @@ class MyCache {
     public void put(String key, Object value) {
         readWriteLock.writeLock().lock();
         try {
-            System.out.println("thread" + Thread.currentThread().getName() + "is writing:key=" + key);
+            System.out.println("thread-" + Thread.currentThread().getName() + " is writing:key=" + key);
             try {
                 // pause 0.3 second
                 TimeUnit.MILLISECONDS.sleep(300);
@@ -27,7 +27,7 @@ class MyCache {
                 e.printStackTrace();
             }
             map.put(key, value);
-            System.out.println("thread" + Thread.currentThread().getName() + "has written:key=" + key);
+            System.out.println("thread-" + Thread.currentThread().getName() + " has written:key=" + key);
         } finally {
             readWriteLock.writeLock().unlock();
         }
@@ -37,7 +37,7 @@ class MyCache {
     public Object get(String key){
         readWriteLock.readLock().lock();
         try {
-            System.out.println("thread" + Thread.currentThread().getName() + "is reading:key=" + key);
+            System.out.println("thread-" + Thread.currentThread().getName() + " is reading:key=" + key);
             try {
                 // pause 0.3 second
                 TimeUnit.MILLISECONDS.sleep(300);
@@ -45,7 +45,7 @@ class MyCache {
                 e.printStackTrace();
             }
             Object value = map.get(key);
-            System.out.println("thread" + Thread.currentThread().getName() + "has read:value=" + value);
+            System.out.println("thread-" + Thread.currentThread().getName() + " has read:value=" + value);
             return value;
         } finally {
             readWriteLock.readLock().unlock();
