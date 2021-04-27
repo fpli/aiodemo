@@ -26,6 +26,7 @@ public class AVLTreeDemo {
 }
 
 class AVLTree {
+
     private Node root;
 
     public Node search(int value) {
@@ -126,7 +127,7 @@ class AVLTree {
         if (root != null) {
             root.infixOrder();
         } else {
-            System.out.println("this tree is emprty.");
+            System.out.println("this tree is empty.");
         }
     }
 
@@ -136,6 +137,7 @@ class AVLTree {
 }
 
 class Node {
+
     int value;
 
     Node left;
@@ -165,21 +167,21 @@ class Node {
 
     private void leftRotate() {
         // create a new node with the current value of node
-        Node newNode = new Node(value);
-        newNode.left = left;
+        Node newNode  = new Node(value);
+        newNode.left  = left;
         newNode.right = right.left;
-        value = right.value;
-        right = right.right;
-        left = newNode;
+        value         = right.value;
+        right         = right.right;
+        left          = newNode;
     }
 
     private void rightRotate() {
-        Node newNode = new Node(value);
+        Node newNode  = new Node(value);
         newNode.right = right;
-        newNode.left = left.right;
-        value = left.value;
-        left = left.left;
-        right = newNode;
+        newNode.left  = left.right;
+        value         = left.value;
+        left          = left.left;
+        right         = newNode;
     }
 
     public Node search(int value) {

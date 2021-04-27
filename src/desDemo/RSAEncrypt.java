@@ -40,11 +40,11 @@ public class RSAEncrypt {
      * @throws NoSuchAlgorithmException
      */
     public static void genKeyPair() throws NoSuchAlgorithmException {
-        KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("RSA");
-        keyPairGen.initialize(1024, new SecureRandom());
-        KeyPair keyPair = keyPairGen.generateKeyPair();
+        KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
+        keyPairGenerator.initialize(1024, new SecureRandom());
+        KeyPair keyPair = keyPairGenerator.generateKeyPair();
         RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
-        RSAPublicKey  publicKey  = (RSAPublicKey) keyPair.getPublic();
+        RSAPublicKey  publicKey  = (RSAPublicKey)  keyPair.getPublic();
         String publicKeyString  = Base64.getEncoder().encodeToString(publicKey.getEncoded());
         String privateKeyString = Base64.getEncoder().encodeToString((privateKey.getEncoded()));
         keyMap.put(0, publicKeyString);
