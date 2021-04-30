@@ -1,5 +1,7 @@
 package dac.tree;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 public class BinaryTreeDemo {
@@ -10,13 +12,17 @@ public class BinaryTreeDemo {
         HeroNode node3 = new HeroNode(3, "卢俊义");
         HeroNode node4 = new HeroNode(4, "林冲");
         HeroNode node5 = new HeroNode(5, "关胜");
+
         root.setLeft(node2);
         root.setRight(node3);
+
+        node2.setLeft(node5);
         node3.setRight(node4);
-        node3.setLeft(node5);
 
         BinaryTree binaryTree = new BinaryTree();
         binaryTree.setRoot(root);
+        System.out.println("level order recursive");
+        binaryTree.levelOrder();
 
         System.out.println("前序遍历");
         binaryTree.preOrder();
@@ -89,6 +95,22 @@ class BinaryTree {
     public void postOrderFast() {
         if (root != null) {
             root.postOrderFast();
+        } else {
+            System.out.println("tree is empty");
+        }
+    }
+
+    public void levelOrder(){
+        if (root != null){
+            root.levelOrder();
+        } else {
+            System.out.println("tree is empty");
+        }
+    }
+
+    public void levelOrderFast(){
+        if (root != null){
+            root.levelOrderFast();
         } else {
             System.out.println("tree is empty");
         }
@@ -239,6 +261,54 @@ class HeroNode {
 
         while (!stack2.isEmpty()) {
             System.out.print(stack2.pop());
+        }
+    }
+
+    /**
+     * 二叉树横向遍历， 递归的方式实现
+     */
+    public void levelOrder(){
+        int height = height();
+        for (int i = 1; i <= height; i++){
+            levelOrder(i);
+        }
+    }
+
+    public void levelOrder(int height){
+        if (height == 1){
+            System.out.println(this);
+            return;
+        }
+        if (left != null){
+            left.levelOrder(height -1);
+        }
+        if (right != null){
+            right.levelOrder(height -1);
+        }
+    }
+
+    public int height(){
+        return Math.max(left == null ? 0 : left.height(), right == null ? 0 : right.height()) + 1;
+    }
+
+    /**
+     * 二叉树横向遍历(又称层序遍历)， 非递归的方式实现
+     */
+    public void levelOrderFast(){
+        Queue<HeroNode> queue = new LinkedList<>();
+        queue.offer(this);
+        HeroNode currentNode;
+        while (!queue.isEmpty()){
+            currentNode = queue.poll();
+            System.out.println(currentNode);
+
+            if (currentNode.left != null){
+                queue.offer(currentNode.left);
+            }
+
+            if (currentNode.right != null){
+                queue.offer(currentNode.right);
+            }
         }
     }
 
