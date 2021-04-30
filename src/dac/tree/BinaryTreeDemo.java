@@ -1,5 +1,7 @@
 package dac.tree;
 
+import java.util.Stack;
+
 public class BinaryTreeDemo {
 
     public static void main(String[] args) {
@@ -12,17 +14,28 @@ public class BinaryTreeDemo {
         root.setRight(node3);
         node3.setRight(node4);
         node3.setLeft(node5);
+
         BinaryTree binaryTree = new BinaryTree();
         binaryTree.setRoot(root);
+
         System.out.println("前序遍历");
         binaryTree.preOrder();
+
+        System.out.println("前序遍历非递归");
+        binaryTree.preOrderFast();
+
         //System.out.println("中序遍历");
         //binaryTree.infixOrder();
+
         //System.out.println("后序遍历");
         //binaryTree.postOrder();
+
         //System.out.println("search a node ...");
+
         //System.out.println(binaryTree.preOrderSearch(5));
+
         binaryTree.delNode(5);
+
         System.out.println("前序遍历");
         binaryTree.preOrder();
     }
@@ -41,6 +54,14 @@ class BinaryTree {
         }
     }
 
+    public void preOrderFast(){
+        if (root != null){
+            root.preOrderFast();
+        } else {
+            System.out.println("tree is empty");
+        }
+    }
+
     public void infixOrder() {
         if (root != null) {
             root.infixOrder();
@@ -49,9 +70,25 @@ class BinaryTree {
         }
     }
 
+    public void infixOrderFast() {
+        if (root != null) {
+            root.infixOrderFast();
+        } else {
+            System.out.println("tree is empty");
+        }
+    }
+
     public void postOrder() {
         if (root != null) {
             root.postOrder();
+        } else {
+            System.out.println("tree is empty");
+        }
+    }
+
+    public void postOrderFast() {
+        if (root != null) {
+            root.postOrderFast();
         } else {
             System.out.println("tree is empty");
         }
@@ -112,6 +149,29 @@ class HeroNode {
             right.preOrder();
         }
     }
+
+    /**
+     * current Node, left node, right node
+     */
+    public void preOrderFast(){
+        Stack<HeroNode> stack = new Stack<>();
+        stack.push(this);
+        // 栈先进后出，所以先加入右侧节点，这样输出的时候，先输出左侧节点
+        HeroNode currentNode;
+        while (!stack.isEmpty()){
+            currentNode = stack.pop();
+            System.out.println(currentNode);
+            // stack FILO, so right node first, then left node
+            if (currentNode.right != null){
+                stack.push(currentNode.right);
+            }
+
+            if (currentNode.left != null){
+                stack.push(currentNode.left);
+            }
+        }
+    }
+
     // 中序遍历
     public void infixOrder() {
         if (left != null) {
@@ -122,6 +182,27 @@ class HeroNode {
             right.infixOrder();
         }
     }
+
+    public void infixOrderFast(){
+        Stack<HeroNode> stack = new Stack<>();
+
+        HeroNode currentNode = this;
+
+        while (!stack.isEmpty() ||  currentNode != null){
+            // 入栈所有左节点并输出左节点
+            while (currentNode != null){
+                stack.push(currentNode);
+                currentNode = currentNode.left;
+            }
+            // 弹出左节点
+            currentNode = stack.pop();
+
+            System.out.println(currentNode);
+            // 弹出后，指向当前节点的右节点
+            currentNode = currentNode.right;
+        }
+    }
+
     // 后序遍历
     public void postOrder() {
         if (left != null) {
@@ -132,6 +213,35 @@ class HeroNode {
         }
         System.out.println(this);
     }
+
+    /**
+     * 后序遍历非递归方式
+     */
+    public void postOrderFast(){
+        Stack<HeroNode> stack1 = new Stack<>();
+        Stack<HeroNode> stack2 = new Stack<>();
+
+        stack1.push(this);
+        HeroNode currentNode;
+        while (!stack1.isEmpty()){
+            currentNode = stack1.pop();
+            // 中、右、左顺序压入栈中
+            stack2.push(currentNode);
+            // 压入stack1为先左后右，保证中、右、左顺序压入stack2中
+            if (currentNode.left != null) {
+                stack1.push(currentNode.left);
+            }
+            if (currentNode.right != null) {
+                stack1.push(currentNode.right);
+            }
+
+        }
+
+        while (!stack2.isEmpty()) {
+            System.out.print(stack2.pop());
+        }
+    }
+
     // 前序查找
     public HeroNode preOrderSearch(int no) {
         HeroNode result = null;
