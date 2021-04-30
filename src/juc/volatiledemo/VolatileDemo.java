@@ -26,21 +26,21 @@ class MyData {
 
 /**
  * volatile 保证可见性，不保证原子性，禁止指令重排, 是一种轻量级的同步解决方案，乞丐版
- * 1 验证volatle的可见性 ，可见性是一种及时通知机制
+ * 1 验证volatile的可见性 ，可见性是一种及时通知机制
  * 1.1 假如int number = 0; number变量之前根本没有添加volatile关键字修饰,没有可见性
  * 1.2 添加了volatile，可以解决可见性问题。
- * <p>
+ *
  * 2 验证volatile不保证原子性
  * 2.1 原子性指的是什么意思？
  * 不可分割，完整性，也即某个线程正在做某个业务时，中间不可以加塞或被分割。需要整体完整，要么同时成功，要么同时失败。
- * <p>
+ *
  * 2.2 volatile不保证原子性的代码验证
- * <p>
+ *
  * 2.3 why
- * <p>
+ *
  * 2.4 如何解决volatile不保证原子性
  * 使用synchronized 可以 属于高射炮打蚊子
- * 使用原子类
+ * solution:使用原子类
  */
 public class VolatileDemo {
 
