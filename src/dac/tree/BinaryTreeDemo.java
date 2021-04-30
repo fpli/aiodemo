@@ -265,6 +265,47 @@ class HeroNode {
     }
 
     /**
+     * 后序遍历递归定义：先左子树，后右子树，再根节点。
+     * 	后序遍历的难点在于：需要判断上次访问的节点是位于左子树，还是右子树。
+     * 		若是位于左子树，则需跳过根节点，先进入右子树，再回头访问根节点；
+     * 		若是位于右子树，则直接访问根节点。
+     */
+    public void postOrderFast2(){
+        Stack<HeroNode> stack1 = new Stack<>();
+        //当前访问的结点               上次访问的结点
+        HeroNode currentNode = this, lastVisitNode = this;
+
+        //把currentNode移到左子树的最下边
+        while (currentNode != null){
+            stack1.push(currentNode);
+            currentNode = currentNode.left;
+        }
+
+        while (!stack1.isEmpty()){
+            // 弹出栈顶元素
+            currentNode = stack1.pop();
+            //一个根节点被访问的前提是：无右子树或右子树已被访问过
+            if (currentNode.right != null && currentNode.right != lastVisitNode){
+                //根节点再次入栈
+                stack1.push(currentNode);
+
+                //进入右子树，且可肯定右子树一定不为空
+                currentNode = currentNode.right;
+                while (currentNode != null){
+                    //再走到右子树的最左边
+                    stack1.push(currentNode);
+                    currentNode = currentNode.left;
+                }
+            } else {
+                // 打印结点
+                System.out.println(currentNode);
+                //修改最近被访问的节点
+                lastVisitNode = currentNode;
+            }
+        }
+    }
+
+    /**
      * 二叉树横向遍历， 递归的方式实现
      */
     public void levelOrder(){
