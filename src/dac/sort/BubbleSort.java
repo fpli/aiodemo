@@ -10,7 +10,7 @@ import java.util.Arrays;
 public class BubbleSort {
 
     public static void main(String[] args) {
-        int[] array = {3, 9, -1, 10, 20};
+        int[] array = {3, 9, -1, 10, 20, -20};
         bubbleSort(array);
         System.out.println(Arrays.toString(array));
 
@@ -27,8 +27,9 @@ public class BubbleSort {
     public static void bubbleSort(int[] array){
         // 冒泡排序算法的时间复杂度O(n^2) 平方阶
         int temp;// 临时变量
-        boolean flag = false;// 标识变量,是否进行过交换
+        boolean flag;// 标识变量,是否进行过交换
         for (int i = 0; i < array.length - 1; i++) {
+            flag = false;// reset flag
             for (int j = 0; j < array.length -1 - i; j++) {
                 // ascend
                 if (array[j] > array[j+1]){
@@ -43,8 +44,6 @@ public class BubbleSort {
             if (!flag){
                 // 在一趟排序中，一次交换都没有发生过
                 break;
-            } else {
-                flag = false;// reset flag
             }
         }
     }

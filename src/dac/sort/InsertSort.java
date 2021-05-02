@@ -12,7 +12,7 @@ public class InsertSort {
 
     public static void main(String[] args) {
         int[] arr = {1, 2, 3, 6, 5, 4};
-        insertSort(arr);
+        insertSort2(arr);
         System.out.println(Arrays.toString(arr));
         int[] array = new int[80000];
         for (int i = 0; i < 80000; i++) {
@@ -51,4 +51,25 @@ public class InsertSort {
             }
         }
     }
+
+    public static void insertSort2(int[] array){
+        int temp;
+        for (int i = 1; i < array.length; i++){
+            temp = array[i];
+            int j;
+            for (j = i -1; j > -1; j --){
+                if (temp < array[j]){
+                    array[j+1] = array[j];
+                } else {
+                    break;
+                }
+            }
+            if (j != i -1){
+                array[j+1] = temp;
+            }
+            System.out.println(Arrays.toString(array));
+        }
+    }
+
+
 }
