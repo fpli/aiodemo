@@ -28,7 +28,7 @@ public class BinarySearchNonRecursiveDemo {
     }
 
     public static int binarySearch(int[] arr, int target, int left, int right){
-        if (left > right){
+        if (left > right || target < arr[0] || target > arr[arr.length -1]){
             return -1;
         }
         int mid = (left + right) / 2;
