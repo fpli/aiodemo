@@ -25,15 +25,15 @@ public class QuickSort {
         quickSort(array, 0, array.length -1);
         System.out.println(Arrays.toString(array));
 
-        array = new int[80000];
-        for (int i = 0; i < 80000; i++) {
+        array = new int[8000000];
+        for (int i = 0; i < 8000000; i++) {
             array[i] = (int) (Math.random() * 8000000);
         }
 
         LocalTime start = LocalTime.now();
-        quickSort2(array, 0, array.length - 1);
+        quickSort(array, 0, array.length - 1);
         LocalTime end = LocalTime.now();
-        System.out.println(Duration.between(start, end).getSeconds());
+        System.out.println(Duration.between(start, end).toSeconds());
     }
 
     /** 快速排序是对冒泡排序的一种改进。
