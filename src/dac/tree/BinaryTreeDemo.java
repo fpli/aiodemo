@@ -271,29 +271,29 @@ class HeroNode {
      * 		若是位于右子树，则直接访问根节点。
      */
     public void postOrderFast2(){
-        Stack<HeroNode> stack1 = new Stack<>();
+        Stack<HeroNode> stack = new Stack<>();
         //当前访问的结点               上次访问的结点
         HeroNode currentNode = this, lastVisitNode = this;
 
         //把currentNode移到左子树的最下边
         while (currentNode != null){
-            stack1.push(currentNode);
+            stack.push(currentNode);
             currentNode = currentNode.left;
         }
 
-        while (!stack1.isEmpty()){
+        while (!stack.isEmpty()){
             // 弹出栈顶元素
-            currentNode = stack1.pop();
+            currentNode = stack.pop();
             //一个根节点被访问的前提是：无右子树或右子树已被访问过
             if (currentNode.right != null && currentNode.right != lastVisitNode){
                 //根节点再次入栈
-                stack1.push(currentNode);
+                stack.push(currentNode);
 
                 //进入右子树，且可肯定右子树一定不为空
                 currentNode = currentNode.right;
                 while (currentNode != null){
                     //再走到右子树的最左边
-                    stack1.push(currentNode);
+                    stack.push(currentNode);
                     currentNode = currentNode.left;
                 }
             } else {
