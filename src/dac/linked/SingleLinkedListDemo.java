@@ -54,11 +54,11 @@ public class SingleLinkedListDemo {
             return;
         }
         Stack<HeroNode> stack = new Stack<>();
-        HeroNode cur = head.next;
+        HeroNode currentNode = head.next;
         // 将链表的所有结点压入栈中
-        while (cur != null){
-            stack.push(cur);
-            cur = cur.next;
+        while (currentNode != null){
+            stack.push(currentNode);
+            currentNode = currentNode.next;
         }
 
         while (!stack.isEmpty()){
