@@ -53,16 +53,16 @@ public class SingleLinkedListDemo {
         if (head.next == null){
             return;
         }
-        Stack<HeroNode> heroNodes = new Stack<>();
+        Stack<HeroNode> stack = new Stack<>();
         HeroNode cur = head.next;
         // 将链表的所有结点压入栈中
         while (cur != null){
-            heroNodes.push(cur);
+            stack.push(cur);
             cur = cur.next;
         }
 
-        while (!heroNodes.isEmpty()){
-            System.out.println(heroNodes.pop());
+        while (!stack.isEmpty()){
+            System.out.println(stack.pop());
         }
     }
 
