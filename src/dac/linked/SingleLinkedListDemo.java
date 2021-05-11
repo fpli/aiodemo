@@ -33,16 +33,16 @@ public class SingleLinkedListDemo {
         //singleLinkedList.del(heroNode3);
         //singleLinkedList.del(heroNode4);
         //singleLinkedList.del(heroNode2);
-        System.out.println("查找倒数第一个");
+        System.out.println("查找倒数第2个");
         System.out.println(singleLinkedList.getLastNode(2));
         System.out.println();
-        singleLinkedList.list();
 
-        //System.out.println(singleLinkedList.length());
         System.out.println("翻转之前");
-        singleLinkedList.reverse();
         singleLinkedList.list();
-        System.out.println();
+        //System.out.println(singleLinkedList.length());
+        singleLinkedList.reverse();
+        System.out.println("翻转之后");
+        singleLinkedList.list();
         System.out.println();
         System.out.println("反向输出链表中的结点");
         reversePrint(singleLinkedList.getHead());
