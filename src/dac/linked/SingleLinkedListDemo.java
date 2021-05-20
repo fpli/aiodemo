@@ -243,6 +243,7 @@ class SingleLinkedList {
         while (helper != null){
             next = helper.next;//先暂时保存当前结点的下一个结点，否则原链表断掉
             helper.next = reverseNode.next;// 将当前结点的下一个结点指向新的链表的头结点
+
             reverseNode.next = helper;
             helper = next; // 让helper后移
         }
