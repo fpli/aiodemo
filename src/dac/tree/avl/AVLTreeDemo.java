@@ -4,8 +4,8 @@ public class AVLTreeDemo {
 
     public static void main(String[] args) {
         //int[] array = {4, 3, 6, 5, 7, 8};
-        //int[] array = {10, 12, 8, 9, 7, 6};
-        int[] array = {10, 11, 7, 6, 8, 9};
+        int[] array = {50, 34, 53, 23, 69, 100, 32, -100, -30, 400, 350, 500, 38};
+        //int[] array = {10, 11, 7, 6, 8, 9};
 
         AVLTree avlTree = new AVLTree();
 
@@ -15,6 +15,31 @@ public class AVLTreeDemo {
 
         System.out.println("infix Order:");
         avlTree.infixOrder();
+
+        System.out.println("the height of the tree:" + avlTree.getRoot().height());
+        System.out.println("the height of the tree left:" + avlTree.getRoot().leftHeight());
+        System.out.println("the height of the tree right:" + avlTree.getRoot().rightHeight());
+        System.out.println("root:" + avlTree.getRoot());
+        System.out.println("left of root:" + avlTree.getRoot().left);
+        System.out.println("right of root:" + avlTree.getRoot().right);
+        //avlTree.deleteNode(32);
+        avlTree.preOrder();
+
+        avlTree.deleteNode(38);
+        avlTree.deleteNode(34);
+        avlTree.deleteNode(23);
+        avlTree.deleteNode(-100);
+        avlTree.deleteNode(-30);
+        avlTree.deleteNode(32);
+
+        System.out.println("the height of the tree:" + avlTree.getRoot().height());
+        System.out.println("the height of the tree left:" + avlTree.getRoot().leftHeight());
+        System.out.println("the height of the tree right:" + avlTree.getRoot().rightHeight());
+        System.out.println("root:" + avlTree.getRoot());
+        System.out.println("left of root:" + avlTree.getRoot().left);
+        System.out.println("right of root:" + avlTree.getRoot().right);
+        System.out.println("-------------add 35 to tree ---------");
+        avlTree.addNode(new Node(35));
 
         System.out.println("the height of the tree:" + avlTree.getRoot().height());
         System.out.println("the height of the tree left:" + avlTree.getRoot().leftHeight());
@@ -126,6 +151,14 @@ class AVLTree {
     public void infixOrder() {
         if (root != null) {
             root.infixOrder();
+        } else {
+            System.out.println("this tree is empty.");
+        }
+    }
+
+    public void preOrder(){
+        if (root != null){
+            root.preOrder();
         } else {
             System.out.println("this tree is empty.");
         }
@@ -264,5 +297,17 @@ class Node {
         return "Node{" +
                 "value=" + value +
                 '}';
+    }
+
+    public void preOrder() {
+        System.out.println(this);
+
+        if (this.left != null) {
+            this.left.preOrder();
+        }
+
+        if (this.right != null) {
+            this.right.preOrder();
+        }
     }
 }
