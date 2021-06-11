@@ -39,7 +39,8 @@ public class AVLTreeDemo {
         System.out.println("left of root:" + avlTree.getRoot().left);
         System.out.println("right of root:" + avlTree.getRoot().right);
         System.out.println("-------------add 85 to tree ---------");
-        avlTree.addNode(new Node(85));
+        //avlTree.addNode(new Node(-600));
+        avlTree.addNode(new Node(600));
 
         System.out.println("the height of the tree:" + avlTree.getRoot().height());
         System.out.println("the height of the tree left:" + avlTree.getRoot().leftHeight());
