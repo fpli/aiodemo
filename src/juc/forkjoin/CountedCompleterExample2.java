@@ -45,7 +45,7 @@ public class CountedCompleterExample2 {
                 sumFactorials();
                 propagateCompletion();
             } else {
-                int middle = integerList.size() / 2;
+                int middle = integerList.size() >>> 1;
                 List<BigInteger> newList = integerList.subList(middle, integerList.size());
                 integerList = integerList.subList(0, middle);
                 addToPendingCount(1);

@@ -36,7 +36,7 @@ public class CountedCompleterExample {
             if (integerList.size() <= SEQUENTIAL_THRESHOLD) {
                 showFactorial();
             } else {
-                int middle = integerList.size() / 2;
+                int middle = integerList.size() >>> 1;
                 List<BigInteger> rightList = integerList.subList(middle,
                         integerList.size());
                 List<BigInteger> leftList = integerList.subList(0, middle);

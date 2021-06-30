@@ -32,7 +32,7 @@ public class RecursiveActionExample {
             if (integerList.size() <= SEQUENTIAL_THRESHOLD) {
                 showFactorials();
             } else {
-                int middle = integerList.size() / 2;
+                int middle = integerList.size() >>> 1;
                 List<BigInteger> newList = integerList.subList(middle, integerList.size());
                 integerList = integerList.subList(0, middle);
                 FactorialTask task = new FactorialTask(newList);
