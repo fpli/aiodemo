@@ -53,23 +53,22 @@ public class InsertSort {
     }
 
     public static void insertSort2(int[] array){
-        int temp;
+        int temporaryData;
         for (int i = 1; i < array.length; i++){
-            temp = array[i];
-            int j;
-            for (j = i -1; j > -1; j --){
-                if (temp < array[j]){
+            temporaryData = array[i];
+            int j = i -1;
+            for (; j >= 0; j--){
+                if (temporaryData < array[j]){
                     array[j+1] = array[j];
                 } else {
                     break;
                 }
             }
             if (j != i -1){
-                array[j+1] = temp;
+                array[j+1] = temporaryData;
             }
-            System.out.println(Arrays.toString(array));
         }
+        System.out.println(Arrays.toString(array));
     }
-
 
 }
